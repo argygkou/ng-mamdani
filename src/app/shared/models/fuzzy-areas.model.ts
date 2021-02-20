@@ -1,19 +1,9 @@
-export interface FuzzyAreas {
-  newFuzzyArea: FuzzyArea;
-  types: FuzzyAreaTypes;
-}
-
 export interface FuzzyArea {
   name: string;
-  type: any;
+  type: FuzzyAreaType;
 }
 
-export interface FuzzyAreaTypes {
-  triangle: Type;
-  trapezoid: Type;
-}
-
-export interface Type {
+export interface FuzzyAreaType {
   name: string;
   ranges: number[];
   value: (rangesParam: string[], valueParam: string) => number;

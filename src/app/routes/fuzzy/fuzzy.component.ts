@@ -9,9 +9,8 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
 })
 export class FuzzyComponent implements OnInit {
   public projectName = 'New Project';
-  // public variables = this.mamdaniService.variables;
-  public fuzzyAreas = this.mamdaniService.fuzzyAreas;
   public rules = this.mamdaniService.rules;
+  public fuzzyAreas = this.mamdaniService.fuzzyAreas;
 
   constructor(private fb: FormBuilder, public mamdaniService: MamdaniService) {}
 

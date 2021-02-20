@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FuzzyAreas, Rules, Variable, Variables } from '../shared';
+import { FuzzyArea, Rule, Rules, Variable, Variables } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +10,10 @@ export class MamdaniService {
     outputs: [],
   };
 
-  public fuzzyAreas: FuzzyAreas = {
-    newFuzzyArea: {
-      name: 'Name',
+  public fuzzyAreas: FuzzyArea[] = [
+    {
+      name: 'Triangle',
       type: {
-        ranges: [],
-      },
-    },
-    types: {
-      triangle: {
         name: 'Triangle',
         ranges: [0, 0, 0],
         value: (rangesParam, valueParam) => {
@@ -33,7 +28,10 @@ export class MamdaniService {
           return (ranges[2] - value) / (ranges[2] - ranges[1]);
         },
       },
-      trapezoid: {
+    },
+    {
+      name: 'Trapezoid',
+      type: {
         name: 'Trapezoid',
         ranges: [0, 0, 0, 0],
         value: (rangesParam, valueParam) => {
@@ -51,7 +49,7 @@ export class MamdaniService {
         },
       },
     },
-  };
+  ];
 
   public rules: Rules = {
     data: [],
@@ -67,17 +65,7 @@ export class MamdaniService {
     },
   };
 
-  public exampleVariables = {
-    ...this.variables,
-    variableType: 'input',
-    newVariable: {
-      name: '',
-      start: 0,
-      end: 0,
-      fuzzyAreasCount: 1,
-      fuzzyAreas: [],
-      example: 0,
-    },
+  public exampleVariables: Variables = {
     inputs: [
       {
         name: 'Temperature',
@@ -91,7 +79,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [-20, -10, 0],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -99,7 +87,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [-5, 5, 23],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -107,7 +95,7 @@ export class MamdaniService {
             type: {
               name: 'Trapezoid',
               ranges: [10, 15, 20, 25],
-              value: this.fuzzyAreas.types.trapezoid.value,
+              value: this.fuzzyAreas[1].type.value,
             },
           },
           {
@@ -115,7 +103,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [20, 30, 40],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
         ],
@@ -132,7 +120,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [0, 25, 35],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -140,7 +128,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [20, 35, 55],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -148,7 +136,7 @@ export class MamdaniService {
             type: {
               name: 'Trapezoid',
               ranges: [20, 60, 70, 75],
-              value: this.fuzzyAreas.types.trapezoid.value,
+              value: this.fuzzyAreas[1].type.value,
             },
           },
           {
@@ -156,7 +144,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [40, 90, 100],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
         ],
@@ -174,7 +162,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [0, 50, 60],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -182,7 +170,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [30, 70, 80],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
           {
@@ -190,7 +178,7 @@ export class MamdaniService {
             type: {
               name: 'Trapezoid',
               ranges: [30, 40, 70, 80],
-              value: this.fuzzyAreas.types.trapezoid.value,
+              value: this.fuzzyAreas[1].type.value,
             },
           },
           {
@@ -198,7 +186,7 @@ export class MamdaniService {
             type: {
               name: 'Triangle',
               ranges: [50, 90, 100],
-              value: this.fuzzyAreas.types.triangle.value,
+              value: this.fuzzyAreas[0].type.value,
             },
           },
         ],
@@ -206,9 +194,15 @@ export class MamdaniService {
     ],
   };
 
-  constructor() {}
+  constructor() {
+    this.variables = this.exampleVariables;
+  }
 
   public addVariable(type: string, variable: Variable): void {
     this.variables[type].push(variable);
+  }
+
+  public addFuzzyArea(type: string, index: number, variable: Variable): void {
+    this.variables[type][index] = variable;
   }
 }
