@@ -1,0 +1,76 @@
+<mat-card class="fuzzy-card">
+  <mat-card-title>Input Variables</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let input of variables">
+        <h3 matLine>
+          {{ input.name }} goes from
+          <strong>{{ input.start }} to {{ input.end }}</strong>
+        </h3>
+        <p matLine>
+          <span> FuzzyAreas: </span>
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngFor="let fuzzyArea of input.fuzzyAreas">{{
+              fuzzyArea.name
+            }}</mat-chip>
+          </mat-chip-list>
+        </p>
+        <section
+          matLine
+          *ngIf="input.fuzzyAreasCount > input.fuzzyAreas.length"
+        >
+          <h5>Add new input variable fuzzyArea:</h5>
+          <form (ngSubmit)="addFuzzyArea.emit(form)" #form="ngForm">
+            <mat-form-field class="input-full-width">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Name"
+                [(ngModel)]="fuzzyAreas.newFuzzyArea.name"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <mat-select
+                [(ngModel)]="fuzzyAreas.newFuzzyArea.type"
+                [ngModelOptions]="{ standalone: true }"
+              >
+                <mat-option
+                  *ngFor="let fuzzyArea of fuzzyAreas.types"
+                  [value]="fuzzyArea"
+                >
+                  {{ fuzzyArea.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <label for="fuzzy-area-value">Value:</label>
+            <span
+              *ngFor="
+                let range of fuzzyAreas.newFuzzyArea.type.ranges;
+                let index = index
+              "
+            >
+              <input
+                [(ngModel)]="fuzzyAreas.newFuzzyArea.type.ranges[index]"
+                [ngModelOptions]="{ standalone: true }"
+                type="number"
+                min="0"
+              />
+            </span>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!form.form.valid"
+            >
+              Add FuzzyArea
+            </button>
+          </form>
+        </section>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

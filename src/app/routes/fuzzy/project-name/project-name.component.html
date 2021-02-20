@@ -1,0 +1,17 @@
+<section class="project-data">
+  <h2>
+    <strong>{{ projectName }}</strong>
+  </h2>
+
+  <form class="example-form">
+    <mat-form-field class="input-full-width">
+      <mat-label>Enter name of your project</mat-label>
+      <input
+        matInput
+        placeholder="Ex. Pizza"
+        [(ngModel)]="projectName"
+        name="projectName"
+      />
+    </mat-form-field>
+  </form>
+</section>

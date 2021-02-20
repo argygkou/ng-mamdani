@@ -1,0 +1,206 @@
+<div class="container">
+  <app-project-name [projectName]="projectName"></app-project-name>
+  <section>
+    <form [formGroup]="variablesForm" (ngSubmit)="addVariable($event)">
+      <mat-card class="fuzzy-card">
+        <mat-card-content>
+          <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="variables.variableType"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <mat-radio-button value="input">Input</mat-radio-button>
+            <mat-radio-button value="output">Output</mat-radio-button>
+          </mat-radio-group>
+          <br />
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="input-full-width">
+                <mat-label>Variable Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" />
+                <mat-error
+                  *ngIf="variablesForm.get('name').hasError('required')"
+                >
+                  Name is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="input-full-width">
+                <mat-label>Number of fuzzyAreas</mat-label>
+                <input
+                  matInput
+                  placeholder="fuzzy areas count"
+                  type="number"
+                  min="0"
+                  formControlName="fuzzyAreasCount"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field class="input-full-width">
+                <mat-label>Range: Start</mat-label>
+                <input
+                  matInput
+                  placeholder="Start"
+                  type="number"
+                  min="0"
+                  formControlName="start"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="input-full-width">
+                <mat-label>Range: End</mat-label>
+                <input
+                  matInput
+                  placeholder="End"
+                  type="number"
+                  min="0"
+                  formControlName="end"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!variablesForm.valid"
+          >
+            Add variable
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+
+    <app-variables-list
+      [title]="'Input Variables'"
+      [variables]="variables.inputs"
+      (addFuzzyArea)="addFuzzyArea($event)"
+    ></app-variables-list>
+
+    <app-variables-list
+      [title]="'Output Variables'"
+      [variables]="variables.outputs"
+      (addFuzzyArea)="addFuzzyArea($event)"
+    ></app-variables-list>
+  </section>
+
+  <section id="examples-data">
+    <form>
+      <mat-card class="fuzzy-card">
+        <mat-card-title>Provide example for your variables:</mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let input of variables.inputs">
+            <mat-form-field class="input-full-width">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Name"
+                [(ngModel)]="input.name"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </mat-form-field>
+            <span
+              class="contain-level"
+              *ngFor="let fuzzyArea of input.fuzzyAreas"
+              >{{
+                fuzzyArea.type.value(fuzzyArea.type.ranges, input.example)
+              }}</span
+            >
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </section>
+
+  <section id="rules" *ngIf="variables.inputs.length">
+    <mat-card class="fuzzy-card">
+      <mat-card-content>
+        <form (ngSubmit)="createRule()" #form="ngForm">
+          <span>Compose your new fuzzyArea: </span>
+          <br />
+          <mat-form-field class="input-full-width">
+            <mat-label>Rule Name</mat-label>
+            <input
+              matInput
+              placeholder="Name"
+              [(ngModel)]="rules.newRule.name"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </mat-form-field>
+          <div class="row">
+            <div class="col-1"><p style="margin-top: 20px">IF</p></div>
+            <div class="col-7">
+              <span *ngFor="let input of variables.inputs; let index = index">
+                <span
+                  style="margin: 0 10px"
+                  *ngIf="index > 0"
+                  (click)="toggleNorm()"
+                  >{{ rules.newRule.type }}</span
+                >
+                <mat-form-field appearance="fill">
+                  <mat-select
+                    [(ngModel)]="rules.newRule.fuzzyAreas.inputs[index]"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <mat-option
+                      *ngFor="let fuzzyArea of input.fuzzyAreas"
+                      [value]="fuzzyArea"
+                    >
+                      {{ fuzzyArea.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </span>
+            </div>
+            <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
+            <div class="col-3">
+              <mat-form-field appearance="fill">
+                <mat-select
+                  *ngFor="let output of variables.outputs; let index = index"
+                  [(ngModel)]="rules.newRule.fuzzyAreas.output[index]"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <mat-option
+                    *ngFor="let fuzzyArea of output.fuzzyAreas"
+                    [value]="fuzzyArea"
+                  >
+                    {{ fuzzyArea.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <button
+            mat-button
+            color="primary"
+            type="submit"
+            [disabled]="!form.form.valid"
+          >
+            Add new rule
+          </button>
+        </form>
+        <mat-list>
+          <mat-list-item *ngFor="let rule of rules.data">
+            <p matLine>
+              {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
+              {{ rule.result }}
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="getResult()">
+          Log result
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </section>
+</div>
