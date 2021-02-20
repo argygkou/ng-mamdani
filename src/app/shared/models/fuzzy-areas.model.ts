@@ -16,5 +16,5 @@ export interface FuzzyAreaTypes {
 export interface Type {
   name: string;
   ranges: number[];
-  value: (rangesParam: number, valueParam: number) => number;
+  value: (rangesParam: string[], valueParam: string) => number;
 }

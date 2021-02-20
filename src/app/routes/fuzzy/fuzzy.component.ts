@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { config } from 'rxjs';
-import MamdaniConfig from 'src/app/core/config';
+import { MamdaniService } from 'src/app/core/mamdani.service';
 
 @Component({
   selector: 'app-fuzzy',
@@ -9,50 +8,14 @@ import MamdaniConfig from 'src/app/core/config';
   styleUrls: ['./fuzzy.component.scss'],
 })
 export class FuzzyComponent implements OnInit {
-  public projectName = MamdaniConfig.projectName;
-  public variables = MamdaniConfig.variables;
-  public fuzzyAreas = MamdaniConfig.fuzzyAreas;
-  public rules = MamdaniConfig.rules;
+  public projectName = 'New Project';
+  // public variables = this.mamdaniService.variables;
+  public fuzzyAreas = this.mamdaniService.fuzzyAreas;
+  public rules = this.mamdaniService.rules;
 
-  public variablesForm = this.fb.group({
-    name: ['', Validators.required],
-    fuzzyAreasCount: 1,
-    start: 0,
-    end: 0,
-  });
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public mamdaniService: MamdaniService) {}
 
   ngOnInit(): void {}
-
-  public get variableType(): any {
-    return this.variablesForm.get('variableType').value;
-  }
-
-  public addVariable(event: Event): void {
-    event.preventDefault();
-    this.variables.newVariable = this.variablesForm.value;
-    if (this.variables.variableType === 'input') {
-      this.variables.inputs = [
-        ...this.variables.inputs,
-        { ...this.variables.newVariable, fuzzyAreas: [] },
-      ];
-    } else {
-      this.variables.outputs = [
-        { ...this.variables.newVariable, fuzzyAreas: [] },
-      ];
-    }
-  }
-
-  public addFuzzyArea(input): void {
-    input.fuzzyAreas.push({
-      ...this.fuzzyAreas.newFuzzyArea,
-      type: {
-        ...this.fuzzyAreas.newFuzzyArea.type,
-        ranges: [...this.fuzzyAreas.newFuzzyArea.type.ranges],
-      },
-    });
-  }
 
   public createRule(): void {
     this.rules = {
@@ -99,7 +62,7 @@ export class FuzzyComponent implements OnInit {
     const inputs = rule.fuzzyAreas.inputs;
     const data = [];
     inputs.forEach((element, index) => {
-      const example = this.variables.inputs[index].example;
+      const example = this.mamdaniService.variables.inputs[index].example;
       data.push(element.type.value(element.type.ranges, example));
     });
     const result = data.reduce((next, prev) => compareFunction(next, prev));

@@ -1,6 +1,4 @@
 export interface Variables {
-  variableType: 'input' | 'output';
-  newVariable: Variable;
   inputs: Variable[];
   outputs: Variable[];
 }

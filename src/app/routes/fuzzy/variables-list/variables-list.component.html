@@ -1,5 +1,5 @@
 <mat-card class="fuzzy-card">
-  <mat-card-title>Input Variables</mat-card-title>
+  <mat-card-title>{{ title }}</mat-card-title>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let input of variables">
@@ -20,7 +20,7 @@
           *ngIf="input.fuzzyAreasCount > input.fuzzyAreas.length"
         >
           <h5>Add new input variable fuzzyArea:</h5>
-          <form (ngSubmit)="addFuzzyArea.emit(form)" #form="ngForm">
+          <form (ngSubmit)="addFuzzyArea(form)" #form="ngForm">
             <mat-form-field class="input-full-width">
               <mat-label>Name</mat-label>
               <input

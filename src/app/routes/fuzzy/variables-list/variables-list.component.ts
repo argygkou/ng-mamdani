@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import MamdaniConfig from 'src/app/core/config';
+import { MamdaniService } from 'src/app/core/mamdani.service';
 
 @Component({
   selector: 'app-variables-list',
@@ -9,11 +9,20 @@ import MamdaniConfig from 'src/app/core/config';
 export class VariablesListComponent implements OnInit {
   @Input() title: string;
   @Input() variables: any[];
-  @Output() addFuzzyArea = new EventEmitter<any>();
 
-  public fuzzyAreas = MamdaniConfig.fuzzyAreas;
+  public fuzzyAreas = this.mamdaniService.fuzzyAreas;
 
-  constructor() {}
+  constructor(public mamdaniService: MamdaniService) {}
 
   ngOnInit(): void {}
+
+  public addFuzzyArea(input): void {
+    input.fuzzyAreas.push({
+      ...this.fuzzyAreas.newFuzzyArea,
+      type: {
+        ...this.fuzzyAreas.newFuzzyArea.type,
+        ranges: [...this.fuzzyAreas.newFuzzyArea.type.ranges],
+      },
+    });
+  }
 }

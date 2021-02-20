@@ -1,0 +1,74 @@
+<form [formGroup]="variableForm" (ngSubmit)="addVariable($event)">
+  <mat-card class="fuzzy-card">
+    <mat-card-content>
+      <mat-radio-group
+        aria-label="Select an option"
+        [formControl]="variableType"
+      >
+        <mat-radio-button value="inputs">Input</mat-radio-button>
+        <mat-radio-button value="outputs">Output</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="input-full-width">
+            <mat-label>Variable Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" />
+            <mat-error *ngIf="variableForm.get('name').hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="input-full-width">
+            <mat-label>Number of fuzzyAreas</mat-label>
+            <input
+              matInput
+              placeholder="fuzzy areas count"
+              type="number"
+              min="0"
+              formControlName="fuzzyAreasCount"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field class="input-full-width">
+            <mat-label>Range: Start</mat-label>
+            <input
+              matInput
+              placeholder="Start"
+              type="number"
+              min="0"
+              formControlName="start"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field class="input-full-width">
+            <mat-label>Range: End</mat-label>
+            <input
+              matInput
+              placeholder="End"
+              type="number"
+              min="0"
+              formControlName="end"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!variableForm.valid"
+      >
+        Add variable
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
