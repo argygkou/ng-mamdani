@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -26,6 +27,7 @@ const MATERIAL_MODULES = [
   MatSelectModule,
   MatChipsModule,
   MatRadioModule,
+  MatSnackBarModule,
 ];
 
 const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];

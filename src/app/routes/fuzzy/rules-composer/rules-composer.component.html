@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="createRule($event)">
+  <mat-form-field class="input-full-width">
+    <mat-label>Rule Name</mat-label>
+    <input matInput placeholder="Name" formControlName="name" />
+    <mat-error *ngIf="form.get('name').hasError('required')">
+      Required
+    </mat-error>
+  </mat-form-field>
+  <div class="row" formGroupName="fuzzyAreas">
+    <div class="col-1"><p style="margin-top: 20px">IF</p></div>
+    <div class="col-7">
+      <span
+        *ngFor="let input of mamdaniService.variables.inputs; let i = index"
+      >
+        <span style="margin: 0 10px" *ngIf="i > 0" (click)="toggleNorm()">{{
+          typeControl.value
+        }}</span>
+
+        <mat-form-field appearance="fill">
+          <mat-select
+            (selectionChange)="onSelectionChanged($event, 'input', i)"
+          >
+            <mat-option
+              *ngFor="let fuzzyArea of input.fuzzyAreas"
+              [value]="fuzzyArea"
+            >
+              {{ fuzzyArea.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </div>
+    <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
+    <div class="col-3">
+      <mat-form-field appearance="fill">
+        <mat-select
+          *ngFor="let output of mamdaniService.variables.outputs; let i = index"
+          (selectionChange)="onSelectionChanged($event, 'output', i)"
+        >
+          <mat-option
+            *ngFor="let fuzzyArea of output.fuzzyAreas"
+            [value]="fuzzyArea"
+          >
+            {{ fuzzyArea.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <button mat-button color="primary" type="submit" [disabled]="!form.valid">
+    Add new rule
+  </button>
+</form>

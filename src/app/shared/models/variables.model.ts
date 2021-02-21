@@ -1,6 +1,6 @@
+import { FuzzyArea } from './fuzzy-areas.model';
+
 export interface Variables {
-  variableType: 'input' | 'output';
-  newVariable: Variable;
   inputs: Variable[];
   outputs: Variable[];
 }
@@ -10,6 +10,6 @@ export interface Variable {
   start: number;
   end: number;
   fuzzyAreasCount: number;
-  fuzzyAreas: any[];
-  example: number;
+  fuzzyAreas: FuzzyArea[];
+  example?: number;
 }
