@@ -26,14 +26,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          node-version: 14.x
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Prepare and deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install
-          npm run ng -- deploy --base-href=/everything-github-demo/ --name="Argyris Gkountoulas" --email=argiris_g@outlook.com
+          npm run ng -- deploy --repo=https://github.com/argygkou/ng-mamdani.git --base-href=/everything-github-demo/ --name="Argyris Gkountoulas" --email=argiris_g@outlook.com
