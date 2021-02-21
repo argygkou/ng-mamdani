@@ -1,13 +1,11 @@
-export interface Rules {
-  data: any[];
-  newRule: Rule;
-}
+import { FuzzyArea } from './fuzzy-areas.model';
 
 export interface Rule {
   name: string;
   type: string;
+  result?: number;
   fuzzyAreas: {
-    inputs: any[];
+    inputs: FuzzyArea[];
     output: {
       value: number;
     };

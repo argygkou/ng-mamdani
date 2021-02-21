@@ -1,0 +1,27 @@
+<form>
+  <mat-card>
+    <mat-card-title>Provide example for your variables:</mat-card-title>
+    <mat-card-content>
+      <div *ngFor="let input of mamdaniService.variables.inputs">
+        <div>
+          <mat-form-field style="width: 200px; margin: 0 20px">
+            <mat-label>{{ input.name }}</mat-label>
+            <input
+              matInput
+              [placeholder]="input.name"
+              [(ngModel)]="input.example"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </mat-form-field>
+          <span
+            class="contain-level"
+            *ngFor="let fuzzyArea of input.fuzzyAreas"
+            >{{
+              fuzzyArea.type.value(fuzzyArea.type.ranges, input.example)
+            }}</span
+          >
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>

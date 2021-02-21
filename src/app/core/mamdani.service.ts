@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FuzzyArea, Rule, Rules, Variable, Variables } from '../shared';
+import { FuzzyArea, Rule, Variable, Variables } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,9 @@ export class MamdaniService {
       type: {
         name: 'Triangle',
         ranges: [0, 0, 0],
-        value: (rangesParam, valueParam) => {
-          const ranges = rangesParam.map((range) => parseInt(range, 10));
-          const value = parseInt(valueParam, 10);
+        value: (ranges, value) => {
+          // const ranges = rangesParam.map((range) => parseInt(range, 10));
+          // const value = parseInt(valueParam, 10);
           if (value < ranges[0] || value > ranges[2]) {
             return 0;
           }
@@ -34,9 +34,9 @@ export class MamdaniService {
       type: {
         name: 'Trapezoid',
         ranges: [0, 0, 0, 0],
-        value: (rangesParam, valueParam) => {
-          const ranges = rangesParam.map((range) => parseInt(range, 10));
-          const value = parseInt(valueParam, 10);
+        value: (ranges, value) => {
+          // const ranges = rangesParam.map((range) => parseInt(range, 10));
+          // const value = parseInt(valueParam, 10);
           if (value < ranges[0] || value > ranges[3]) {
             return 0;
           }
@@ -51,19 +51,7 @@ export class MamdaniService {
     },
   ];
 
-  public rules: Rules = {
-    data: [],
-    newRule: {
-      name: 'name',
-      type: 'AND',
-      fuzzyAreas: {
-        inputs: [],
-        output: {
-          value: 0,
-        },
-      },
-    },
-  };
+  public rules: Rule[] = [];
 
   public exampleVariables: Variables = {
     inputs: [
@@ -204,5 +192,22 @@ export class MamdaniService {
 
   public addFuzzyArea(type: string, index: number, variable: Variable): void {
     this.variables[type][index] = variable;
+  }
+
+  public addRule(rule: Rule): void {
+    rule.result = this.checkValue(rule);
+    this.rules.push(rule);
+  }
+
+  private checkValue(rule: Rule): any {
+    const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
+    const inputs = rule.fuzzyAreas.inputs;
+    const data = [];
+    inputs.forEach((element, index) => {
+      const example = this.variables.inputs[index].example;
+      data.push(element.type.value(element.type.ranges, example));
+    });
+    const result = data.reduce((next, prev) => compareFunction(next, prev));
+    return result;
   }
 }

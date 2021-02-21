@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 
 @Component({
@@ -8,18 +9,14 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   styleUrls: ['./variables-form.component.scss'],
 })
 export class VariablesFormComponent implements OnInit {
-  public variableType = this.fb.control('inputs');
+  public variableType = new FormControl('inputs');
 
-  public variableForm = this.fb.group({
-    name: ['', Validators.required],
-    start: 0,
-    end: 0,
-    fuzzyAreasCount: 1,
-    fuzzyAreas: this.fb.array([]),
-    example: 0,
-  });
+  public variableForm = this.formCreatorService.createVariableForm();
 
-  constructor(private fb: FormBuilder, public mamdaniService: MamdaniService) {}
+  constructor(
+    private formCreatorService: FormCreatorService,
+    public mamdaniService: MamdaniService
+  ) {}
 
   ngOnInit(): void {}
 

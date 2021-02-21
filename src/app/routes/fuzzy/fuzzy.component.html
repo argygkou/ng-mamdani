@@ -16,111 +16,17 @@
     ></app-variables-list>
   </section>
 
-  <section id="examples-data">
-    <form>
-      <mat-card class="fuzzy-card">
-        <mat-card-title>Provide example for your variables:</mat-card-title>
-        <mat-card-content>
-          <div *ngFor="let input of mamdaniService.variables.inputs">
-            <mat-form-field class="input-full-width">
-              <mat-label>Name</mat-label>
-              <input
-                matInput
-                placeholder="Name"
-                [(ngModel)]="input.name"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </mat-form-field>
-            <span
-              class="contain-level"
-              *ngFor="let fuzzyArea of input.fuzzyAreas"
-              >{{
-                fuzzyArea.type.value(fuzzyArea.type.ranges, input.example)
-              }}</span
-            >
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </form>
+  <section>
+    <app-examples-form></app-examples-form>
   </section>
 
   <section id="rules" *ngIf="mamdaniService.variables.inputs.length">
-    <mat-card class="fuzzy-card">
+    <mat-card>
+      <mat-card-title>Compose your new fuzzyArea</mat-card-title>
       <mat-card-content>
-        <form (ngSubmit)="createRule()" #form="ngForm">
-          <span>Compose your new fuzzyArea: </span>
-          <br />
-          <mat-form-field class="input-full-width">
-            <mat-label>Rule Name</mat-label>
-            <input
-              matInput
-              placeholder="Name"
-              [(ngModel)]="rules.newRule.name"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </mat-form-field>
-          <div class="row">
-            <div class="col-1"><p style="margin-top: 20px">IF</p></div>
-            <div class="col-7">
-              <span
-                *ngFor="
-                  let input of mamdaniService.variables.inputs;
-                  let index = index
-                "
-              >
-                <span
-                  style="margin: 0 10px"
-                  *ngIf="index > 0"
-                  (click)="toggleNorm()"
-                  >{{ rules.newRule.type }}</span
-                >
-                <mat-form-field appearance="fill">
-                  <mat-select
-                    [(ngModel)]="rules.newRule.fuzzyAreas.inputs[index]"
-                    [ngModelOptions]="{ standalone: true }"
-                  >
-                    <mat-option
-                      *ngFor="let fuzzyArea of input.fuzzyAreas"
-                      [value]="fuzzyArea"
-                    >
-                      {{ fuzzyArea.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </span>
-            </div>
-            <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
-            <div class="col-3">
-              <mat-form-field appearance="fill">
-                <mat-select
-                  *ngFor="
-                    let output of mamdaniService.variables.outputs;
-                    let index = index
-                  "
-                  [(ngModel)]="rules.newRule.fuzzyAreas.output[index]"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <mat-option
-                    *ngFor="let fuzzyArea of output.fuzzyAreas"
-                    [value]="fuzzyArea"
-                  >
-                    {{ fuzzyArea.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <button
-            mat-button
-            color="primary"
-            type="submit"
-            [disabled]="!form.form.valid"
-          >
-            Add new rule
-          </button>
-        </form>
+        <app-rules-composer></app-rules-composer>
         <mat-list>
-          <mat-list-item *ngFor="let rule of rules.data">
+          <mat-list-item *ngFor="let rule of mamdaniService.rules.data">
             <p matLine>
               {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
               {{ rule.result }}
