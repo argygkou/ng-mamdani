@@ -1,5 +1,7 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { matFormFieldAnimations } from '@angular/material/form-field';
 import { MatSelectChange } from '@angular/material/select';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
@@ -36,15 +38,29 @@ export class RulesComposerComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public onSelectionChanged(event: MatSelectChange, type: string): void {
+  public onSelectionChanged(
+    event: MatSelectChange,
+    type: string,
+    index: 0
+  ): void {
     const fuzzyAreaForm = this.formCreatorService.createFuzzyAreaForm();
     fuzzyAreaForm.patchValue(event.value);
-    fuzzyAreaForm.get('type').patchValue(event.value.type);
-    if (type === 'input') {
-      this.inputs.push(fuzzyAreaForm);
-    } else {
-      this.output.patchValue(fuzzyAreaForm);
+    const ranges = fuzzyAreaForm.get('type').get('ranges') as FormArray;
+    event.value.type.ranges.forEach((range) => {
+      ranges.push(new FormControl(range));
+    });
+
+    if (type !== 'input') {
+      this.output.setValue(fuzzyAreaForm.value);
+      return;
     }
+
+    if (index <= this.inputs.length) {
+      this.inputs.removeAt(index);
+    }
+    this.inputs.push(fuzzyAreaForm);
+
+    console.log(this.form.value);
   }
 
   public createRule(event: Event): void {

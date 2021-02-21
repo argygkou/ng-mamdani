@@ -41,20 +41,8 @@ export class FormCreatorService {
       type: ['AND'],
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),
-        output: this.fb.group({
-          value: 0,
-        }),
+        output: null,
       }),
-      // fuzzyAreas: this.fb.array([this.createFuzzyAreaRuleForm()]),
     });
   }
-
-  // public createFuzzyAreaRuleForm(): FormGroup {
-  //   return this.fb.group({
-  //     inputs: this.fb.array([]),
-  //     output: this.fb.group({
-  //       value: 0,
-  //     }),
-  //   });
-  // }
 }

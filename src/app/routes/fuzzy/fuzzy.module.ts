@@ -9,7 +9,14 @@ import { ExamplesFormComponent } from './examples-form/examples-form.component';
 import { RulesComposerComponent } from './rules-composer/rules-composer.component';
 
 @NgModule({
-  declarations: [FuzzyComponent, ProjectNameComponent, VariablesListComponent, VariablesFormComponent, ExamplesFormComponent, RulesComposerComponent],
+  declarations: [
+    FuzzyComponent,
+    ProjectNameComponent,
+    VariablesListComponent,
+    VariablesFormComponent,
+    ExamplesFormComponent,
+    RulesComposerComponent,
+  ],
   imports: [SharedModule, FuzzyRoutingModule],
 })
 export class FuzzyModule {}

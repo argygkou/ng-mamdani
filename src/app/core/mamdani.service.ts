@@ -187,7 +187,11 @@ export class MamdaniService {
   }
 
   public addVariable(type: string, variable: Variable): void {
-    this.variables[type].push(variable);
+    if (type === 'inputs') {
+      this.variables[type].push(variable);
+      return;
+    }
+    this.variables[type] = [variable];
   }
 
   public addFuzzyArea(type: string, index: number, variable: Variable): void {

@@ -17,7 +17,9 @@
         }}</span>
 
         <mat-form-field appearance="fill">
-          <mat-select (selectionChange)="onSelectionChanged($event)">
+          <mat-select
+            (selectionChange)="onSelectionChanged($event, 'input', i)"
+          >
             <mat-option
               *ngFor="let fuzzyArea of input.fuzzyAreas"
               [value]="fuzzyArea"
@@ -33,7 +35,7 @@
       <mat-form-field appearance="fill">
         <mat-select
           *ngFor="let output of mamdaniService.variables.outputs; let i = index"
-          (selectionChange)="onSelectionChanged($event)"
+          (selectionChange)="onSelectionChanged($event, 'output', i)"
         >
           <mat-option
             *ngFor="let fuzzyArea of output.fuzzyAreas"

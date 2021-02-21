@@ -8,7 +8,6 @@
           <strong>{{ variable.start }} to {{ variable.end }}</strong>
         </h3>
         <p matLine>
-          <span> FuzzyAreas: </span>
           <mat-chip-list aria-label="Fish selection">
             <mat-chip *ngFor="let fuzzyArea of variable.fuzzyAreas">{{
               fuzzyArea.name
