@@ -1,44 +1,29 @@
-import { config } from 'rxjs';
-import { FuzzyArea, Variable } from '../shared';
+import { FuzzyAreaTypes, Variable } from '../shared';
 
-export const fuzzyAreas: FuzzyArea[] = [
-  {
-    name: 'Triangle',
-    type: {
-      name: 'Triangle',
-      ranges: [0, 0, 0],
-      value: (ranges, value) => {
-        if (value < ranges[0] || value > ranges[2]) {
-          return 0;
-        }
-        if (value < ranges[1]) {
-          return (value - ranges[0]) / (ranges[1] - ranges[0]);
-        }
-        return (ranges[2] - value) / (ranges[2] - ranges[1]);
-      },
-    },
+export const FUZZYAREATYPES: FuzzyAreaTypes = {
+  Triangle: (ranges, value) => {
+    if (value < ranges[0] || value > ranges[2]) {
+      return 0;
+    }
+    if (value < ranges[1]) {
+      return (value - ranges[0]) / (ranges[1] - ranges[0]);
+    }
+    return (ranges[2] - value) / (ranges[2] - ranges[1]);
   },
-  {
-    name: 'Trapezoid',
-    type: {
-      name: 'Trapezoid',
-      ranges: [0, 0, 0, 0],
-      value: (ranges, value) => {
-        if (value < ranges[0] || value > ranges[3]) {
-          return 0;
-        }
-        if (value < ranges[1]) {
-          return (value - ranges[0]) / (ranges[1] - ranges[0]);
-        } else if (value < ranges[2]) {
-          return 1;
-        }
-        return (ranges[3] - value) / (ranges[3] - ranges[2]);
-      },
-    },
+  Trapezoid: (ranges, value) => {
+    if (value < ranges[0] || value > ranges[3]) {
+      return 0;
+    }
+    if (value < ranges[1]) {
+      return (value - ranges[0]) / (ranges[1] - ranges[0]);
+    } else if (value < ranges[2]) {
+      return 1;
+    }
+    return (ranges[3] - value) / (ranges[3] - ranges[2]);
   },
-];
+};
 
-export const inputVariables: Variable[] = [
+export const defaultInputVariables: Variable[] = [
   {
     name: 'Temperature',
     start: -20,
@@ -48,35 +33,23 @@ export const inputVariables: Variable[] = [
     fuzzyAreas: [
       {
         name: 'Freezing',
-        type: {
-          name: 'Triangle',
-          ranges: [-20, -10, 0],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [-20, -10, 0],
       },
       {
         name: 'Breeze',
-        type: {
-          name: 'Triangle',
-          ranges: [-5, 5, 23],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [-5, 5, 23],
       },
       {
         name: 'Warm',
-        type: {
-          name: 'Trapezoid',
-          ranges: [10, 15, 20, 25],
-          value: fuzzyAreas[1].type.value,
-        },
+        type: 'Trapezoid',
+        ranges: [10, 15, 20, 25],
       },
       {
         name: 'Hot',
-        type: {
-          name: 'Triangle',
-          ranges: [20, 30, 40],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [20, 30, 40],
       },
     ],
   },
@@ -89,41 +62,29 @@ export const inputVariables: Variable[] = [
     fuzzyAreas: [
       {
         name: 'Only air',
-        type: {
-          name: 'Triangle',
-          ranges: [0, 25, 35],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [0, 25, 35],
       },
       {
         name: 'Airy',
-        type: {
-          name: 'Triangle',
-          ranges: [20, 35, 55],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [20, 35, 55],
       },
       {
         name: 'Comfort',
-        type: {
-          name: 'Trapezoid',
-          ranges: [20, 60, 70, 75],
-          value: fuzzyAreas[1].type.value,
-        },
+        type: 'Trapezoid',
+        ranges: [20, 60, 70, 75],
       },
       {
         name: 'Humid',
-        type: {
-          name: 'Triangle',
-          ranges: [40, 90, 100],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [40, 90, 100],
       },
     ],
   },
 ];
 
-export const outputVariables: Variable[] = [
+export const defaultOutputVariables: Variable[] = [
   {
     name: 'Watering',
     start: 0,
@@ -132,43 +93,24 @@ export const outputVariables: Variable[] = [
     fuzzyAreas: [
       {
         name: 'No watering',
-        type: {
-          name: 'Triangle',
-          ranges: [0, 50, 60],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [0, 50, 60],
       },
       {
         name: 'Sprinkle',
-        type: {
-          name: 'Triangle',
-          ranges: [30, 70, 80],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [30, 70, 80],
       },
       {
         name: 'Tiny watering',
-        type: {
-          name: 'Trapezoid',
-          ranges: [30, 40, 70, 80],
-          value: fuzzyAreas[1].type.value,
-        },
+        type: 'Trapezoid',
+        ranges: [30, 40, 70, 80],
       },
       {
         name: 'Huge watering',
-        type: {
-          name: 'Triangle',
-          ranges: [50, 90, 100],
-          value: fuzzyAreas[0].type.value,
-        },
+        type: 'Triangle',
+        ranges: [50, 90, 100],
       },
     ],
   },
 ];
-
-const defaultConfig = {
-  inputVariables,
-  outputVariables,
-  fuzzyAreas,
-};
-export default defaultConfig;

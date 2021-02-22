@@ -1,10 +1,11 @@
 export interface FuzzyArea {
   name: string;
-  type: FuzzyAreaType;
+  type: FuzzyAreaTypeNames;
+  ranges: number[];
 }
 
-export interface FuzzyAreaType {
-  name: string;
-  ranges: number[];
-  value: (ranges: number[], values: number) => number;
-}
+export type FuzzyAreaTypes = {
+  [key in FuzzyAreaTypeNames]: (ranges: number[], values: number) => number;
+};
+
+export type FuzzyAreaTypeNames = 'Triangle' | 'Trapezoid';

@@ -24,11 +24,8 @@ export class FormCreatorService {
   public createFuzzyAreaForm(): FormGroup {
     return this.fb.group({
       name: [null, Validators.required],
-      type: this.fb.group({
-        name: [null, Validators.required],
-        ranges: this.fb.array([]),
-        value: [null, Validators.required],
-      }),
+      type: [null, Validators.required],
+      ranges: this.fb.array([]),
     });
   }
 

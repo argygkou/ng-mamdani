@@ -31,15 +31,14 @@
               </mat-error>
             </mat-form-field>
             <br />
-            <div formGroupName="type">
               <mat-form-field>
                 <mat-label>Type</mat-label>
-                <mat-select formControlName="name">
+                <mat-select formControlName="type">
                   <mat-option
-                    *ngFor="let fuzzyArea of this.mamdaniService.fuzzyAreas"
-                    [value]="fuzzyArea.type.name"
+                    *ngFor="let fuzzyArea of fuzzyAreaTypes"
+                    [value]="fuzzyArea"
                   >
-                    {{ fuzzyArea.name }}
+                    {{ fuzzyArea }}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('type').hasError('required')">
@@ -69,7 +68,6 @@
                   </ng-container>
                 </span>
               </span>
-            </div>
 
             <button
               mat-raised-button
