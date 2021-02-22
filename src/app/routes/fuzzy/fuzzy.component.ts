@@ -18,14 +18,9 @@ export class FuzzyComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public getResult(): void {
-    let res = { result: 0 };
-    this.mamdaniService.rules.forEach((element) => {
-      if (+element.result > +res.result) {
-        res.result = element.result;
-      }
-    });
-    const message = `Result is ${res.result}`;
+  public onGetResult(): void {
+    const result = this.mamdaniService.getResult();
+    const message = `Result is ${result}`;
     this.openSnackBar(message, 'OK');
   }
 

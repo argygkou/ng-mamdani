@@ -12,34 +12,41 @@
         </mat-form-field>
         <div class="row" formGroupName="fuzzyAreas">
           <div class="col-1"><p style="margin-top: 20px">IF</p></div>
-          <div class="col-7">
-            <span
-              *ngFor="let input of mamdaniService.inputVariables; let i = index"
-            >
-              <span style="margin: 0 10px" *ngIf="i > 0" (click)="toggleNorm()">{{
-                typeControl.value
-              }}</span>
-      
-              <mat-form-field appearance="fill">
-                <mat-select
-                  (selectionChange)="onSelectionChanged($event, 'input', i)"
-                >
-                  <mat-option
-                    *ngFor="let fuzzyArea of input.fuzzyAreas"
-                    [value]="fuzzyArea"
-                  >
-                    {{ fuzzyArea.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+          <div class="col-7" formArrayName="inputs">
+            <span *ngFor="let input of inputs.controls; let i = index">
+              <span
+                style="margin: 0 10px"
+                *ngIf="i > 0"
+                (click)="toggleNorm()"
+                >{{ typeControl.value }}</span
+              >
+
+              <ng-container>
+                <mat-form-field appearance="fill">
+                  <mat-select [formControlName]="i">
+                    <mat-option
+                      *ngFor="
+                        let fuzzyArea of mamdaniService.inputVariables[i]
+                          .fuzzyAreas
+                      "
+                      [value]="fuzzyArea"
+                    >
+                      {{ fuzzyArea.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
             </span>
           </div>
           <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
           <div class="col-3">
             <mat-form-field appearance="fill">
               <mat-select
-                *ngFor="let output of mamdaniService.outputVariables; let i = index"
-                (selectionChange)="onSelectionChanged($event, 'output', i)"
+                *ngFor="
+                  let output of mamdaniService.outputVariables;
+                  let i = index
+                "
+                formControlName="output"
               >
                 <mat-option
                   *ngFor="let fuzzyArea of output.fuzzyAreas"
@@ -51,11 +58,16 @@
             </mat-form-field>
           </div>
         </div>
-        <button mat-button color="primary" type="submit" [disabled]="!form.valid">
+        <button
+          mat-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
           Add new rule
         </button>
       </form>
-      
+
       <mat-list>
         <mat-list-item *ngFor="let rule of mamdaniService.rules">
           <p matLine>
@@ -66,9 +78,9 @@
       </mat-list>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="getResult()">
+      <button mat-raised-button color="primary" (click)="getResult.emit()">
         Log result
       </button>
     </mat-card-actions>
   </mat-card>
-</section> 
+</section>

@@ -41,6 +41,16 @@ export class MamdaniService {
     this.rules.push(rule);
   }
 
+  public getResult(): number {
+    let result = 0;
+    this.rules.forEach((rule) => {
+      if (rule.result > result) {
+        result = result;
+      }
+    });
+    return result;
+  }
+
   private checkValue(rule: Rule): any {
     const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
     const inputs = rule.fuzzyAreas.inputs;

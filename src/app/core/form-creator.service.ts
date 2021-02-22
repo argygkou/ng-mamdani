@@ -29,7 +29,7 @@ export class FormCreatorService {
     });
   }
 
-  public createRangeForm(name: string): FormGroup {
+  public createCustomForm(name: string, value = null): FormGroup {
     return this.fb.group({
       [name]: [0, Validators.required],
     });
@@ -39,6 +39,7 @@ export class FormCreatorService {
     return this.fb.group({
       name: [null, Validators.required],
       type: ['AND'],
+      result: 0,
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),
         output: null,

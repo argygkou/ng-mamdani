@@ -79,6 +79,9 @@ export class VariablesListComponent implements OnInit, OnDestroy {
   }
 
   private createRange(index: number): FormGroup {
-    return this.formCreatorService.createRangeForm(this.getRangeName(index));
+    return this.formCreatorService.createCustomForm(
+      this.getRangeName(index),
+      0
+    );
   }
 }
