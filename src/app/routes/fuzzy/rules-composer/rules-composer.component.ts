@@ -13,8 +13,7 @@ import { FuzzyArea, Rule } from 'src/app/shared';
   styleUrls: ['./rules-composer.component.scss'],
 })
 export class RulesComposerComponent implements OnInit {
-  public form = this.formCreatorService.createRuleForm();
-
+  public form: FormGroup;
   get typeControl(): FormControl {
     return this.form.get('type') as FormControl;
   }
@@ -36,7 +35,9 @@ export class RulesComposerComponent implements OnInit {
     private formCreatorService: FormCreatorService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.formCreatorService.createRuleForm();
+  }
 
   public onSelectionChanged(
     event: MatSelectChange,
@@ -59,8 +60,6 @@ export class RulesComposerComponent implements OnInit {
       this.inputs.removeAt(index);
     }
     this.inputs.push(fuzzyAreaForm);
-
-    console.log(this.form.value);
   }
 
   public createRule(event: Event): void {

@@ -10,9 +10,12 @@ export class FormCreatorService {
   public createVariableForm(): FormGroup {
     return this.fb.group({
       name: [null, Validators.required],
-      start: 0,
-      end: 0,
-      fuzzyAreasCount: 1,
+      start: [0, Validators.required],
+      end: [0, Validators.required],
+      fuzzyAreasCount: [
+        1,
+        Validators.compose([Validators.required, Validators.min(1)]),
+      ],
       fuzzyAreas: this.fb.array([]),
       example: 0,
     });
@@ -22,9 +25,9 @@ export class FormCreatorService {
     return this.fb.group({
       name: [null, Validators.required],
       type: this.fb.group({
-        name: null,
+        name: [null, Validators.required],
         ranges: this.fb.array([]),
-        value: null,
+        value: [null, Validators.required],
       }),
     });
   }

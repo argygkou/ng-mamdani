@@ -1,17 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { Variable, Variables } from 'src/app/shared';
+import { Variable } from 'src/app/shared';
 
 @Component({
   selector: 'app-variables-list',
@@ -21,19 +14,16 @@ import { Variable, Variables } from 'src/app/shared';
 export class VariablesListComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() type: string;
-  @Input() variables: Variables[];
+  @Input() variables: Variable[];
 
-  public form = this.formCreatorService.createFuzzyAreaForm();
-
-  private onDestroy$ = new Subject();
-
+  public form: FormGroup;
   get typeGroup(): FormGroup {
     return this.form.get('type') as FormGroup;
   }
-
   get ranges(): FormArray {
     return this.typeGroup.get('ranges') as FormArray;
   }
+  private onDestroy$ = new Subject();
 
   constructor(
     public mamdaniService: MamdaniService,
@@ -41,22 +31,7 @@ export class VariablesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.typeGroup
-      .get('name')
-      .valueChanges.pipe(takeUntil(this.onDestroy$))
-      .subscribe((value) => {
-        const selectedType = this.mamdaniService.fuzzyAreas.find(
-          (area) => area.name === value
-        );
-        this.typeGroup.get('value').setValue(selectedType.type.value);
-        this.ranges.clear();
-
-        selectedType.type.ranges.forEach((range, index) => {
-          const group = this.createRange(index);
-          group.get(`range${index}`).setValue(range);
-          this.ranges.push(group);
-        });
-      });
+    this.initForm();
   }
 
   ngOnDestroy(): void {
@@ -71,13 +46,38 @@ export class VariablesListComponent implements OnInit, OnDestroy {
       ...formValue,
       type: {
         ...formValue.type,
-        ranges: formValue.type.ranges.map((r, i) => r[this.getRangeName(i)]),
+        ranges: formValue.type.ranges.map(
+          (range, index) => range[this.getRangeName(index)]
+        ),
       },
     };
 
     variable.fuzzyAreas.push(formValue);
 
     this.mamdaniService.addFuzzyArea(this.type, index, variable);
+    this.form.reset();
+    this.initForm();
+  }
+
+  private initForm() {
+    this.form = this.formCreatorService.createFuzzyAreaForm();
+    this.typeGroup
+      .get('name')
+      .valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe((value) => {
+        const selectedType = this.mamdaniService.fuzzyAreas.find(
+          (area) => area.name === value
+        );
+        if (selectedType) {
+          this.typeGroup.get('value').setValue(selectedType.type.value);
+          this.ranges.clear();
+          selectedType.type.ranges.forEach((range, index) => {
+            const group = this.createRange(index);
+            group.get(`range${index}`).setValue(range);
+            this.ranges.push(group);
+          });
+        }
+      });
   }
 
   public getRangeName(index: number): string {

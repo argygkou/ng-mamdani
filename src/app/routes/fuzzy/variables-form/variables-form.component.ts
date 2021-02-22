@@ -9,9 +9,9 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   styleUrls: ['./variables-form.component.scss'],
 })
 export class VariablesFormComponent implements OnInit {
-  public variableType = new FormControl('inputs');
+  public variableType = new FormControl('input');
 
-  public variableForm = this.formCreatorService.createVariableForm();
+  public form = this.formCreatorService.createVariableForm();
 
   constructor(
     private formCreatorService: FormCreatorService,
@@ -22,9 +22,12 @@ export class VariablesFormComponent implements OnInit {
 
   public addVariable(event: Event): void {
     event.preventDefault();
-    this.mamdaniService.addVariable(
-      this.variableType.value,
-      this.variableForm.value
-    );
+    if (this.variableType.value === 'input') {
+      this.mamdaniService.addInputVariable(this.form.value);
+    } else {
+      this.mamdaniService.addOutputVariable(this.form.value);
+    }
+    this.form.reset();
+    this.form = this.formCreatorService.createVariableForm();
   }
 }

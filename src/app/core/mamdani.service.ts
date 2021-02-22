@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { FuzzyArea, Rule, Variable, Variables } from '../shared';
+import { FuzzyArea, Rule, Variable } from '../shared';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MamdaniService {
-  public variables: Variables = {
-    inputs: [],
-    outputs: [],
-  };
+  public inputVariables: Variable[];
+  public outputVariables: Variable[];
+  public rules: Rule[];
 
   public fuzzyAreas: FuzzyArea[] = [
     {
@@ -17,8 +16,6 @@ export class MamdaniService {
         name: 'Triangle',
         ranges: [0, 0, 0],
         value: (ranges, value) => {
-          // const ranges = rangesParam.map((range) => parseInt(range, 10));
-          // const value = parseInt(valueParam, 10);
           if (value < ranges[0] || value > ranges[2]) {
             return 0;
           }
@@ -35,8 +32,6 @@ export class MamdaniService {
         name: 'Trapezoid',
         ranges: [0, 0, 0, 0],
         value: (ranges, value) => {
-          // const ranges = rangesParam.map((range) => parseInt(range, 10));
-          // const value = parseInt(valueParam, 10);
           if (value < ranges[0] || value > ranges[3]) {
             return 0;
           }
@@ -51,9 +46,7 @@ export class MamdaniService {
     },
   ];
 
-  public rules: Rule[] = [];
-
-  public exampleVariables: Variables = {
+  private exampleVariables = {
     inputs: [
       {
         name: 'Temperature',
@@ -183,19 +176,25 @@ export class MamdaniService {
   };
 
   constructor() {
-    this.variables = this.exampleVariables;
+    this.rules = [];
+    this.inputVariables = this.exampleVariables.inputs;
+    this.outputVariables = this.exampleVariables.outputs;
   }
 
-  public addVariable(type: string, variable: Variable): void {
-    if (type === 'inputs') {
-      this.variables[type].push(variable);
-      return;
-    }
-    this.variables[type] = [variable];
+  public addInputVariable(variable: Variable): void {
+    this.inputVariables.push(variable);
+  }
+
+  public addOutputVariable(variable: Variable): void {
+    this.outputVariables = [variable];
   }
 
   public addFuzzyArea(type: string, index: number, variable: Variable): void {
-    this.variables[type][index] = variable;
+    if (type === 'inputs') {
+      this.inputVariables[index] = variable;
+      return;
+    }
+    this.outputVariables[index] = variable;
   }
 
   public addRule(rule: Rule): void {
@@ -208,7 +207,7 @@ export class MamdaniService {
     const inputs = rule.fuzzyAreas.inputs;
     const data = [];
     inputs.forEach((element, index) => {
-      const example = this.variables.inputs[index].example;
+      const example = this.inputVariables[index].example;
       data.push(element.type.value(element.type.ranges, example));
     });
     const result = data.reduce((next, prev) => compareFunction(next, prev));

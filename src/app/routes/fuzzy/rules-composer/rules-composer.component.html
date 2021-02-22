@@ -10,7 +10,7 @@
     <div class="col-1"><p style="margin-top: 20px">IF</p></div>
     <div class="col-7">
       <span
-        *ngFor="let input of mamdaniService.variables.inputs; let i = index"
+        *ngFor="let input of mamdaniService.inputVariables; let i = index"
       >
         <span style="margin: 0 10px" *ngIf="i > 0" (click)="toggleNorm()">{{
           typeControl.value
@@ -34,7 +34,7 @@
     <div class="col-3">
       <mat-form-field appearance="fill">
         <mat-select
-          *ngFor="let output of mamdaniService.variables.outputs; let i = index"
+          *ngFor="let output of mamdaniService.outputVariables; let i = index"
           (selectionChange)="onSelectionChanged($event, 'output', i)"
         >
           <mat-option
