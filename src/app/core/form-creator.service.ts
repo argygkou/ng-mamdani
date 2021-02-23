@@ -29,12 +29,6 @@ export class FormCreatorService {
     });
   }
 
-  public createCustomForm(name: string, value = null): FormGroup {
-    return this.fb.group({
-      [name]: [0, Validators.required],
-    });
-  }
-
   public createRuleForm(): FormGroup {
     return this.fb.group({
       name: [null, Validators.required],
@@ -42,7 +36,7 @@ export class FormCreatorService {
       result: 0,
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),
-        output: null,
+        output: this.fb.control(null, Validators.required),
       }),
     });
   }

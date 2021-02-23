@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 
@@ -33,20 +33,25 @@ export class RulesComposerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formCreatorService.createRuleForm();
-    this.mamdaniService.inputVariables.forEach((input, index) => {
-      this.inputs.push(new FormControl());
-    });
+    this.initForm();
   }
 
   public createRule(event: Event): void {
     event.preventDefault();
     const value = this.form.value;
     this.mamdaniService.addRule(value);
+    this.form.reset();
   }
 
   public toggleNorm(): void {
     const newType = this.typeControl.value === 'AND' ? 'OR' : 'AND';
     this.typeControl.setValue(newType);
+  }
+
+  private initForm(): void {
+    this.form = this.formCreatorService.createRuleForm();
+    this.mamdaniService.inputVariables.forEach(() => {
+      this.inputs.push(new FormControl(null, Validators.required));
+    });
   }
 }

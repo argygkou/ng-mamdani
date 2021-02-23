@@ -21,21 +21,22 @@
                 >{{ typeControl.value }}</span
               >
 
-              <ng-container>
-                <mat-form-field appearance="fill">
-                  <mat-select [formControlName]="i">
-                    <mat-option
-                      *ngFor="
-                        let fuzzyArea of mamdaniService.inputVariables[i]
-                          .fuzzyAreas
-                      "
-                      [value]="fuzzyArea"
-                    >
-                      {{ fuzzyArea.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </ng-container>
+              <mat-form-field appearance="fill">
+                <mat-select [formControlName]="i">
+                  <mat-option
+                    *ngFor="
+                      let fuzzyArea of mamdaniService.inputVariables[i]
+                        .fuzzyAreas
+                    "
+                    [value]="fuzzyArea"
+                  >
+                    {{ fuzzyArea.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="input.hasError('required')">
+                  Required
+                </mat-error>
+              </mat-form-field>
             </span>
           </div>
           <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
@@ -55,6 +56,9 @@
                   {{ fuzzyArea.name }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="output.hasError('required')">
+                Required
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
