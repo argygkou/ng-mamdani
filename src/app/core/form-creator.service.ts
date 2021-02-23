@@ -24,17 +24,8 @@ export class FormCreatorService {
   public createFuzzyAreaForm(): FormGroup {
     return this.fb.group({
       name: [null, Validators.required],
-      type: this.fb.group({
-        name: [null, Validators.required],
-        ranges: this.fb.array([]),
-        value: [null, Validators.required],
-      }),
-    });
-  }
-
-  public createRangeForm(name: string): FormGroup {
-    return this.fb.group({
-      [name]: [0, Validators.required],
+      type: [null, Validators.required],
+      ranges: this.fb.array([]),
     });
   }
 
@@ -42,9 +33,10 @@ export class FormCreatorService {
     return this.fb.group({
       name: [null, Validators.required],
       type: ['AND'],
+      result: 0,
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),
-        output: null,
+        output: this.fb.control(null, Validators.required),
       }),
     });
   }

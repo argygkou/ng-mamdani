@@ -16,29 +16,7 @@
     ></app-variables-list>
   </section>
 
-  <section>
-    <app-examples-form></app-examples-form>
-  </section>
+  <app-examples-form></app-examples-form>
 
-  <section id="rules" *ngIf="mamdaniService.inputVariables.length">
-    <mat-card>
-      <mat-card-title>Compose your new fuzzyArea</mat-card-title>
-      <mat-card-content>
-        <app-rules-composer></app-rules-composer>
-        <mat-list>
-          <mat-list-item *ngFor="let rule of mamdaniService.rules">
-            <p matLine>
-              {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
-              {{ rule.result }}
-            </p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="getResult()">
-          Log result
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </section>
+  <app-rules-composer (getResult)="onGetResult()"></app-rules-composer>
 </div>

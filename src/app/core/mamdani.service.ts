@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { FuzzyArea, Rule, Variable } from '../shared';
-import defaultConfig from './config';
+import { Rule, Variable } from '../shared';
+import {
+  defaultInputVariables,
+  defaultOutputVariables,
+  FUZZYAREATYPES,
+} from './config';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +13,11 @@ export class MamdaniService {
   public inputVariables: Variable[];
   public outputVariables: Variable[];
   public rules: Rule[];
-  public fuzzyAreas: FuzzyArea[];
 
   constructor() {
     this.rules = [];
-    this.inputVariables = defaultConfig.inputVariables;
-    this.outputVariables = defaultConfig.outputVariables;
-    this.fuzzyAreas = defaultConfig.fuzzyAreas;
+    this.inputVariables = defaultInputVariables;
+    this.outputVariables = defaultOutputVariables;
   }
 
   public addInputVariable(variable: Variable): void {
@@ -39,13 +41,23 @@ export class MamdaniService {
     this.rules.push(rule);
   }
 
+  public getResult(): number {
+    let result = 0;
+    this.rules.forEach((rule) => {
+      if (rule.result > result) {
+        result = result;
+      }
+    });
+    return result;
+  }
+
   private checkValue(rule: Rule): any {
     const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
     const inputs = rule.fuzzyAreas.inputs;
     const data = [];
     inputs.forEach((element, index) => {
       const example = this.inputVariables[index].example;
-      data.push(element.type.value(element.type.ranges, example));
+      data.push(FUZZYAREATYPES[element.type](element.ranges, example));
     });
     const result = data.reduce((next, prev) => compareFunction(next, prev));
     return result;
