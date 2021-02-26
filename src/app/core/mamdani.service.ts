@@ -15,7 +15,7 @@ export class MamdaniService {
   public rules: Rule[];
 
   constructor() {
-    this.rules = [];
+    this.rules = rulesConfig;
     this.inputVariables = inputsConfig as Variable[];
     this.outputVariables = [outputConfig] as Variable[];
   }

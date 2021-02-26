@@ -10,7 +10,6 @@ import { Rule } from 'src/app/shared';
   styleUrls: ['./rules-composer.component.scss'],
 })
 export class RulesComposerComponent implements OnInit {
-  @Output() getResult = new EventEmitter();
   public form: FormGroup;
   get typeControl(): FormControl {
     return this.form.get('type') as FormControl;
@@ -44,6 +43,7 @@ export class RulesComposerComponent implements OnInit {
     if (rule.fuzzyAreas.inputs.length > 0) {
       this.mamdaniService.addRule(rule);
       this.form.reset();
+      console.log(JSON.stringify(rule));
     }
   }
 

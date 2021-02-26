@@ -80,4 +80,14 @@
       </mat-list-item>
     </mat-list>
   </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openDialog()"
+      *ngIf="type === 'inputs'"
+    >
+      Add variable
+    </button>
+  </mat-card-actions>
 </mat-card>

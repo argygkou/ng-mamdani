@@ -6,8 +6,6 @@ export interface Rule {
   result?: number;
   fuzzyAreas: {
     inputs: FuzzyArea[];
-    output: {
-      value: number;
-    };
+    output: FuzzyArea;
   };
 }

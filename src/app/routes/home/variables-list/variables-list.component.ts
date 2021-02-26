@@ -6,6 +6,8 @@ import { FUZZYAREATYPES } from 'src/app/core/config';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { FuzzyArea, Variable } from 'src/app/shared';
+import { MatDialog } from '@angular/material/dialog';
+import { VariablesFormComponent } from '../variables-form/variables-form.component';
 
 @Component({
   selector: 'app-variables-list',
@@ -26,7 +28,8 @@ export class VariablesListComponent implements OnInit, OnDestroy {
 
   constructor(
     public mamdaniService: MamdaniService,
-    private formCreatorService: FormCreatorService
+    private formCreatorService: FormCreatorService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +39,14 @@ export class VariablesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.onDestroy$.next();
     this.onDestroy$.complete();
+  }
+
+  public openDialog() {
+    this.dialog.open(VariablesFormComponent, {
+      data: {
+        animal: 'panda',
+      },
+    });
   }
 
   public addFuzzyArea(event: Event, variable: Variable, index: number): void {

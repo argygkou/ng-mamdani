@@ -7,11 +7,11 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'fuzzy', pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
-        path: 'fuzzy',
+        path: 'home',
         loadChildren: () =>
-          import('./routes/fuzzy/fuzzy.module').then((m) => m.FuzzyModule),
+          import('./routes/home/home.module').then((m) => m.HomeModule),
       },
     ],
   },

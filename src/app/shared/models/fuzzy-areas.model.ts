@@ -1,6 +1,6 @@
 export interface FuzzyArea {
   name: string;
-  type: FuzzyAreaTypeNames;
+  type: string;
   ranges: number[];
 }
 

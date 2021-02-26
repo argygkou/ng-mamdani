@@ -1,6 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="addVariable($event)">
-  <mat-card>
-    <mat-card-content>
+  <h1 mat-dialog-title>Add Input Variables</h1>
+  <div mat-dialog-content>
+    <div class="variables-form-container">
       <mat-radio-group
         aria-label="Select an option"
         [formControl]="variableType"
@@ -71,16 +72,18 @@
           </mat-form-field>
         </div>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!form.valid"
-      >
-        Add variable
-      </button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      mat-dialog-close
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!form.valid"
+    >
+      Save
+    </button>
+  </div>
 </form>

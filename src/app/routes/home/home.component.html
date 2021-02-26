@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <mat-card>
+        <mat-card-title>Provide example for your variables:</mat-card-title>
+        <mat-card-content>
+          <div *ngFor="let input of mamdaniService.inputVariables">
+            <div class="example-container">
+              <mat-form-field style="width: 200px; margin: 0 20px">
+                <mat-label>{{ input.name }}</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [placeholder]="input.name"
+                  [(ngModel)]="input.example"
+                  [ngModelOptions]="{ standalone: true }"
+                  required
+                />
+              </mat-form-field>
+
+              <div style="display: inline">
+                <span *ngFor="let fuzzyArea of input.fuzzyAreas">
+                  <span>{{ fuzzyArea.name }}:</span>
+                  <span class="contain-level" style="margin-right: 20px">{{
+                    calculateValue(fuzzyArea, input.example)
+                  }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- <button mat-raised-button color="primary" (click)="getResult()">
+            Log result
+          </button> -->
+          <p>
+            Result is: <strong>{{ getResult() }}</strong>
+          </p>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-sm-8">
+      <app-variables-list
+        [title]="'Input Variables'"
+        type="inputs"
+        [variables]="mamdaniService.inputVariables"
+      ></app-variables-list>
+
+      <app-variables-list
+        [title]="'Output Variables'"
+        type="outputs"
+        [variables]="mamdaniService.outputVariables"
+      ></app-variables-list>
+      <app-rules-composer></app-rules-composer>
+    </div>
+  </div>
+</div>
