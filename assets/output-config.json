@@ -1,0 +1,34 @@
+{
+    "name": "Recommendation",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 5,
+    "example": 7,
+    "fuzzyAreas": [
+        {
+            "name": "Very Low",
+            "type": "Trapezoid",
+            "ranges": [0, 0, 0, 0]
+        },
+        {
+            "name": "Low",
+            "type": "Trapezoid",
+            "ranges": [0, 0, 0, 0]
+        },
+        {
+            "name": "Average",
+            "type": "Trapezoid",
+            "ranges": [0, 0, 0, 0]
+        },
+        {
+            "name": "High",
+            "type": "Trapezoid",
+            "ranges": [0, 0, 0, 0]
+        },
+        {
+            "name": "Very High",
+            "type": "Trapezoid",
+            "ranges": [0, 0, 0, 0]
+        }
+    ]
+}
