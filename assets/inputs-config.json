@@ -1,151 +1,151 @@
 [
-    {
-        "name": "Past Performance",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 4,
-        "example": 7,
-        "fuzzyAreas": [
-            {
-                "name": "Very Good",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Good",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Fair",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Poor",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    },
-    {
-        "name": "Perceived Difficulty of Learning Pathway",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 3,
-        "example": 2,
-        "fuzzyAreas": [
-            {
-                "name": "Hard",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Average",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Easy",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    },
-    {
-        "name": "Perceived Career Opportunities",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 3,
-        "example": 2,
-        "fuzzyAreas": [
-            {
-                "name": "Many",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Some",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Few",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    },
-    {
-        "name": "Friends & Peers in Learning Pathway",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 3,
-        "example": 2,
-        "fuzzyAreas": [
-            {
-                "name": "High",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Average",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Low",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    },
-    {
-        "name": "Reputation of learing pathway",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 3,
-        "example": 2,
-        "fuzzyAreas": [
-            {
-                "name": "High",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Moderate",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Low",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    },
-    {
-        "name": "Cost of learing pathway",
-        "start": 0,
-        "end": 10,
-        "fuzzyAreasCount": 3,
-        "example": 2,
-        "fuzzyAreas": [
-            {
-                "name": "High",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Moderate",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            },
-            {
-                "name": "Low",
-                "type": "Triangle",
-                "ranges": [0, 0, 0]
-            }
-        ]
-    }
+  {
+    "name": "Past Performance",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 4,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Poor",
+        "type": "Trapezoid",
+        "ranges": [0, 0, 30, 45]
+      },
+      {
+        "name": "Fair",
+        "type": "Trapezoid",
+        "ranges": [33, 50, 50, 68]
+      },
+      {
+        "name": "Good",
+        "type": "Trapezoid",
+        "ranges": [53, 70, 70, 88]
+      },
+      {
+        "name": "Very Good",
+        "type": "Trapezoid",
+        "ranges": [76, 90, 100, 100]
+      }
+    ]
+  },
+  {
+    "name": "Perceived Difficulty of Learning Pathway(Easy to Hard)",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 3,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Easy",
+        "type": "Triangle",
+        "ranges": [0, 20, 45]
+      },
+      {
+        "name": "Average",
+        "type": "Triangle",
+        "ranges": [30, 50, 70]
+      },
+      {
+        "name": "Hard",
+        "type": "Triangle",
+        "ranges": [65, 80, 100]
+      }
+    ]
+  },
+  {
+    "name": "Perceived Career Opportunities(Few To Many)",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 3,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Few",
+        "type": "Triangle",
+        "ranges": [0, 15, 30]
+      },
+      {
+        "name": "Some",
+        "type": "Triangle",
+        "ranges": [25, 50, 75]
+      },
+      {
+        "name": "Many",
+        "type": "Triangle",
+        "ranges": [70, 85, 100]
+      }
+    ]
+  },
+  {
+    "name": "Friends & Peers in Learning Pathway(Low To High)",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 3,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Low",
+        "type": "Triangle",
+        "ranges": [0, 25, 50]
+      },
+      {
+        "name": "Average",
+        "type": "Triangle",
+        "ranges": [40, 55, 70]
+      },
+      {
+        "name": "High",
+        "type": "Triangle",
+        "ranges": [65, 80, 100]
+      }
+    ]
+  },
+  {
+    "name": "Reputation of learing pathway(Low To High)",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 3,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Low",
+        "type": "Triangle",
+        "ranges": [0, 25, 50]
+      },
+      {
+        "name": "Moderate",
+        "type": "Triangle",
+        "ranges": [40, 55, 70]
+      },
+      {
+        "name": "High",
+        "type": "Triangle",
+        "ranges": [65, 80, 100]
+      }
+    ]
+  },
+  {
+    "name": "Cost of learing pathway",
+    "start": 0,
+    "end": 100,
+    "fuzzyAreasCount": 3,
+    "example": 0,
+    "fuzzyAreas": [
+      {
+        "name": "Low",
+        "type": "Triangle",
+        "ranges": [0, 20, 40]
+      },
+      {
+        "name": "Moderate",
+        "type": "Triangle",
+        "ranges": [37, 59, 74]
+      },
+      {
+        "name": "High",
+        "type": "Triangle",
+        "ranges": [72, 86, 100]
+      }
+    ]
+  }
 ]
