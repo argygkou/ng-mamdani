@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>Rules</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let rule of mamdaniService.rules">
+        <p matLine>
+          {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
+          {{ rule.result }}
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      Add Rule
+    </button>
+  </mat-card-actions>
+</mat-card>

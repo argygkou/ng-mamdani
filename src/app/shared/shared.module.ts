@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { LayoutModule } from '@angular/cdk/layout';
+import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 
 const MATERIAL_MODULES = [
   MatToolbarModule,
@@ -36,9 +37,11 @@ const MATERIAL_MODULES = [
 
 const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
+const COMPONENTS = [CustomModalComponent];
+
 @NgModule({
-  declarations: [],
+  declarations: [COMPONENTS],
   imports: [MODULES, MATERIAL_MODULES],
-  exports: [MODULES, MATERIAL_MODULES],
+  exports: [MODULES, MATERIAL_MODULES, COMPONENTS],
 })
 export class SharedModule {}

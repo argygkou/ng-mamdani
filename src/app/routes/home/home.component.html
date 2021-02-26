@@ -30,9 +30,6 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <!-- <button mat-raised-button color="primary" (click)="getResult()">
-            Log result
-          </button> -->
           <p>
             Result is: <strong>{{ getResult() }}</strong>
           </p>
@@ -51,7 +48,8 @@
         type="outputs"
         [variables]="mamdaniService.outputVariables"
       ></app-variables-list>
-      <app-rules-composer></app-rules-composer>
+
+      <app-rules-list></app-rules-list>
     </div>
   </div>
 </div>

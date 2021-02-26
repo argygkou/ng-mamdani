@@ -1,91 +1,76 @@
-<section id="rules" *ngIf="mamdaniService.inputVariables.length">
-  <mat-card>
-    <mat-card-title>Compose your new fuzzyArea</mat-card-title>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="createRule($event)">
-        <mat-form-field class="input-full-width">
-          <mat-label>Rule Name</mat-label>
-          <input matInput placeholder="Name" formControlName="name" />
-          <mat-error *ngIf="form.get('name').hasError('required')">
-            Required
-          </mat-error>
-        </mat-form-field>
-        <div class="row" formGroupName="fuzzyAreas">
-          <div class="col-1"><p style="margin-top: 20px">IF</p></div>
-          <div class="col-7" formArrayName="inputs">
-            <span *ngFor="let input of inputs.controls; let i = index">
-              <span
-                style="margin: 0 10px"
-                *ngIf="i > 0"
-                (click)="toggleNorm()"
-                >{{ typeControl.value }}</span
-              >
+<form [formGroup]="form" (ngSubmit)="createRule($event)">
+  <app-custom-modal>
+    <h1 dialog-title>Add Rule</h1>
+    <div dialog-content>
+      <mat-form-field class="input-full-width">
+        <mat-label>Rule Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="form.get('name').hasError('required')">
+          Required
+        </mat-error>
+      </mat-form-field>
+      <div class="row" formGroupName="fuzzyAreas">
+        <div class="col-1"><p style="margin-top: 20px">IF</p></div>
+        <div class="col-7" formArrayName="inputs">
+          <span *ngFor="let input of inputs.controls; let i = index">
+            <span style="margin: 0 10px" *ngIf="i > 0" (click)="toggleNorm()">{{
+              typeControl.value
+            }}</span>
 
-              <mat-form-field appearance="fill">
-                <mat-label>{{
-                  mamdaniService.inputVariables[i].name
-                }}</mat-label>
-                <mat-select [formControlName]="i">
-                  <mat-option
-                    *ngFor="
-                      let fuzzyArea of mamdaniService.inputVariables[i]
-                        .fuzzyAreas
-                    "
-                    [value]="fuzzyArea"
-                  >
-                    {{ fuzzyArea.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="input.hasError('required')">
-                  Required
-                </mat-error>
-              </mat-form-field>
-            </span>
-          </div>
-          <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
-          <div class="col-3">
             <mat-form-field appearance="fill">
-              <mat-label>{{
-                mamdaniService.outputVariables[0].name
-              }}</mat-label>
-              <mat-select
-                *ngFor="
-                  let output of mamdaniService.outputVariables;
-                  let i = index
-                "
-                formControlName="output"
-              >
+              <mat-label>{{ mamdaniService.inputVariables[i].name }}</mat-label>
+              <mat-select [formControlName]="i">
                 <mat-option
-                  *ngFor="let fuzzyArea of output.fuzzyAreas"
+                  *ngFor="
+                    let fuzzyArea of mamdaniService.inputVariables[i].fuzzyAreas
+                  "
                   [value]="fuzzyArea"
                 >
                   {{ fuzzyArea.name }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="output.hasError('required')">
+              <mat-error *ngIf="input.hasError('required')">
                 Required
               </mat-error>
             </mat-form-field>
-          </div>
+          </span>
         </div>
-        <button
-          mat-button
-          color="primary"
-          type="submit"
-          [disabled]="!form.valid"
-        >
-          Add new rule
-        </button>
-      </form>
-
-      <mat-list>
-        <mat-list-item *ngFor="let rule of mamdaniService.rules">
-          <p matLine>
-            {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
-            {{ rule.result }}
-          </p>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
-</section>
+        <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
+        <div class="col-3">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ mamdaniService.outputVariables[0].name }}</mat-label>
+            <mat-select
+              *ngFor="
+                let output of mamdaniService.outputVariables;
+                let i = index
+              "
+              formControlName="output"
+            >
+              <mat-option
+                *ngFor="let fuzzyArea of output.fuzzyAreas"
+                [value]="fuzzyArea"
+              >
+                {{ fuzzyArea.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="output.hasError('required')">
+              Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div dialog-actions>
+      <button
+        mat-button
+        mat-dialog-close
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Save
+      </button>
+    </div>
+  </app-custom-modal>
+</form>

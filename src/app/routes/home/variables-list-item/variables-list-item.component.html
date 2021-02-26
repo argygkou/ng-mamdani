@@ -14,17 +14,18 @@
   <span class="header-spacer"></span>
   <button
     mat-icon-button
-    color="primary"
-    (click)="remove(i)"
+    color="warn"
+    (click)="removeItem.emit(index)"
     *ngIf="type === 'inputs'"
   >
-    <mat-icon>close</mat-icon>
+    <mat-icon>delete</mat-icon>
   </button>
 </div>
 <p matLine>
   <mat-button-toggle-group [(ngModel)]="selectedFuzzyArea">
     <mat-button-toggle
-      *ngFor="let fuzzyArea of variable.fuzzyAreas"
+      *ngFor="let fuzzyArea of variable.fuzzyAreas; let i = index"
+      (change)="toggleChanged($event, i)"
       [value]="fuzzyArea"
     >
       {{ fuzzyArea.name }}</mat-button-toggle
@@ -33,8 +34,8 @@
   <app-variables-list-item-form
     *ngIf="edit"
     [variable]="variable"
-    [fuzzyArea]="selectedFuzzyArea"
     [index]="index"
+    [fuzzyArea]="selectedFuzzyArea"
   ></app-variables-list-item-form>
 </p>
-<mat-divider></mat-divider>
+<mat-divider *ngIf="type === 'inputs'"></mat-divider>

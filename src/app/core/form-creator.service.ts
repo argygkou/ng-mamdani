@@ -16,7 +16,7 @@ export class FormCreatorService {
         1,
         Validators.compose([Validators.required, Validators.min(1)]),
       ],
-      fuzzyAreas: this.fb.array([]),
+      fuzzyAreas: this.fb.array([this.createFuzzyAreaForm()]),
       example: 0,
     });
   }

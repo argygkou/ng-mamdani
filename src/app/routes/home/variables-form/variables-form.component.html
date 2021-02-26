@@ -1,89 +1,101 @@
 <form [formGroup]="form" (ngSubmit)="addVariable($event)">
-  <h1 mat-dialog-title>Add Input Variables</h1>
-  <div mat-dialog-content>
-    <div class="variables-form-container">
-      <mat-radio-group
-        aria-label="Select an option"
-        [formControl]="variableType"
-      >
-        <mat-radio-button value="input">Input</mat-radio-button>
-        <mat-radio-button value="output">Output</mat-radio-button>
-      </mat-radio-group>
-      <br />
-      <div class="row">
-        <div class="col-6">
-          <mat-form-field class="input-full-width">
-            <mat-label>Variable Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" />
-            <mat-error *ngIf="form.get('name').hasError('required')">
-              Required
-            </mat-error>
-          </mat-form-field>
+  <app-custom-modal>
+    <h1 dialog-title>Add Input Variables</h1>
+    <div dialog-content>
+      <div class="variables-form-container">
+        <mat-radio-group
+          aria-label="Select an option"
+          [formControl]="variableType"
+        >
+          <mat-radio-button value="input">Input</mat-radio-button>
+          <mat-radio-button value="output">Output</mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="input-full-width">
+              <mat-label>Variable Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" />
+              <mat-error *ngIf="form.get('name').hasError('required')">
+                Required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="input-full-width">
+              <mat-label>Number of fuzzyAreas</mat-label>
+              <input
+                matInput
+                placeholder="fuzzy areas count"
+                type="number"
+                min="0"
+                formControlName="fuzzyAreasCount"
+              />
+              <mat-error
+                *ngIf="form.get('fuzzyAreasCount').hasError('required')"
+              >
+                Required
+              </mat-error>
+              <mat-error *ngIf="form.get('fuzzyAreasCount').hasError('min')">
+                Minumun number of fuzzy areas 1
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="col-6">
-          <mat-form-field class="input-full-width">
-            <mat-label>Number of fuzzyAreas</mat-label>
-            <input
-              matInput
-              placeholder="fuzzy areas count"
-              type="number"
-              min="0"
-              formControlName="fuzzyAreasCount"
-            />
-            <mat-error *ngIf="form.get('fuzzyAreasCount').hasError('required')">
-              Required
-            </mat-error>
-            <mat-error *ngIf="form.get('fuzzyAreasCount').hasError('min')">
-              Minumun number of fuzzy areas 1
-            </mat-error>
-          </mat-form-field>
+        <br />
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field class="input-full-width">
+              <mat-label>Range: Start</mat-label>
+              <input
+                matInput
+                placeholder="Start"
+                type="number"
+                min="0"
+                formControlName="start"
+              />
+              <mat-error *ngIf="form.get('start').hasError('required')">
+                Required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field class="input-full-width">
+              <mat-label>Range: End</mat-label>
+              <input
+                matInput
+                placeholder="End"
+                type="number"
+                min="0"
+                formControlName="end"
+              />
+              <mat-error *ngIf="form.get('end').hasError('required')">
+                Required
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
-      <br />
-      <div class="row">
-        <div class="col-6">
-          <mat-form-field class="input-full-width">
-            <mat-label>Range: Start</mat-label>
-            <input
-              matInput
-              placeholder="Start"
-              type="number"
-              min="0"
-              formControlName="start"
-            />
-            <mat-error *ngIf="form.get('start').hasError('required')">
-              Required
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-6">
-          <mat-form-field class="input-full-width">
-            <mat-label>Range: End</mat-label>
-            <input
-              matInput
-              placeholder="End"
-              type="number"
-              min="0"
-              formControlName="end"
-            />
-            <mat-error *ngIf="form.get('end').hasError('required')">
-              Required
-            </mat-error>
-          </mat-form-field>
+        <mat-divider></mat-divider>
+        <div class="fuzzy-area">
+          <h2>Fuzzy Areas</h2>
+          <div *ngFor="let item of fuzzyAreasArray.controls">
+            <app-fuzzy-area-form [form]="item"></app-fuzzy-area-form>
+            <mat-divider></mat-divider>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div mat-dialog-actions>
-    <button
-      mat-button
-      mat-dialog-close
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="!form.valid"
-    >
-      Save
-    </button>
-  </div>
+    <div dialog-actions>
+      <button
+        mat-button
+        mat-dialog-close
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Save
+      </button>
+    </div>
+  </app-custom-modal>
 </form>

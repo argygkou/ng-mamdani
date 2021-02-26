@@ -25,14 +25,12 @@ export class VariablesListItemFormComponent
   @Input() fuzzyArea: FuzzyArea;
   @Input() index: number;
 
-  public variableType = new FormControl('input');
-
   public form = this.formCreatorService.createVariableForm();
 
   get ranges(): FormArray {
     return this.form.get('ranges') as FormArray;
   }
-  public fuzzyAreaTypes = Object.keys(FUZZYAREATYPES);
+
   private onDestroy$ = new Subject();
 
   constructor(
@@ -54,13 +52,11 @@ export class VariablesListItemFormComponent
     this.onDestroy$.complete();
   }
 
-  public addFuzzyArea(event: Event): void {
+  public updateFuzzyArea(event: Event): void {
     event.preventDefault();
     const value = this.form.value;
-    this.variable.fuzzyAreas.push(value);
+    this.variable.fuzzyAreas[this.index] = value;
     this.mamdaniService.addFuzzyArea('inputs', this.index, this.variable);
-    // this.form.reset();
-    // this.initForm();
   }
 
   private initForm(): void {
@@ -69,16 +65,5 @@ export class VariablesListItemFormComponent
     this.fuzzyArea.ranges.forEach((range) => {
       this.ranges.push(new FormControl(range, Validators.required));
     });
-    // console.log(this.form.value);
-    this.form
-      .get('type')
-      .valueChanges.pipe(takeUntil(this.onDestroy$))
-      .subscribe((value) => {
-        this.ranges.clear();
-        const numberOfRanges = value === 'Trapezoid' ? 4 : 3;
-        for (let index = 0; index < numberOfRanges; index++) {
-          this.ranges.push(new FormControl(0, Validators.required));
-        }
-      });
   }
 }

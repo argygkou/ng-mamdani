@@ -23,13 +23,11 @@ export class VariablesListComponent implements OnInit {
 
   public openDialog() {
     this.dialog.open(VariablesFormComponent, {
-      data: {
-        animal: 'panda',
-      },
+      width: '1200px',
     });
   }
 
-  public remove(index: number): void {
+  public onRemoveItem(index: number): void {
     this.variables.splice(index, 1);
   }
 }

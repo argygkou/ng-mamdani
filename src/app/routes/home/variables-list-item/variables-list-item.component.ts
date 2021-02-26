@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { FuzzyArea, Variable } from 'src/app/shared';
 
 @Component({
@@ -10,6 +11,7 @@ export class VariablesListItemComponent implements OnInit {
   @Input() variable: Variable;
   @Input() type: string;
   @Input() index: number;
+  @Output() removeItem = new EventEmitter<number>();
 
   public edit: boolean;
   public selectedFuzzyArea: FuzzyArea;
@@ -19,7 +21,11 @@ export class VariablesListItemComponent implements OnInit {
   ngOnInit(): void {}
 
   public changeMode(): void {
-    this.selectedFuzzyArea = this.variable.fuzzyAreas[0];
     this.edit = !this.edit;
+    this.selectedFuzzyArea = this.edit ? this.variable.fuzzyAreas[0] : null;
+  }
+
+  public toggleChanged(event: MatButtonToggleChange, index: number) {
+    this.index = index;
   }
 }

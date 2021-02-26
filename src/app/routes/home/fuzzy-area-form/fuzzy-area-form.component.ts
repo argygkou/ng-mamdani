@@ -13,11 +13,8 @@ import { FuzzyArea, Variable } from 'src/app/shared';
   styleUrls: ['./fuzzy-area-form.component.scss'],
 })
 export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
-  @Input() variable: Variable;
-  @Input() fuzzyArea: FuzzyArea;
-  @Input() index: number;
+  @Input() form: FormGroup;
 
-  public form: FormGroup;
   get ranges(): FormArray {
     return this.form.get('ranges') as FormArray;
   }
@@ -30,27 +27,6 @@ export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
-
-  public addFuzzyArea(event: Event): void {
-    event.preventDefault();
-    const value = this.form.value;
-    this.variable.fuzzyAreas.push(value);
-    this.mamdaniService.addFuzzyArea('inputs', this.index, this.variable);
-    // this.form.reset();
-    // this.initForm();
-  }
-
-  private initForm() {
-    this.form = this.formCreatorService.createFuzzyAreaForm();
-    this.form.patchValue(this.fuzzyArea);
-    // console.log(this.form.value);
     this.form
       .get('type')
       .valueChanges.pipe(takeUntil(this.onDestroy$))
@@ -61,5 +37,10 @@ export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
           this.ranges.push(new FormControl(0, Validators.required));
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
   }
 }

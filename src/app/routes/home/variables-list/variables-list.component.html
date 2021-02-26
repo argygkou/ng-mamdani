@@ -7,15 +7,8 @@
           [type]="type"
           [index]="i"
           [variable]="variable"
+          (removeItem)="onRemoveItem($event)"
         ></app-variables-list-item>
-        <!-- <button
-          mat-icon-button
-          color="primary"
-          (click)="remove(i)"
-          *ngIf="type === 'inputs'"
-        >
-          <mat-icon>close</mat-icon>
-        </button> -->
       </mat-list-item>
     </mat-list>
   </mat-card-content>
