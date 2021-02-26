@@ -7,6 +7,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { VariablesListComponent } from './variables-list/variables-list.component';
 import { RulesComposerComponent } from './rules-composer/rules-composer.component';
 import { VariablesFormComponent } from './variables-form/variables-form.component';
+import { FuzzyAreaFormComponent } from './fuzzy-area-form/fuzzy-area-form.component';
+import { VariablesListItemComponent } from './variables-list-item/variables-list-item.component';
+import { VariablesListItemFormComponent } from './variables-list-item-form/variables-list-item-form.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { VariablesFormComponent } from './variables-form/variables-form.componen
     VariablesListComponent,
     RulesComposerComponent,
     VariablesFormComponent,
+    FuzzyAreaFormComponent,
+    VariablesListItemComponent,
+    VariablesListItemFormComponent,
   ],
   imports: [HomeRoutingModule, SharedModule],
 })

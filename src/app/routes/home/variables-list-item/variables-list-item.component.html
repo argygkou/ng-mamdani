@@ -1,0 +1,40 @@
+<div matLine style="display: flex">
+  <h3>
+    {{ variable.name }} goes from
+    <strong>{{ variable.start }} to {{ variable.end }}</strong>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="changeMode()"
+      *ngIf="type === 'inputs'"
+    >
+      <mat-icon>{{ !edit ? "edit" : "close" }}</mat-icon>
+    </button>
+  </h3>
+  <span class="header-spacer"></span>
+  <button
+    mat-icon-button
+    color="primary"
+    (click)="remove(i)"
+    *ngIf="type === 'inputs'"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<p matLine>
+  <mat-button-toggle-group [(ngModel)]="selectedFuzzyArea">
+    <mat-button-toggle
+      *ngFor="let fuzzyArea of variable.fuzzyAreas"
+      [value]="fuzzyArea"
+    >
+      {{ fuzzyArea.name }}</mat-button-toggle
+    >
+  </mat-button-toggle-group>
+  <app-variables-list-item-form
+    *ngIf="edit"
+    [variable]="variable"
+    [fuzzyArea]="selectedFuzzyArea"
+    [index]="index"
+  ></app-variables-list-item-form>
+</p>
+<mat-divider></mat-divider>

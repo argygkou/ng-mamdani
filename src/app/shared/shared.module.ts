@@ -14,6 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
@@ -30,6 +31,7 @@ const MATERIAL_MODULES = [
   MatRadioModule,
   MatSnackBarModule,
   MatDialogModule,
+  MatButtonToggleModule,
 ];
 
 const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
