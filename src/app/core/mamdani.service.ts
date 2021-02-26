@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Rule, Variable } from '../shared';
-import {
-  defaultInputVariables,
-  defaultOutputVariables,
-  FUZZYAREATYPES,
-} from './config';
+import { FUZZYAREATYPES } from './config';
+
+import inputsConfig from '../../assets/inputs-config.json';
+import outputConfig from '../../assets/output-config.json';
+import rulesConfig from '../../assets/rules-config.json';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,8 @@ export class MamdaniService {
 
   constructor() {
     this.rules = [];
-    this.inputVariables = defaultInputVariables;
-    this.outputVariables = defaultOutputVariables;
+    this.inputVariables = inputsConfig as Variable[];
+    this.outputVariables = [outputConfig] as Variable[];
   }
 
   public addInputVariable(variable: Variable): void {

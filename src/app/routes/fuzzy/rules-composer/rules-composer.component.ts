@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
+import { Rule } from 'src/app/shared';
 
 @Component({
   selector: 'app-rules-composer',
@@ -38,9 +39,12 @@ export class RulesComposerComponent implements OnInit {
 
   public createRule(event: Event): void {
     event.preventDefault();
-    const value = this.form.value;
-    this.mamdaniService.addRule(value);
-    this.form.reset();
+    const rule = this.form.value as Rule;
+    rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter((input) => input);
+    if (rule.fuzzyAreas.inputs.length > 0) {
+      this.mamdaniService.addRule(rule);
+      this.form.reset();
+    }
   }
 
   public toggleNorm(): void {
@@ -51,7 +55,7 @@ export class RulesComposerComponent implements OnInit {
   private initForm(): void {
     this.form = this.formCreatorService.createRuleForm();
     this.mamdaniService.inputVariables.forEach(() => {
-      this.inputs.push(new FormControl(null, Validators.required));
+      this.inputs.push(new FormControl(null));
     });
   }
 }

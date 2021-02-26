@@ -22,6 +22,9 @@
               >
 
               <mat-form-field appearance="fill">
+                <mat-label>{{
+                  mamdaniService.inputVariables[i].name
+                }}</mat-label>
                 <mat-select [formControlName]="i">
                   <mat-option
                     *ngFor="
@@ -42,6 +45,9 @@
           <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
           <div class="col-3">
             <mat-form-field appearance="fill">
+              <mat-label>{{
+                mamdaniService.outputVariables[0].name
+              }}</mat-label>
               <mat-select
                 *ngFor="
                   let output of mamdaniService.outputVariables;
