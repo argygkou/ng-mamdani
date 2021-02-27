@@ -25,13 +25,11 @@ export class LayoutComponent {
   public onFileInput(files: File[]): void {
     if (files.length > 0) {
       const file = files[0];
-
-      let fileReader = new FileReader();
+      const fileReader = new FileReader();
       fileReader.onload = (e) => {
         const result = fileReader.result;
         this.mamdaniService.importConfig(result);
       };
-      fileReader.readAsText(file);
     }
   }
 }
