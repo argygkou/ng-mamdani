@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-title>Provide example for your variables:</mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let input of mamdaniService.inputVariables">
+      <div class="example-container">
+        <mat-form-field class="example-input">
+          <mat-label>{{ input.name }}</mat-label>
+          <input
+            matInput
+            type="number"
+            [placeholder]="input.name"
+            [(ngModel)]="input.example"
+            [ngModelOptions]="{ standalone: true }"
+            required
+          />
+        </mat-form-field>
+
+        <div style="display: inline">
+          <span *ngFor="let fuzzyArea of input.fuzzyAreas">
+            <span class="contain-name">{{ fuzzyArea.name }}:</span>
+            <span class="contain-value">{{
+              calculateValue(fuzzyArea, input.example)
+            }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <p>
+      Result is: <strong>{{ getResult() }}</strong>
+    </p>
+  </mat-card-actions>
+</mat-card>

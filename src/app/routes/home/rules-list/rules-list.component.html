@@ -2,11 +2,20 @@
   <mat-card-title>Rules</mat-card-title>
   <mat-card-content>
     <mat-list>
-      <mat-list-item *ngFor="let rule of mamdaniService.rules">
+      <mat-list-item *ngIf="mamdaniService.rules.length === 0">
+        <p matLine>No Rules. Add some!</p>
+        <button mat-icon-button color="primary" (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-list-item *ngFor="let rule of mamdaniService.rules; let i = index">
         <p matLine>
           {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
           {{ rule.result }}
         </p>
+        <button mat-icon-button color="warn" (click)="removeRule(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

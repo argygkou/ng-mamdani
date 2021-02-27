@@ -11,6 +11,7 @@ import { FuzzyAreaFormComponent } from './fuzzy-area-form/fuzzy-area-form.compon
 import { VariablesListItemComponent } from './variables-list-item/variables-list-item.component';
 import { VariablesListItemFormComponent } from './variables-list-item-form/variables-list-item-form.component';
 import { RulesListComponent } from './rules-list/rules-list.component';
+import { ExamplesFormComponent } from './examples-form/examples-form.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { RulesListComponent } from './rules-list/rules-list.component';
     VariablesListItemComponent,
     VariablesListItemFormComponent,
     RulesListComponent,
+    ExamplesFormComponent,
   ],
   imports: [HomeRoutingModule, SharedModule],
 })

@@ -21,4 +21,8 @@ export class RulesListComponent implements OnInit {
       width: '1200px',
     });
   }
+
+  public removeRule(index: number): void {
+    this.mamdaniService.removeRule(index);
+  }
 }

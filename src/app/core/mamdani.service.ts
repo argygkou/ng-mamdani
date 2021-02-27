@@ -24,6 +24,10 @@ export class MamdaniService {
     this.inputVariables.push(variable);
   }
 
+  public removeInputVariable(index: number): void {
+    this.inputVariables.splice(index, 1);
+  }
+
   public addOutputVariable(variable: Variable): void {
     this.outputVariables = [variable];
   }
@@ -39,6 +43,10 @@ export class MamdaniService {
   public addRule(rule: Rule): void {
     rule.result = this.checkValue(rule);
     this.rules.push(rule);
+  }
+
+  public removeRule(index: number) {
+    this.rules.splice(index, 1);
   }
 
   public getResult(): number {

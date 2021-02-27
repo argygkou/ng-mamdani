@@ -28,6 +28,6 @@ export class VariablesListComponent implements OnInit {
   }
 
   public onRemoveItem(index: number): void {
-    this.variables.splice(index, 1);
+    this.mamdaniService.removeInputVariable(index);
   }
 }
