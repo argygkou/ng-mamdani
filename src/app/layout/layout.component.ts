@@ -30,6 +30,7 @@ export class LayoutComponent {
         const result = fileReader.result;
         this.mamdaniService.importConfig(result);
       };
+      fileReader.readAsText(file);
     }
   }
 }
