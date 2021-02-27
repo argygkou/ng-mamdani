@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
@@ -33,6 +34,7 @@ const MATERIAL_MODULES = [
   MatSnackBarModule,
   MatDialogModule,
   MatButtonToggleModule,
+  MatMenuModule,
 ];
 
 const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];

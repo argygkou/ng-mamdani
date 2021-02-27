@@ -59,6 +59,21 @@ export class MamdaniService {
     return result;
   }
 
+  public importConfig(result: string | ArrayBuffer): void {
+    const config = JSON.parse(result as string);
+    this.inputVariables = config.inputs;
+    this.outputVariables = config.output;
+    this.rules = config.rules;
+  }
+  public exportConfig(): string {
+    const config = {
+      inputs: this.inputVariables,
+      output: this.outputVariables,
+      rules: this.rules,
+    };
+    return JSON.stringify(config);
+  }
+
   private checkValue(rule: Rule): any {
     const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
     const inputs = rule.fuzzyAreas.inputs;

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MamdaniService } from '../core/mamdani.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,10 +8,30 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
-  // isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  //   .pipe(
-  //     map(result => result.matches),
-  //     shareReplay()
-  //   );
-  // constructor(private breakpointObserver: BreakpointObserver) {}
+  public downloadJsonHref: SafeUrl;
+  constructor(
+    private mamdaniService: MamdaniService,
+    private sanitizer: DomSanitizer
+  ) {}
+
+  public export(): void {
+    const config = this.mamdaniService.exportConfig();
+    const uri = this.sanitizer.bypassSecurityTrustUrl(
+      'data:text/json;charset=UTF-8,' + encodeURIComponent(config)
+    );
+    this.downloadJsonHref = uri;
+  }
+
+  public onFileInput(files: File[]): void {
+    if (files.length > 0) {
+      const file = files[0];
+
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        const result = fileReader.result;
+        this.mamdaniService.importConfig(result);
+      };
+      fileReader.readAsText(file);
+    }
+  }
 }

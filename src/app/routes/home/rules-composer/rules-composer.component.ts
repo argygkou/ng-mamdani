@@ -43,7 +43,6 @@ export class RulesComposerComponent implements OnInit {
     if (rule.fuzzyAreas.inputs.length > 0) {
       this.mamdaniService.addRule(rule);
       this.form.reset();
-      console.log(JSON.stringify(rule));
     }
   }
 
