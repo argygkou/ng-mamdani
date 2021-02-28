@@ -8,27 +8,27 @@
         {
             "name": "Very Low",
             "type": "Trapezoid",
-            "ranges": [0, 0, 0, 0]
+            "ranges": [0, 10, 15, 20]
         },
         {
             "name": "Low",
             "type": "Trapezoid",
-            "ranges": [0, 0, 0, 0]
+            "ranges": [15, 25, 30, 40]
         },
         {
             "name": "Average",
             "type": "Trapezoid",
-            "ranges": [0, 0, 0, 0]
+            "ranges": [35, 45, 50, 60]
         },
         {
             "name": "High",
             "type": "Trapezoid",
-            "ranges": [0, 0, 0, 0]
+            "ranges": [55, 65, 70, 80]
         },
         {
             "name": "Very High",
             "type": "Trapezoid",
-            "ranges": [0, 0, 0, 0]
+            "ranges": [75, 85, 90, 100]
         }
     ]
 }

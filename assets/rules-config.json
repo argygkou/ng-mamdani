@@ -7,7 +7,7 @@
       "inputs": [
         { "name": "Poor", "type": "Trapezoid", "ranges": [0, 0, 30, 45] }
       ],
-      "output": { "name": "Low", "type": "Trapezoid", "ranges": [0, 0, 0, 0] }
+      "output": { "name": "Low", "type": "Trapezoid", "ranges": [15, 25, 30, 40] }
     }
   }
 ]
