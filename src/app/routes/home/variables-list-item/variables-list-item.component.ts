@@ -25,7 +25,7 @@ export class VariablesListItemComponent implements OnInit {
     this.selectedFuzzyArea = this.edit ? this.variable.fuzzyAreas[0] : null;
   }
 
-  public toggleChanged(event: MatButtonToggleChange, index: number) {
+  public toggleChanged(event: MatButtonToggleChange, index: number): void {
     this.index = index;
   }
 }

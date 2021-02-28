@@ -1,13 +1,10 @@
 <div matLine style="display: flex">
   <h3>
-    {{ variable.name }} goes from
-    <strong>{{ variable.start }} to {{ variable.end }}</strong>
-    <button
-      mat-icon-button
-      color="primary"
-      (click)="changeMode()"
-      *ngIf="type === 'inputs'"
-    >
+    <span class="list-item-title">
+      {{ variable.name }} goes from
+      <strong>{{ variable.start }} to {{ variable.end }}</strong>
+    </span>
+    <button mat-icon-button color="primary" (click)="changeMode()">
       <mat-icon>{{ !edit ? "edit" : "close" }}</mat-icon>
     </button>
   </h3>
