@@ -9,56 +9,73 @@
           Required
         </mat-error>
       </mat-form-field>
-      <div class="row" formGroupName="fuzzyAreas">
-        <div class="col-1"><p style="margin-top: 20px">IF</p></div>
-        <div class="col-7" formArrayName="inputs">
-          <span *ngFor="let input of inputs.controls; let i = index">
-            <span style="margin: 0 10px" *ngIf="i > 0" (click)="toggleNorm()">{{
-              typeControl.value
-            }}</span>
+      <ng-container formGroupName="fuzzyAreas">
+        <div class="row">
+          <div class="col-md-1"><p style="margin-top: 20px">IF</p></div>
+          <div class="col-md-11" formArrayName="inputs">
+            <span *ngFor="let input of inputs.controls; let i = index">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="fab-control"
+                *ngIf="i > 0"
+                (click)="toggleNorm()"
+              >
+                {{ typeControl.value }}
+              </button>
 
+              <mat-form-field appearance="fill">
+                <mat-label>{{
+                  mamdaniService.inputVariables[i].name
+                }}</mat-label>
+                <mat-select [formControlName]="i">
+                  <mat-option
+                    *ngFor="
+                      let fuzzyArea of mamdaniService.inputVariables[i]
+                        .fuzzyAreas
+                    "
+                    [value]="fuzzyArea"
+                  >
+                    {{ fuzzyArea.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="input.hasError('required')">
+                  Required
+                </mat-error>
+              </mat-form-field>
+            </span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <br />
+        <div class="row">
+          <div class="col-md-1"><p style="margin-top: 20px">THEN</p></div>
+          <div class="col-md-11">
             <mat-form-field appearance="fill">
-              <mat-label>{{ mamdaniService.inputVariables[i].name }}</mat-label>
-              <mat-select [formControlName]="i">
+              <mat-label>{{
+                mamdaniService.outputVariables[0].name
+              }}</mat-label>
+              <mat-select
+                *ngFor="
+                  let output of mamdaniService.outputVariables;
+                  let i = index
+                "
+                formControlName="output"
+              >
                 <mat-option
-                  *ngFor="
-                    let fuzzyArea of mamdaniService.inputVariables[i].fuzzyAreas
-                  "
+                  *ngFor="let fuzzyArea of output.fuzzyAreas"
                   [value]="fuzzyArea"
                 >
                   {{ fuzzyArea.name }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="input.hasError('required')">
+              <mat-error *ngIf="output.hasError('required')">
                 Required
               </mat-error>
             </mat-form-field>
-          </span>
+          </div>
         </div>
-        <div class="col-1"><p style="margin-top: 20px">THEN</p></div>
-        <div class="col-3">
-          <mat-form-field appearance="fill">
-            <mat-label>{{ mamdaniService.outputVariables[0].name }}</mat-label>
-            <mat-select
-              *ngFor="
-                let output of mamdaniService.outputVariables;
-                let i = index
-              "
-              formControlName="output"
-            >
-              <mat-option
-                *ngFor="let fuzzyArea of output.fuzzyAreas"
-                [value]="fuzzyArea"
-              >
-                {{ fuzzyArea.name }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="output.hasError('required')">
-              Required
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div>
+      </ng-container>
     </div>
     <div dialog-actions>
       <button
