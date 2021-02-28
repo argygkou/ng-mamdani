@@ -8,6 +8,8 @@
           <input
             matInput
             type="number"
+            max="100"
+            min="0"
             [placeholder]="input.name"
             [(ngModel)]="input.example"
             [ngModelOptions]="{ standalone: true }"
@@ -19,7 +21,7 @@
           <span *ngFor="let fuzzyArea of input.fuzzyAreas">
             <span class="contain-name">{{ fuzzyArea.name }}:</span>
             <span class="contain-value">{{
-              calculateValue(fuzzyArea, input.example)
+              calculateValue(fuzzyArea, input.example) | number
             }}</span>
           </span>
         </div>

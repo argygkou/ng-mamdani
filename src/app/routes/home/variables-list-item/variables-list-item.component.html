@@ -18,7 +18,7 @@
     <mat-icon>delete</mat-icon>
   </button>
 </div>
-<p matLine>
+<div matLine>
   <mat-button-toggle-group [(ngModel)]="selectedFuzzyArea">
     <mat-button-toggle
       *ngFor="let fuzzyArea of variable.fuzzyAreas; let i = index"
@@ -28,11 +28,23 @@
       {{ fuzzyArea.name }}</mat-button-toggle
     >
   </mat-button-toggle-group>
+  <div *ngIf="!edit && selectedFuzzyArea">
+    <p class="selected-area-ranges-container">
+      <strong>{{ selectedFuzzyArea.type }} :</strong>
+      <span
+        *ngFor="let range of selectedFuzzyArea.ranges"
+        class="selected-area-range"
+        >{{ range }}</span
+      >
+    </p>
+  </div>
   <app-variables-list-item-form
     *ngIf="edit"
+    [type]="type"
     [variable]="variable"
     [index]="index"
     [fuzzyArea]="selectedFuzzyArea"
   ></app-variables-list-item-form>
-</p>
+</div>
+<br />
 <mat-divider *ngIf="type === 'inputs'"></mat-divider>

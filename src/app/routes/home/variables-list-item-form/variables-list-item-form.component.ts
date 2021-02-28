@@ -24,6 +24,7 @@ export class VariablesListItemFormComponent
   @Input() variable: Variable;
   @Input() fuzzyArea: FuzzyArea;
   @Input() index: number;
+  @Input() type: string;
 
   public form = this.formCreatorService.createVariableForm();
 
@@ -56,7 +57,7 @@ export class VariablesListItemFormComponent
     event.preventDefault();
     const value = this.form.value;
     this.variable.fuzzyAreas[this.index] = value;
-    this.mamdaniService.addFuzzyArea('inputs', this.index, this.variable);
+    this.mamdaniService.addFuzzyArea(this.type, this.index, this.variable);
   }
 
   private initForm(): void {
