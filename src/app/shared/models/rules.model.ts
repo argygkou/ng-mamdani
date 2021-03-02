@@ -5,7 +5,12 @@ export interface Rule {
   type: string;
   result?: number;
   fuzzyAreas: {
-    inputs: FuzzyArea[];
+    inputs: SelectedFuzzyArea[];
     output: FuzzyArea;
   };
+}
+
+export interface SelectedFuzzyArea {
+  name: string;
+  area: FuzzyArea;
 }

@@ -11,13 +11,13 @@ import rulesConfig from '../../assets/rules-config.json';
 })
 export class MamdaniService {
   public inputVariables: Variable[];
-  public outputVariables: Variable[];
+  public outputVariable: Variable;
   public rules: Rule[];
 
   constructor() {
     this.rules = rulesConfig;
     this.inputVariables = inputsConfig as Variable[];
-    this.outputVariables = [outputConfig] as Variable[];
+    this.outputVariable = outputConfig as Variable;
   }
 
   public addInputVariable(variable: Variable): void {
@@ -29,7 +29,7 @@ export class MamdaniService {
   }
 
   public addOutputVariable(variable: Variable): void {
-    this.outputVariables = [variable];
+    this.outputVariable = variable;
   }
 
   public addFuzzyArea(type: string, index: number, variable: Variable): void {
@@ -37,7 +37,7 @@ export class MamdaniService {
       this.inputVariables[index] = variable;
       return;
     }
-    this.outputVariables[index] = variable;
+    this.outputVariable = variable;
   }
 
   public addRule(rule: Rule): void {
@@ -62,13 +62,13 @@ export class MamdaniService {
   public importConfig(result: string | ArrayBuffer): void {
     const config = JSON.parse(result as string);
     this.inputVariables = config.inputs;
-    this.outputVariables = config.output;
+    this.outputVariable = config.output;
     this.rules = config.rules;
   }
   public exportConfig(): string {
     const config = {
       inputs: this.inputVariables,
-      output: this.outputVariables,
+      output: this.outputVariable,
       rules: this.rules,
     };
     return JSON.stringify(config);
@@ -80,7 +80,9 @@ export class MamdaniService {
     const data = [];
     inputs.forEach((element, index) => {
       const example = this.inputVariables[index].example;
-      data.push(FUZZYAREATYPES[element.type](element.ranges, example));
+      data.push(
+        FUZZYAREATYPES[element.area.type](element.area.ranges, example)
+      );
     });
     const result = data.reduce((next, prev) => compareFunction(next, prev));
     return result;

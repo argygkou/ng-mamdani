@@ -14,6 +14,10 @@ export class RulesListComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+  public get outputVariableName(): string {
+    return this.mamdaniService.outputVariable.name;
+  }
+
   ngOnInit(): void {}
 
   public openDialog() {

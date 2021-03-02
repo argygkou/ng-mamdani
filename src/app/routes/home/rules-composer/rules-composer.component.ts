@@ -39,7 +39,9 @@ export class RulesComposerComponent implements OnInit {
   public createRule(event: Event): void {
     event.preventDefault();
     const rule = this.form.value as Rule;
-    rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter((input) => input);
+    rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter(
+      (input) => input.area
+    );
     if (rule.fuzzyAreas.inputs.length > 0) {
       this.mamdaniService.addRule(rule);
       this.form.reset();
@@ -53,8 +55,13 @@ export class RulesComposerComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.formCreatorService.createRuleForm();
-    this.mamdaniService.inputVariables.forEach(() => {
-      this.inputs.push(new FormControl(null));
+    this.mamdaniService.inputVariables.forEach((input) => {
+      this.inputs.push(
+        new FormGroup({
+          name: new FormControl(input.name),
+          area: new FormControl(null),
+        })
+      );
     });
   }
 }

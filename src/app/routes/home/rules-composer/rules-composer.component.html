@@ -16,6 +16,7 @@
             <span *ngFor="let input of inputs.controls; let i = index">
               <button
                 mat-mini-fab
+                type="button"
                 color="primary"
                 class="fab-control"
                 *ngIf="i > 0"
@@ -24,25 +25,27 @@
                 {{ typeControl.value }}
               </button>
 
-              <mat-form-field appearance="fill">
-                <mat-label>{{
-                  mamdaniService.inputVariables[i].name
-                }}</mat-label>
-                <mat-select [formControlName]="i">
-                  <mat-option
-                    *ngFor="
-                      let fuzzyArea of mamdaniService.inputVariables[i]
-                        .fuzzyAreas
-                    "
-                    [value]="fuzzyArea"
-                  >
-                    {{ fuzzyArea.name }}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="input.hasError('required')">
-                  Required
-                </mat-error>
-              </mat-form-field>
+              <ng-container [formGroupName]="i">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{
+                    mamdaniService.inputVariables[i].name
+                  }}</mat-label>
+                  <mat-select formControlName="area">
+                    <mat-option
+                      *ngFor="
+                        let fuzzyArea of mamdaniService.inputVariables[i]
+                          .fuzzyAreas
+                      "
+                      [value]="fuzzyArea"
+                    >
+                      {{ fuzzyArea.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="input.hasError('required')">
+                    Required
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
             </span>
           </div>
         </div>
@@ -52,18 +55,12 @@
           <div class="col-md-1"><p style="margin-top: 20px">THEN</p></div>
           <div class="col-md-11">
             <mat-form-field appearance="fill">
-              <mat-label>{{
-                mamdaniService.outputVariables[0].name
-              }}</mat-label>
-              <mat-select
-                *ngFor="
-                  let output of mamdaniService.outputVariables;
-                  let i = index
-                "
-                formControlName="output"
-              >
+              <mat-label>{{ mamdaniService.outputVariable.name }}</mat-label>
+              <mat-select formControlName="output">
                 <mat-option
-                  *ngFor="let fuzzyArea of output.fuzzyAreas"
+                  *ngFor="
+                    let fuzzyArea of mamdaniService.outputVariable.fuzzyAreas
+                  "
                   [value]="fuzzyArea"
                 >
                   {{ fuzzyArea.name }}

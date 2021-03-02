@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z4">
   <mat-card-title>Rules</mat-card-title>
   <mat-card-content>
     <mat-list>
@@ -9,9 +9,19 @@
         </button>
       </mat-list-item>
       <mat-list-item *ngFor="let rule of mamdaniService.rules; let i = index">
+        <h4 matLine>{{ rule.name }}</h4>
         <p matLine>
-          {{ rule.name }} has: {{ rule.fuzzyAreas.output.name }} of:
-          {{ rule.result }}
+          <span>If </span>
+          <span *ngFor="let input of rule.fuzzyAreas.inputs; let last = last">
+            <strong>{{ input.name }}</strong> is
+            <strong>{{ input.area.name }}</strong>
+            <span *ngIf="!last">
+              {{ rule.type | lowercase }}
+            </span>
+          </span>
+          then
+          <strong>{{ outputVariableName }}</strong> is
+          <strong>{{ rule.fuzzyAreas.output.name }}</strong>
         </p>
         <button mat-icon-button color="warn" (click)="removeRule(i)">
           <mat-icon>delete</mat-icon>
