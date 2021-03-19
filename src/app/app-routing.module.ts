@@ -13,6 +13,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./routes/home/home.module').then((m) => m.HomeModule),
       },
+      {
+        path: 'viewer',
+        loadChildren: () =>
+          import('./routes/viewer/viewer.module').then((m) => m.ViewerModule),
+      },
     ],
   },
 ];

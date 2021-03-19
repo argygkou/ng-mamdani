@@ -225,6 +225,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@angular/flex-layout@^11.0.0-beta.33":
+  version "11.0.0-beta.33"
+  resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-11.0.0-beta.33.tgz#c2d08f90164701b66a62b8c4365b4e22c1e95789"
+  integrity sha512-unfhw3abZuKtdwQicRStHCYGbANPTHYg4WNRQk/RC5Mxq+4WOp4Q8HI7GqRHCGUYDCGUP7w1sU/oDt8f09nM8w==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/forms@~11.2.6":
   version "11.2.6"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-11.2.6.tgz#d82a1c655754d48ec861b9b3af370e6ee1e841cb"
@@ -5906,6 +5913,13 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
+
+ngx-json-viewer@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/ngx-json-viewer/-/ngx-json-viewer-3.0.2.tgz#91e72fe41f80756181aa0d36b4bfaeac5df5b1b1"
+  integrity sha512-XBj0DgUDIBOeJuAczlFQIIMCaELJGoEbvjBWIXHIh2QebiB5lY6itslRkbE5TAgFn1bYK+2ToxqwspLgP4DDJg==
+  dependencies:
+    tslib "^2.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

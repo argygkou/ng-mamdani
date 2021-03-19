@@ -16,9 +16,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MATERIAL_MODULES = [
   MatToolbarModule,
@@ -35,9 +37,15 @@ const MATERIAL_MODULES = [
   MatDialogModule,
   MatButtonToggleModule,
   MatMenuModule,
+  MatSlideToggleModule,
 ];
 
-const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
+const MODULES = [
+  CommonModule,
+  FormsModule,
+  ReactiveFormsModule,
+  FlexLayoutModule,
+];
 
 const COMPONENTS = [CustomModalComponent];
 
