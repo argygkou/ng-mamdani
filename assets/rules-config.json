@@ -5,7 +5,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past Performace",
+          "name": "Past Performance",
           "area": {
             "name": "Poor",
             "type": "Trapezoid",
