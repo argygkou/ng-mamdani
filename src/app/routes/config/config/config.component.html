@@ -7,13 +7,13 @@
       <app-variables-list
         title="Input Variables"
         type="inputs"
-        [variables]="mamdaniService.inputVariables"
+        [variables]="mamdaniService.inputVariables$ | async"
       ></app-variables-list>
 
       <app-variables-list
         title="Output Variables"
         type="outputs"
-        [variables]="[mamdaniService.outputVariable]"
+        [variables]="[mamdaniService.outputVariable$ | async]"
       ></app-variables-list>
 
       <app-rules-list></app-rules-list>

@@ -6,52 +6,70 @@ import inputsConfig from '../../assets/inputs-config.json';
 import outputConfig from '../../assets/output-config.json';
 import rulesConfig from '../../assets/rules-config.json';
 import { ExampleValue } from '../shared/models/selected-values';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MamdaniService {
-  public inputVariables: Variable[];
-  public outputVariable: Variable;
-  public rules: Rule[];
+  public get inputVariables$(): Observable<Variable[]> {
+    return this.inputVariablesBS.asObservable();
+  }
+  public get outputVariable$(): Observable<Variable> {
+    return this.outputVariableBS.asObservable();
+  }
+  public get rules$(): Observable<Rule[]> {
+    return this.rulesBS.asObservable();
+  }
+
+  private inputVariablesBS = new BehaviorSubject([]);
+  private outputVariableBS = new BehaviorSubject(null);
+  private rulesBS = new BehaviorSubject([]);
 
   constructor() {
-    this.rules = rulesConfig;
-    this.inputVariables = inputsConfig as Variable[];
-    this.outputVariable = outputConfig as Variable;
+    this.rulesBS.next(rulesConfig);
+    this.inputVariablesBS.next(inputsConfig);
+    this.outputVariableBS.next(outputConfig);
   }
 
   public addInputVariable(variable: Variable): void {
-    this.inputVariables.push(variable);
+    this.inputVariablesBS.next([...this.inputVariablesBS.value, variable]);
   }
 
   public removeInputVariable(index: number): void {
-    this.inputVariables.splice(index, 1);
+    const variables = this.inputVariablesBS.value;
+    variables.splice(index, 1);
+    this.inputVariablesBS.next(variables);
   }
 
   public addOutputVariable(variable: Variable): void {
-    this.outputVariable = variable;
+    this.outputVariableBS.next(variable);
   }
 
   public addFuzzyArea(type: string, index: number, variable: Variable): void {
     if (type === 'inputs') {
-      this.inputVariables[index] = variable;
+      const variables = this.inputVariablesBS.value;
+      variables[index] = variable;
+      this.inputVariablesBS.next(variables);
       return;
     }
-    this.outputVariable = variable;
+    this.outputVariableBS.next(variable);
   }
 
   public addRule(rule: Rule): void {
-    this.rules.push(rule);
+    this.rulesBS.next([...this.rulesBS.value, rule]);
   }
 
   public removeRule(index: number): void {
-    this.rules.splice(index, 1);
+    // this.rules.splice(index, 1);
+    const rules = this.rulesBS.value;
+    rules.splice(index, 1);
+    this.rulesBS.next(rules);
   }
 
   public getResult(values: ExampleValue[]): number {
     let result = 0;
-    this.rules.forEach((rule) => {
+    this.rulesBS.value.forEach((rule) => {
       const res = this.checkValue(rule, values);
       if (res > result) {
         result = res;
@@ -62,15 +80,15 @@ export class MamdaniService {
 
   public importConfig(result: string | ArrayBuffer): void {
     const config = JSON.parse(result as string);
-    this.inputVariables = config.inputs;
-    this.outputVariable = config.output;
-    this.rules = config.rules;
+    this.inputVariablesBS.next(config.inputs);
+    this.outputVariableBS.next(config.output);
+    this.rulesBS.next(config.rules);
   }
   public exportConfig(): string {
     const config = {
-      inputs: this.inputVariables,
-      output: this.outputVariable,
-      rules: this.rules,
+      inputs: this.inputVariablesBS.value,
+      output: this.outputVariableBS.value,
+      rules: this.rulesBS.value,
     };
     return JSON.stringify(config);
   }
@@ -91,6 +109,9 @@ export class MamdaniService {
         )
       );
     });
+    if (data.length === 0) {
+      return 0;
+    }
     const result = data.reduce((next, prev) => compareFunction(next, prev));
     return result;
   }

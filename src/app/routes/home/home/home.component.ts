@@ -50,9 +50,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = this.formCreatorService.initExampleForm();
-    this.mamdaniService.inputVariables.forEach((input) => {
-      const variables = this.form.get('variables') as FormArray;
-      variables.push(this.formCreatorService.addExample(input));
-    });
+    this.mamdaniService.inputVariables$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((inputVariables) => {
+        const variables = this.form.get('variables') as FormArray;
+        variables.clear();
+        inputVariables.forEach((input) => {
+          variables.push(this.formCreatorService.addExample(input));
+        });
+      });
   }
 }

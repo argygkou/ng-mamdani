@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subject } from 'rxjs';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { RulesComposerComponent } from '../rules-composer/rules-composer.component';
 
@@ -13,10 +14,6 @@ export class RulesListComponent implements OnInit {
     public mamdaniService: MamdaniService,
     private dialog: MatDialog
   ) {}
-
-  public get outputVariableName(): string {
-    return this.mamdaniService.outputVariable.name;
-  }
 
   ngOnInit(): void {}
 

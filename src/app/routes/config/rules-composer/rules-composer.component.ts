@@ -1,5 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { Rule } from 'src/app/shared';
@@ -9,8 +17,9 @@ import { Rule } from 'src/app/shared';
   templateUrl: './rules-composer.component.html',
   styleUrls: ['./rules-composer.component.scss'],
 })
-export class RulesComposerComponent implements OnInit {
+export class RulesComposerComponent implements OnInit, OnDestroy {
   public form: FormGroup;
+  private destroy$ = new Subject();
   get typeControl(): FormControl {
     return this.form.get('type') as FormControl;
   }
@@ -36,6 +45,11 @@ export class RulesComposerComponent implements OnInit {
     this.initForm();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   public createRule(event: Event): void {
     event.preventDefault();
     const rule = this.form.value as Rule;
@@ -55,13 +69,17 @@ export class RulesComposerComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.formCreatorService.createRuleForm();
-    this.mamdaniService.inputVariables.forEach((input) => {
-      this.inputs.push(
-        new FormGroup({
-          name: new FormControl(input.name),
-          area: new FormControl(null),
-        })
-      );
-    });
+    this.mamdaniService.inputVariables$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((variables) => {
+        variables.forEach((input) => {
+          this.inputs.push(
+            new FormGroup({
+              name: new FormControl(input.name),
+              area: new FormControl(null),
+            })
+          );
+        });
+      });
   }
 }

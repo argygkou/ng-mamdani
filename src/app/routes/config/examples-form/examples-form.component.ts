@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { FUZZYAREATYPES } from 'src/app/core/config';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { FuzzyArea } from 'src/app/shared';
+import { FuzzyArea, Variable } from 'src/app/shared';
 import { ExampleValue } from 'src/app/shared/models/selected-values';
 
 @Component({
@@ -11,8 +12,11 @@ import { ExampleValue } from 'src/app/shared/models/selected-values';
   templateUrl: './examples-form.component.html',
   styleUrls: ['./examples-form.component.scss'],
 })
-export class ExamplesFormComponent implements OnInit {
+export class ExamplesFormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
+  public inputVariables: Variable[];
+  private destroy$ = new Subject();
+
   constructor(
     public mamdaniService: MamdaniService,
     private formCreatorService: FormCreatorService
@@ -20,6 +24,11 @@ export class ExamplesFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initExampleForm();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public calculateValue(fuzzyArea: FuzzyArea, value: number): number {
@@ -30,9 +39,7 @@ export class ExamplesFormComponent implements OnInit {
   }
 
   public getFuzzyAreas(name: string): FuzzyArea[] {
-    const input = this.mamdaniService.inputVariables.find(
-      (inVar) => inVar.name === name
-    );
+    const input = this.inputVariables.find((inVar) => inVar.name === name);
     return (input && input.fuzzyAreas) || [];
   }
 
@@ -43,9 +50,13 @@ export class ExamplesFormComponent implements OnInit {
 
   private initExampleForm(): void {
     this.form = this.formCreatorService.initExampleForm();
-    this.mamdaniService.inputVariables.forEach((input) => {
+    this.mamdaniService.inputVariables$.pipe().subscribe((inputVariables) => {
+      this.inputVariables = inputVariables;
       const variables = this.form.get('variables') as FormArray;
-      variables.push(this.formCreatorService.addExample(input));
+      variables.clear();
+      this.inputVariables.forEach((input) => {
+        variables.push(this.formCreatorService.addExample(input));
+      });
     });
   }
 }

@@ -16,21 +16,21 @@
       <div class="viewer">
         <h3>Inputs</h3>
         <ngx-json-viewer
-          [json]="mamdaniService.inputVariables"
+          [json]="mamdaniService.inputVariables$ | async"
           [expanded]="expanded"
         ></ngx-json-viewer>
       </div>
       <div class="viewer">
         <h3>Outputs</h3>
         <ngx-json-viewer
-          [json]="mamdaniService.outputVariable"
+          [json]="mamdaniService.outputVariable$ | async"
           [expanded]="expanded"
         ></ngx-json-viewer>
       </div>
       <div class="viewer">
         <h3>Rules</h3>
         <ngx-json-viewer
-          [json]="mamdaniService.rules"
+          [json]="mamdaniService.rules$ | async"
           [expanded]="expanded"
         ></ngx-json-viewer>
       </div>
