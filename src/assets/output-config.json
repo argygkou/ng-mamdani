@@ -1,34 +1,33 @@
 {
-    "name": "Recommendation",
-    "start": 0,
-    "end": 100,
-    "fuzzyAreasCount": 5,
-    "example": 7,
-    "fuzzyAreas": [
-        {
-            "name": "Very Low",
-            "type": "Trapezoid",
-            "ranges": [0, 10, 15, 20]
-        },
-        {
-            "name": "Low",
-            "type": "Trapezoid",
-            "ranges": [15, 25, 30, 40]
-        },
-        {
-            "name": "Average",
-            "type": "Trapezoid",
-            "ranges": [35, 45, 50, 60]
-        },
-        {
-            "name": "High",
-            "type": "Trapezoid",
-            "ranges": [55, 65, 70, 80]
-        },
-        {
-            "name": "Very High",
-            "type": "Trapezoid",
-            "ranges": [75, 85, 90, 100]
-        }
-    ]
+  "name": "Recommendation",
+  "start": 0,
+  "end": 100,
+  "fuzzyAreasCount": 5,
+  "fuzzyAreas": [
+    {
+      "name": "Very Low",
+      "type": "Trapezoid",
+      "ranges": [0, 10, 15, 20]
+    },
+    {
+      "name": "Low",
+      "type": "Trapezoid",
+      "ranges": [15, 25, 30, 40]
+    },
+    {
+      "name": "Average",
+      "type": "Trapezoid",
+      "ranges": [35, 45, 50, 60]
+    },
+    {
+      "name": "High",
+      "type": "Trapezoid",
+      "ranges": [55, 65, 70, 80]
+    },
+    {
+      "name": "Very High",
+      "type": "Trapezoid",
+      "ranges": [75, 85, 90, 100]
+    }
+  ]
 }

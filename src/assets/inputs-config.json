@@ -4,7 +4,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 4,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Poor",
@@ -33,7 +32,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Easy",
@@ -57,7 +55,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Few",
@@ -81,7 +78,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Low",
@@ -105,7 +101,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Low",
@@ -129,7 +124,6 @@
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
-    "example": 0,
     "fuzzyAreas": [
       {
         "name": "Low",
