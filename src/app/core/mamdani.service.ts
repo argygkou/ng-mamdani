@@ -5,6 +5,7 @@ import { FUZZYAREATYPES } from './config';
 import inputsConfig from '../../assets/inputs-config.json';
 import outputConfig from '../../assets/output-config.json';
 import rulesConfig from '../../assets/rules-config.json';
+import { ExampleValue } from '../shared/models/selected-values';
 
 @Injectable({
   providedIn: 'root',
@@ -48,10 +49,10 @@ export class MamdaniService {
     this.rules.splice(index, 1);
   }
 
-  public getResult(): number {
+  public getResult(values: ExampleValue[]): number {
     let result = 0;
     this.rules.forEach((rule) => {
-      const res = this.checkValue(rule);
+      const res = this.checkValue(rule, values);
       if (res > result) {
         result = res;
       }
@@ -74,14 +75,17 @@ export class MamdaniService {
     return JSON.stringify(config);
   }
 
-  private checkValue(rule: Rule): any {
+  private checkValue(rule: Rule, values: ExampleValue[]): any {
     const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
     const inputs = rule.fuzzyAreas.inputs;
     const data = [];
     inputs.forEach((element, index) => {
-      const example = this.inputVariables[index].example;
+      const selectedValue = values.find((v) => v.name === element.name);
       data.push(
-        FUZZYAREATYPES[element.area.type](element.area.ranges, example)
+        FUZZYAREATYPES[element.area.type](
+          element.area.ranges,
+          selectedValue.example
+        )
       );
     });
     const result = data.reduce((next, prev) => compareFunction(next, prev));

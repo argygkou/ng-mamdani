@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Variable } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,6 @@ export class FormCreatorService {
         Validators.compose([Validators.required, Validators.min(1)]),
       ],
       fuzzyAreas: this.fb.array([this.createFuzzyAreaForm()]),
-      example: 0,
     });
   }
 
@@ -37,6 +37,19 @@ export class FormCreatorService {
         inputs: this.fb.array([]),
         output: this.fb.control(null, Validators.required),
       }),
+    });
+  }
+
+  public initExampleForm(): FormGroup {
+    return this.fb.group({
+      variables: this.fb.array([]),
+    });
+  }
+
+  public addExample(input: Variable): FormGroup {
+    return this.fb.group({
+      name: [input.name],
+      example: [null, Validators.required],
     });
   }
 }

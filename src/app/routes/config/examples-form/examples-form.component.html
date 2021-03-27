@@ -1,32 +1,51 @@
 <mat-card class="mat-elevation-z4">
   <mat-card-title>Provide example for your variables:</mat-card-title>
   <mat-card-content>
-    <div *ngFor="let input of mamdaniService.inputVariables">
-      <div class="example-container">
-        <mat-form-field class="example-input">
-          <mat-label>{{ input.name }}</mat-label>
-          <input
-            matInput
-            type="number"
-            max="100"
-            min="0"
-            [placeholder]="input.name"
-            [(ngModel)]="input.example"
-            [ngModelOptions]="{ standalone: true }"
-            required
-          />
-        </mat-form-field>
+    <form [formGroup]="form">
+      <div formArrayName="variables">
+        <div
+          *ngFor="
+            let variableGroup of form.get('variables')['controls'];
+            let i = index
+          "
+          [formGroupName]="i"
+        >
+          <div class="example-container">
+            <mat-form-field class="example-input">
+              <mat-label>{{ variableGroup.get("name").value }}</mat-label>
+              <input
+                matInput
+                type="number"
+                max="100"
+                min="0"
+                formControlName="example"
+              />
+              <mat-error
+                *ngIf="variableGroup.get('example').hasError('required')"
+              >
+                Please enter a value
+              </mat-error>
+            </mat-form-field>
 
-        <div style="display: inline">
-          <span *ngFor="let fuzzyArea of input.fuzzyAreas">
-            <span class="contain-name">{{ fuzzyArea.name }}:</span>
-            <span class="contain-value">{{
-              calculateValue(fuzzyArea, input.example) | number
-            }}</span>
-          </span>
+            <div style="display: inline">
+              <span
+                *ngFor="
+                  let fuzzyArea of getFuzzyAreas(
+                    variableGroup.get('name').value
+                  )
+                "
+              >
+                <span class="contain-name">{{ fuzzyArea.name }}:</span>
+                <span class="contain-value">{{
+                  calculateValue(fuzzyArea, variableGroup.get("name").value)
+                    | number
+                }}</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </mat-card-content>
   <mat-card-actions>
     <p>

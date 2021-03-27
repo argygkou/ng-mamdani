@@ -6,5 +6,4 @@ export interface Variable {
   end: number;
   fuzzyAreasCount: number;
   fuzzyAreas: FuzzyArea[];
-  example?: number;
 }

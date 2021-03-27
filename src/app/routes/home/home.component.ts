@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { Variable } from 'src/app/shared';
+import { ExampleValue } from 'src/app/shared/models/selected-values';
 import { ResultComponent } from './result/result.component';
 
 @Component({
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     public mamdaniService: MamdaniService,
-    private fb: FormBuilder,
+    private formCreatorService: FormCreatorService,
     private dialog: MatDialog
   ) {}
 
@@ -33,15 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  addVariable(input: Variable): FormGroup {
-    return this.fb.group({
-      name: [input.name],
-      example: [input.example, Validators.required],
-    });
-  }
-
   public getResult(): void {
-    const dialogRef = this.dialog.open(ResultComponent);
+    const values = this.form.get('variables').value as ExampleValue[];
+    const dialogRef = this.dialog.open(ResultComponent, {
+      data: { values },
+    });
     dialogRef
       .afterClosed()
       .pipe(takeUntil(this.destroy$))
@@ -51,12 +48,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
-    this.form = this.fb.group({
-      variables: this.fb.array([]),
-    });
+    this.form = this.formCreatorService.initExampleForm();
     this.mamdaniService.inputVariables.forEach((input) => {
       const variables = this.form.get('variables') as FormArray;
-      variables.push(this.addVariable(input));
+      variables.push(this.formCreatorService.addExample(input));
     });
   }
 }
