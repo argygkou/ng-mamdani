@@ -28,7 +28,9 @@
               </mat-error>
             </mat-form-field>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
+              <button *ngIf="index > 0" mat-button matStepperPrevious>
+                Back
+              </button>
               <button *ngIf="!last" mat-button matStepperNext>Next</button>
               <button
                 *ngIf="last"

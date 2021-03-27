@@ -41,19 +41,19 @@ export class MamdaniService {
   }
 
   public addRule(rule: Rule): void {
-    rule.result = this.checkValue(rule);
     this.rules.push(rule);
   }
 
-  public removeRule(index: number) {
+  public removeRule(index: number): void {
     this.rules.splice(index, 1);
   }
 
   public getResult(): number {
     let result = 0;
     this.rules.forEach((rule) => {
-      if (rule.result > result) {
-        result = result;
+      const res = this.checkValue(rule);
+      if (res > result) {
+        result = res;
       }
     });
     return result;

@@ -33,7 +33,6 @@ export class FormCreatorService {
     return this.fb.group({
       name: [null, Validators.required],
       type: ['AND'],
-      result: 0,
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),
         output: this.fb.control(null, Validators.required),
