@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
@@ -38,6 +39,7 @@ const MATERIAL_MODULES = [
   MatButtonToggleModule,
   MatMenuModule,
   MatSlideToggleModule,
+  MatStepperModule,
 ];
 
 const MODULES = [

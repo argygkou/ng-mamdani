@@ -14,6 +14,11 @@ const routes: Routes = [
           import('./routes/home/home.module').then((m) => m.HomeModule),
       },
       {
+        path: 'config',
+        loadChildren: () =>
+          import('./routes/config/config.module').then((m) => m.ConfigModule),
+      },
+      {
         path: 'viewer',
         loadChildren: () =>
           import('./routes/viewer/viewer.module').then((m) => m.ViewerModule),

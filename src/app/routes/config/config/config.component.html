@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">
+      <app-examples-form></app-examples-form>
+    </div>
+    <div class="col-md-8">
+      <app-variables-list
+        title="Input Variables"
+        type="inputs"
+        [variables]="mamdaniService.inputVariables"
+      ></app-variables-list>
+
+      <app-variables-list
+        title="Output Variables"
+        type="outputs"
+        [variables]="[mamdaniService.outputVariable]"
+      ></app-variables-list>
+
+      <app-rules-list></app-rules-list>
+    </div>
+  </div>
+</div>
