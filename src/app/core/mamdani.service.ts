@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Rule, Variable } from '../shared';
+import { FuzzyArea, Rule, Variable } from '../shared';
 import { FUZZYAREATYPES } from './config';
 
 import inputsConfig from '../../assets/inputs-config.json';
@@ -22,9 +22,9 @@ export class MamdaniService {
     return this.rulesBS.asObservable();
   }
 
-  private inputVariablesBS = new BehaviorSubject([]);
-  private outputVariableBS = new BehaviorSubject(null);
-  private rulesBS = new BehaviorSubject([]);
+  private inputVariablesBS = new BehaviorSubject<Variable[]>([]);
+  private outputVariableBS = new BehaviorSubject<Variable>(null);
+  private rulesBS = new BehaviorSubject<Rule[]>([]);
 
   constructor() {
     this.rulesBS.next(rulesConfig);
@@ -46,13 +46,20 @@ export class MamdaniService {
     this.outputVariableBS.next(variable);
   }
 
-  public addFuzzyArea(type: string, index: number, variable: Variable): void {
+  public addFuzzyArea(
+    type: string,
+    itemIndex: number,
+    index: number,
+    value: FuzzyArea
+  ): void {
     if (type === 'inputs') {
       const variables = this.inputVariablesBS.value;
-      variables[index] = variable;
+      variables[itemIndex].fuzzyAreas[index] = value;
       this.inputVariablesBS.next(variables);
       return;
     }
+    const variable = this.outputVariableBS.value;
+    variable.fuzzyAreas[index] = value;
     this.outputVariableBS.next(variable);
   }
 

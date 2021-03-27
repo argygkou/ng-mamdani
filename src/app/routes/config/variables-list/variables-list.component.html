@@ -11,8 +11,8 @@
       <mat-list-item *ngFor="let variable of variables; let i = index">
         <app-variables-list-item
           [type]="type"
-          [index]="i"
           [variable]="variable"
+          [itemIndex]="i"
           (removeItem)="onRemoveItem($event)"
         ></app-variables-list-item>
       </mat-list-item>

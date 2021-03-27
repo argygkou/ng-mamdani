@@ -10,11 +10,12 @@ import { FuzzyArea, Variable } from 'src/app/shared';
 export class VariablesListItemComponent implements OnInit {
   @Input() variable: Variable;
   @Input() type: string;
-  @Input() index: number;
+  @Input() itemIndex: number;
   @Output() removeItem = new EventEmitter<number>();
 
   public edit: boolean;
   public selectedFuzzyArea: FuzzyArea;
+  public index: number;
 
   constructor() {}
 
@@ -22,7 +23,13 @@ export class VariablesListItemComponent implements OnInit {
 
   public changeMode(): void {
     this.edit = !this.edit;
-    this.selectedFuzzyArea = this.edit ? this.variable.fuzzyAreas[0] : null;
+    if (this.edit) {
+      this.selectedFuzzyArea = this.variable.fuzzyAreas[0];
+      this.index = 0;
+      return;
+    }
+    this.selectedFuzzyArea = null;
+    this.index = null;
   }
 
   public toggleChanged(event: MatButtonToggleChange, index: number): void {

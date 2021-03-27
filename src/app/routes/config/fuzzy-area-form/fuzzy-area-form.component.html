@@ -1,38 +1,52 @@
-<form [formGroup]="form">
-  <mat-form-field style="width: 50%">
+<form [formGroup]="form" class="fuzzy-area-form">
+  <mat-form-field class="fuzzy-area-name-input">
     <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" formControlName="name" />
+    <input
+      matInput
+      placeholder="Name"
+      formControlName="name"
+      autocomplete="off"
+    />
     <mat-error *ngIf="form.get('name').hasError('required')">
       Name is required
     </mat-error>
   </mat-form-field>
-  <br />
-  <mat-form-field>
-    <mat-label>Type</mat-label>
-    <mat-select formControlName="type">
-      <mat-option *ngFor="let fuzzyArea of fuzzyAreaTypes" [value]="fuzzyArea">
-        {{ fuzzyArea }}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="form.get('type').hasError('required')">
-      Type is required
-    </mat-error>
-  </mat-form-field>
-  <span formArrayName="ranges">
-    <label for="fuzzy-area-value" style="margin: 0 10px">Value:</label>
-    <span *ngFor="let range of ranges.controls; let i = index">
-      <ng-container>
-        <mat-form-field style="width: 100px; margin: 0 10px">
-          <mat-label>Range {{ i + 1 }}</mat-label>
-          <input
-            matInput
-            type="number"
-            placeholder="Name"
-            [formControlName]="i"
-          />
-          <mat-error *ngIf="range.hasError('required')"> Required </mat-error>
-        </mat-form-field>
-      </ng-container>
-    </span>
-  </span>
+  <div fxLayout="row wrap " fxLayoutAlign="start center">
+    <mat-form-field class="mr-3">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="type">
+        <mat-option
+          *ngFor="let fuzzyArea of fuzzyAreaTypes"
+          [value]="fuzzyArea"
+        >
+          {{ fuzzyArea }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('type').hasError('required')">
+        Type is required
+      </mat-error>
+    </mat-form-field>
+    <div
+      formArrayName="ranges"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+    >
+      <label for="fuzzy-area-value" class="mr-3">Value:</label>
+      <span *ngFor="let range of ranges.controls; let i = index">
+        <ng-container>
+          <mat-form-field class="fuzzy-area-range-input mx-3">
+            <mat-label>Range {{ i + 1 }}</mat-label>
+            <input
+              matInput
+              type="number"
+              autocomplete="off"
+              placeholder="Name"
+              [formControlName]="i"
+            />
+            <mat-error *ngIf="range.hasError('required')"> Required </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </span>
+    </div>
+  </div>
 </form>

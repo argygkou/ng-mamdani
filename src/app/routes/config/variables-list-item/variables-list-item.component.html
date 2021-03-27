@@ -1,6 +1,6 @@
-<div matLine style="display: flex">
+<div matLine fxLayout="row" *ngIf="variable">
   <h3>
-    <span class="list-item-title">
+    <span class="mr-2">
       {{ variable.name }} goes from
       <strong>{{ variable.start }} to {{ variable.end }}</strong>
     </span>
@@ -12,14 +12,17 @@
   <button
     mat-icon-button
     color="warn"
-    (click)="removeItem.emit(index)"
+    (click)="removeItem.emit(itemIndex)"
     *ngIf="type === 'inputs'"
   >
     <mat-icon>delete</mat-icon>
   </button>
 </div>
 <div matLine>
-  <mat-button-toggle-group [(ngModel)]="selectedFuzzyArea">
+  <mat-button-toggle-group
+    [(ngModel)]="selectedFuzzyArea"
+    class="fuzzy-area-toogle-group"
+  >
     <mat-button-toggle
       *ngFor="let fuzzyArea of variable.fuzzyAreas; let i = index"
       (change)="toggleChanged($event, i)"
@@ -29,19 +32,18 @@
     >
   </mat-button-toggle-group>
   <div *ngIf="!edit && selectedFuzzyArea">
-    <p class="selected-area-ranges-container">
+    <p class="my-2">
       <strong>{{ selectedFuzzyArea.type }} :</strong>
-      <span
-        *ngFor="let range of selectedFuzzyArea.ranges"
-        class="selected-area-range"
-        >{{ range }}</span
-      >
+      <span *ngFor="let range of selectedFuzzyArea.ranges" class="m-2">{{
+        range
+      }}</span>
     </p>
   </div>
   <app-variables-list-item-form
     *ngIf="edit"
     [type]="type"
     [variable]="variable"
+    [itemIndex]="itemIndex"
     [index]="index"
     [fuzzyArea]="selectedFuzzyArea"
   ></app-variables-list-item-form>

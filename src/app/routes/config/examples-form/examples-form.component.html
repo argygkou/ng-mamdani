@@ -10,55 +10,47 @@
           "
           [formGroupName]="i"
         >
-          <div class="example-container">
-            <mat-form-field class="example-input">
-              <mat-label>{{ variableGroup.get("name").value }}</mat-label>
-              <input
-                matInput
-                type="number"
-                autocomplete="off"
-                formControlName="example"
-              />
-              <mat-error
-                *ngIf="variableGroup.get('example').hasError('required')"
-              >
-                Please enter a value
-              </mat-error>
-              <mat-error *ngIf="variableGroup.get('example').hasError('min')">
-                Minimum value:
-                <strong>{{
-                  variableGroup.get("example").errors.min.min
-                }}</strong>
-              </mat-error>
-              <mat-error *ngIf="variableGroup.get('example').hasError('max')">
-                Maximum value:
-                <strong>{{
-                  variableGroup.get("example").errors.max.max
-                }}</strong>
-              </mat-error>
-            </mat-form-field>
-            <div style="display: inline">
-              <span
-                *ngFor="
-                  let fuzzyArea of getFuzzyAreas(
-                    variableGroup.get('name').value
-                  )
-                "
-              >
-                <span class="contain-name">{{ fuzzyArea.name }}:</span>
-                <span class="contain-value">{{
-                  calculateValue(fuzzyArea, variableGroup.get("example").value)
-                    | number
-                }}</span>
-              </span>
-            </div>
+          <mat-form-field class="example-input mx-3">
+            <mat-label>{{ variableGroup.get("name").value }}</mat-label>
+            <input
+              matInput
+              type="number"
+              autocomplete="off"
+              formControlName="example"
+            />
+            <mat-error
+              *ngIf="variableGroup.get('example').hasError('required')"
+            >
+              Please enter a value
+            </mat-error>
+            <mat-error *ngIf="variableGroup.get('example').hasError('min')">
+              Minimum value:
+              <strong>{{ variableGroup.get("example").errors.min.min }}</strong>
+            </mat-error>
+            <mat-error *ngIf="variableGroup.get('example').hasError('max')">
+              Maximum value:
+              <strong>{{ variableGroup.get("example").errors.max.max }}</strong>
+            </mat-error>
+          </mat-form-field>
+          <div class="fuzzy-area-values ml-3">
+            <span
+              *ngFor="
+                let fuzzyArea of getFuzzyAreas(variableGroup.get('name').value)
+              "
+            >
+              <span class="mr-2">{{ fuzzyArea.name }}:</span>
+              <span class="mr-3 contain-value">{{
+                calculateValue(fuzzyArea, variableGroup.get("example").value)
+                  | number
+              }}</span>
+            </span>
           </div>
         </div>
       </div>
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <p>
+    <p class="ml-4">
       Result is: <strong>{{ getResult() | percent }}</strong>
     </p>
   </mat-card-actions>
