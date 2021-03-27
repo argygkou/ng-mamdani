@@ -81,6 +81,9 @@ export class MamdaniService {
     const data = [];
     inputs.forEach((element, index) => {
       const selectedValue = values.find((v) => v.name === element.name);
+      if (!selectedValue) {
+        return;
+      }
       data.push(
         FUZZYAREATYPES[element.area.type](
           element.area.ranges,

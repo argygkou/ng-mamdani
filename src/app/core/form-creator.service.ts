@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Variable } from '../shared';
+import { FuzzyArea, Variable } from '../shared';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +49,23 @@ export class FormCreatorService {
   public addExample(input: Variable): FormGroup {
     return this.fb.group({
       name: [input.name],
-      example: [null, Validators.required],
+      example: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.min(calculateMaxMin('min', input.fuzzyAreas)),
+          Validators.max(calculateMaxMin('max', input.fuzzyAreas)),
+        ]),
+      ],
     });
   }
+}
+
+function calculateMaxMin(type: 'max' | 'min', fuzzyAreas: FuzzyArea[]): number {
+  const ranges = [];
+  fuzzyAreas.forEach((area) => {
+    ranges.push(...area.ranges);
+  });
+
+  return type === 'max' ? Math.max(...ranges) : Math.min(...ranges);
 }

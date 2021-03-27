@@ -33,7 +33,7 @@ export class ExamplesFormComponent implements OnInit {
     const input = this.mamdaniService.inputVariables.find(
       (inVar) => inVar.name === name
     );
-    return input.fuzzyAreas || [];
+    return (input && input.fuzzyAreas) || [];
   }
 
   public getResult(): number {

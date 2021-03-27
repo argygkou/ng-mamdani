@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { ExampleValue } from 'src/app/shared/models/selected-values';
-import { ResultComponent } from './result/result.component';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe((result) => {
+        this.initForm();
         this.stepper.reset();
       });
   }

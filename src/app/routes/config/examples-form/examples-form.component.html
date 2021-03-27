@@ -16,8 +16,7 @@
               <input
                 matInput
                 type="number"
-                max="100"
-                min="0"
+                autocomplete="off"
                 formControlName="example"
               />
               <mat-error
@@ -25,8 +24,19 @@
               >
                 Please enter a value
               </mat-error>
+              <mat-error *ngIf="variableGroup.get('example').hasError('min')">
+                Minimum value:
+                <strong>{{
+                  variableGroup.get("example").errors.min.min
+                }}</strong>
+              </mat-error>
+              <mat-error *ngIf="variableGroup.get('example').hasError('max')">
+                Maximum value:
+                <strong>{{
+                  variableGroup.get("example").errors.max.max
+                }}</strong>
+              </mat-error>
             </mat-form-field>
-
             <div style="display: inline">
               <span
                 *ngFor="
@@ -37,7 +47,7 @@
               >
                 <span class="contain-name">{{ fuzzyArea.name }}:</span>
                 <span class="contain-value">{{
-                  calculateValue(fuzzyArea, variableGroup.get("name").value)
+                  calculateValue(fuzzyArea, variableGroup.get("example").value)
                     | number
                 }}</span>
               </span>
