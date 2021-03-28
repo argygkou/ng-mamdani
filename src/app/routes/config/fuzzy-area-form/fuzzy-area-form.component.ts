@@ -1,18 +1,23 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FUZZYAREATYPES } from 'src/app/core/config';
-import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { FuzzyArea, Variable } from 'src/app/shared';
 
 @Component({
   selector: 'app-fuzzy-area-form',
   templateUrl: './fuzzy-area-form.component.html',
   styleUrls: ['./fuzzy-area-form.component.scss'],
 })
-export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
+export class FuzzyAreaFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() form: FormGroup;
 
   get ranges(): FormArray {
@@ -21,12 +26,22 @@ export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
   public fuzzyAreaTypes = Object.keys(FUZZYAREATYPES);
   private onDestroy$ = new Subject();
 
-  constructor(
-    public mamdaniService: MamdaniService,
-    private formCreatorService: FormCreatorService
-  ) {}
+  constructor(public mamdaniService: MamdaniService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.form && this.form) {
+      this.formTypeChangeSubsciption();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
+  private formTypeChangeSubsciption() {
     this.form
       .get('type')
       .valueChanges.pipe(takeUntil(this.onDestroy$))
@@ -37,10 +52,5 @@ export class FuzzyAreaFormComponent implements OnInit, OnDestroy {
           this.ranges.push(new FormControl(0, Validators.required));
         }
       });
-  }
-
-  ngOnDestroy(): void {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
   }
 }
