@@ -23,8 +23,8 @@ export class VariablesListItemFormComponent
   implements OnInit, OnDestroy, OnChanges {
   @Input() variable: Variable;
   @Input() fuzzyArea: FuzzyArea;
+  @Input() variableIndex: number;
   @Input() itemIndex: number;
-  @Input() index: number;
   @Input() type: string;
 
   public form = this.formCreatorService.createVariableForm();
@@ -59,8 +59,8 @@ export class VariablesListItemFormComponent
     const value = this.form.value as FuzzyArea;
     this.mamdaniService.addFuzzyArea(
       this.type,
+      this.variableIndex,
       this.itemIndex,
-      this.index,
       value
     );
   }

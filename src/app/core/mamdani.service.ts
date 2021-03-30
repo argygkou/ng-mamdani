@@ -48,18 +48,18 @@ export class MamdaniService {
 
   public addFuzzyArea(
     type: string,
+    varialeIndex: number,
     itemIndex: number,
-    index: number,
     value: FuzzyArea
   ): void {
     if (type === 'inputs') {
       const variables = this.inputVariablesBS.value;
-      variables[itemIndex].fuzzyAreas[index] = value;
+      variables[varialeIndex].fuzzyAreas[itemIndex] = value;
       this.inputVariablesBS.next(variables);
       return;
     }
     const variable = this.outputVariableBS.value;
-    variable.fuzzyAreas[index] = value;
+    variable.fuzzyAreas[itemIndex] = value;
     this.outputVariableBS.next(variable);
   }
 
