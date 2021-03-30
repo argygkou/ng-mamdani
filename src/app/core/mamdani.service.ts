@@ -38,8 +38,21 @@ export class MamdaniService {
 
   public removeInputVariable(index: number): void {
     const variables = this.inputVariablesBS.value;
+    const variableToRemove = variables[index];
+    this.updateRuleContainingRemovedVariable(variableToRemove);
     variables.splice(index, 1);
     this.inputVariablesBS.next(variables);
+  }
+  private updateRuleContainingRemovedVariable(variableToRemove: Variable) {
+    let rules = this.rulesBS.value;
+    rules.forEach((rule) => {
+      rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter(
+        (input) => input.name !== variableToRemove.name
+      );
+    });
+
+    rules = rules.filter((rule) => rule.fuzzyAreas.inputs.length > 0);
+    this.rulesBS.next(rules);
   }
 
   public addOutputVariable(variable: Variable): void {
@@ -48,18 +61,18 @@ export class MamdaniService {
 
   public addFuzzyArea(
     type: string,
+    varialeIndex: number,
     itemIndex: number,
-    index: number,
     value: FuzzyArea
   ): void {
     if (type === 'inputs') {
       const variables = this.inputVariablesBS.value;
-      variables[itemIndex].fuzzyAreas[index] = value;
+      variables[varialeIndex].fuzzyAreas[itemIndex] = value;
       this.inputVariablesBS.next(variables);
       return;
     }
     const variable = this.outputVariableBS.value;
-    variable.fuzzyAreas[index] = value;
+    variable.fuzzyAreas[itemIndex] = value;
     this.outputVariableBS.next(variable);
   }
 
@@ -68,7 +81,6 @@ export class MamdaniService {
   }
 
   public removeRule(index: number): void {
-    // this.rules.splice(index, 1);
     const rules = this.rulesBS.value;
     rules.splice(index, 1);
     this.rulesBS.next(rules);
@@ -109,11 +121,14 @@ export class MamdaniService {
       if (!selectedValue) {
         return;
       }
+      const variable = this.inputVariablesBS.value.find(
+        (variable) => variable.name === element.name
+      );
+      const fuzzyArea = variable.fuzzyAreas.find(
+        (area) => area.name === element.area
+      );
       data.push(
-        FUZZYAREATYPES[element.area.type](
-          element.area.ranges,
-          selectedValue.example
-        )
+        FUZZYAREATYPES[fuzzyArea.type](fuzzyArea.ranges, selectedValue.example)
       );
     });
     if (data.length === 0) {

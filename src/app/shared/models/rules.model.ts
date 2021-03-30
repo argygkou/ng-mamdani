@@ -1,15 +1,12 @@
-import { FuzzyArea } from './fuzzy-areas.model';
-
 export interface Rule {
-  name: string;
   type: string;
   fuzzyAreas: {
     inputs: SelectedFuzzyArea[];
-    output: FuzzyArea;
+    output: SelectedFuzzyArea;
   };
 }
 
 export interface SelectedFuzzyArea {
   name: string;
-  area: FuzzyArea;
+  area: string;
 }
