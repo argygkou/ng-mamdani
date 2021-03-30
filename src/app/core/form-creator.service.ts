@@ -31,7 +31,6 @@ export class FormCreatorService {
 
   public createRuleForm(): FormGroup {
     return this.fb.group({
-      name: [null, Validators.required],
       type: ['AND'],
       fuzzyAreas: this.fb.group({
         inputs: this.fb.array([]),

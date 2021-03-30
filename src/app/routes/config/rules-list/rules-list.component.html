@@ -9,7 +9,7 @@
         </button>
       </mat-list-item>
       <mat-list-item *ngFor="let rule of rules; let i = index">
-        <h4 matLine>{{ rule.name }}</h4>
+        <h4 matLine>Rule {{ i + 1 }}</h4>
         <p matLine>
           <span>If </span>
           <span *ngFor="let input of rule.fuzzyAreas.inputs; let last = last">

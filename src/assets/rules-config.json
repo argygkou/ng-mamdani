@@ -1,6 +1,5 @@
 [
   {
-    "name": "Rule 1",
     "type": "AND",
     "fuzzyAreas": {
       "inputs": [
