@@ -5,17 +5,12 @@
       "inputs": [
         {
           "name": "Past Performance",
-          "area": {
-            "name": "Poor",
-            "type": "Trapezoid",
-            "ranges": [0, 0, 30, 45]
-          }
+          "area":  "Poor"
         }
       ],
       "output": {
-        "name": "Low",
-        "type": "Trapezoid",
-        "ranges": [15, 25, 30, 40]
+        "name": "Recommendation",
+        "area": "Low"
       }
     }
   }

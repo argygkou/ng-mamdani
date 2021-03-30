@@ -14,7 +14,7 @@
           <span>If </span>
           <span *ngFor="let input of rule.fuzzyAreas.inputs; let last = last">
             <strong>{{ input.name }}</strong> is
-            <strong>{{ input.area.name }}</strong>
+            <strong>{{ input.area }}</strong>
             <span *ngIf="!last">
               {{ rule.type | lowercase }}
             </span>
@@ -22,7 +22,7 @@
           then
           <strong>{{ (mamdaniService.outputVariable$ | async)?.name }}</strong>
           is
-          <strong>{{ rule.fuzzyAreas.output.name }}</strong>
+          <strong>{{ rule.fuzzyAreas.output.area }}</strong>
         </p>
         <button mat-icon-button color="warn" (click)="removeRule(i)">
           <mat-icon>delete</mat-icon>

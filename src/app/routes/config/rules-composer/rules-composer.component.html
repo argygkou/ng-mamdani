@@ -52,7 +52,7 @@
             <mat-select formControlName="output">
               <mat-option
                 *ngFor="let fuzzyArea of outputVariable.fuzzyAreas"
-                [value]="fuzzyArea"
+                [value]="{ name: outputVariable.name, area: fuzzyArea.name }"
               >
                 {{ fuzzyArea.name }}
               </mat-option>

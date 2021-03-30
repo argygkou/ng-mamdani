@@ -1,3 +1,4 @@
+import { TYPED_NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import {
   Component,
   EventEmitter,
@@ -5,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
@@ -52,10 +53,14 @@ export class RulesComposerComponent implements OnInit, OnDestroy {
 
   public createRule(event: Event): void {
     event.preventDefault();
-    const rule = this.form.value as Rule;
-    rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter(
-      (input) => input.area
-    );
+    const rule = this.form.value;
+    const validRules = rule.fuzzyAreas.inputs.filter((input) => input.area);
+    rule.fuzzyAreas.inputs = validRules.map((rule) => {
+      return {
+        name: rule.name,
+        area: rule.area.name,
+      };
+    });
     if (rule.fuzzyAreas.inputs.length > 0) {
       this.mamdaniService.addRule(rule);
       this.form.reset();
