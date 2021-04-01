@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title>{{ title }} </mat-card-title>
   <mat-card-content>
-    <mat-list>
+    <mat-list *ngIf="variables$ | async as variables">
       <mat-list-item *ngIf="variables.length === 0">
         <p matLine>No Variables. Add some!</p>
         <button mat-icon-button color="primary" (click)="openDialog()">

@@ -15,7 +15,7 @@ export class MamdaniService {
   public get inputVariables$(): Observable<Variable[]> {
     return this.inputVariablesBS.asObservable();
   }
-  public get outputVariable$(): Observable<Variable> {
+  public get outputVariable$(): Observable<Variable[]> {
     return this.outputVariableBS.asObservable();
   }
   public get rules$(): Observable<Rule[]> {
@@ -23,13 +23,13 @@ export class MamdaniService {
   }
 
   private inputVariablesBS = new BehaviorSubject<Variable[]>([]);
-  private outputVariableBS = new BehaviorSubject<Variable>(null);
+  private outputVariableBS = new BehaviorSubject<Variable[]>([]);
   private rulesBS = new BehaviorSubject<Rule[]>([]);
 
   constructor() {
     this.rulesBS.next(rulesConfig);
     this.inputVariablesBS.next(inputsConfig);
-    this.outputVariableBS.next(outputConfig);
+    this.outputVariableBS.next([outputConfig]);
   }
 
   public addInputVariable(variable: Variable): void {
@@ -43,20 +43,9 @@ export class MamdaniService {
     variables.splice(index, 1);
     this.inputVariablesBS.next(variables);
   }
-  private updateRuleContainingRemovedVariable(variableToRemove: Variable) {
-    let rules = this.rulesBS.value;
-    rules.forEach((rule) => {
-      rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter(
-        (input) => input.name !== variableToRemove.name
-      );
-    });
-
-    rules = rules.filter((rule) => rule.fuzzyAreas.inputs.length > 0);
-    this.rulesBS.next(rules);
-  }
 
   public addOutputVariable(variable: Variable): void {
-    this.outputVariableBS.next(variable);
+    this.outputVariableBS.next([variable]);
   }
 
   public addFuzzyArea(
@@ -71,9 +60,9 @@ export class MamdaniService {
       this.inputVariablesBS.next(variables);
       return;
     }
-    const variable = this.outputVariableBS.value;
-    variable.fuzzyAreas[itemIndex] = value;
-    this.outputVariableBS.next(variable);
+    const variables = this.outputVariableBS.value;
+    variables[varialeIndex].fuzzyAreas[itemIndex] = value;
+    this.outputVariableBS.next(variables);
   }
 
   public addRule(rule: Rule): void {
@@ -99,7 +88,7 @@ export class MamdaniService {
         selectedRule = rule;
       }
     });
-    const output = this.outputVariableBS.value;
+    const output = this.outputVariableBS.value[0];
     const area = output.fuzzyAreas.find(
       (area) => area.name === selectedRule.fuzzyAreas.output.area
     );
@@ -119,6 +108,18 @@ export class MamdaniService {
       rules: this.rulesBS.value,
     };
     return JSON.stringify(config);
+  }
+
+  private updateRuleContainingRemovedVariable(variableToRemove: Variable) {
+    let rules = this.rulesBS.value;
+    rules.forEach((rule) => {
+      rule.fuzzyAreas.inputs = rule.fuzzyAreas.inputs.filter(
+        (input) => input.name !== variableToRemove.name
+      );
+    });
+
+    rules = rules.filter((rule) => rule.fuzzyAreas.inputs.length > 0);
+    this.rulesBS.next(rules);
   }
 
   private checkValue(rule: Rule, values: ExampleValue[]): any {

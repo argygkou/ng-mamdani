@@ -6,23 +6,30 @@
     <div class="col-md-8">
       <mat-card>
         <mat-card-content>
-          <mat-tab-group>
-            <mat-tab label="Inputs">
-              <app-variables-list
-                title="Input Variables"
-                type="inputs"
-                [variables]="mamdaniService.inputVariables$ | async"
-              ></app-variables-list>
-            </mat-tab>
-            <mat-tab label="Output">
-              <app-variables-list
-                title="Output Variables"
-                type="outputs"
-                [variables]="[mamdaniService.outputVariable$ | async]"
-              ></app-variables-list>
-            </mat-tab>
-            <mat-tab label="Rules"> <app-rules-list></app-rules-list> </mat-tab>
-          </mat-tab-group>
+          <nav mat-tab-nav-bar>
+            <a
+              mat-tab-link
+              [routerLink]="['./inputs']"
+              routerLinkActive="router-link-active"
+            >
+              Inputs
+            </a>
+            <a
+              mat-tab-link
+              [routerLink]="['./output']"
+              routerLinkActive="router-link-active"
+            >
+              Output
+            </a>
+            <a
+              mat-tab-link
+              [routerLink]="['./rules']"
+              routerLinkActive="router-link-active"
+            >
+              Rules
+            </a>
+          </nav>
+          <router-outlet></router-outlet>
         </mat-card-content>
       </mat-card>
     </div>
