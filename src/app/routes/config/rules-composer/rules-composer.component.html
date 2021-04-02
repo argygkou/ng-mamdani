@@ -46,7 +46,9 @@
         <div class="col-md-11">
           <mat-form-field
             appearance="fill"
-            *ngIf="mamdaniService.outputVariable$ | async as outputVariable"
+            *ngFor="
+              let outputVariable of mamdaniService.outputVariables$ | async
+            "
           >
             <mat-label>{{ outputVariable.name }}</mat-label>
             <mat-select formControlName="output">

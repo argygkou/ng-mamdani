@@ -36,7 +36,7 @@ export class VariablesListComponent implements OnInit {
       this.variables$ = this.mamdaniService.inputVariables$;
     } else {
       this.title = 'Output';
-      this.variables$ = this.mamdaniService.outputVariable$;
+      this.variables$ = this.mamdaniService.outputVariables$;
     }
   }
 

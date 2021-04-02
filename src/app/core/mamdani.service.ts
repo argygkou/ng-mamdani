@@ -15,21 +15,21 @@ export class MamdaniService {
   public get inputVariables$(): Observable<Variable[]> {
     return this.inputVariablesBS.asObservable();
   }
-  public get outputVariable$(): Observable<Variable[]> {
-    return this.outputVariableBS.asObservable();
+  public get outputVariables$(): Observable<Variable[]> {
+    return this.outputVariablesBS.asObservable();
   }
   public get rules$(): Observable<Rule[]> {
     return this.rulesBS.asObservable();
   }
 
   private inputVariablesBS = new BehaviorSubject<Variable[]>([]);
-  private outputVariableBS = new BehaviorSubject<Variable[]>([]);
+  private outputVariablesBS = new BehaviorSubject<Variable[]>([]);
   private rulesBS = new BehaviorSubject<Rule[]>([]);
 
   constructor() {
     this.rulesBS.next(rulesConfig);
     this.inputVariablesBS.next(inputsConfig);
-    this.outputVariableBS.next([outputConfig]);
+    this.outputVariablesBS.next([outputConfig]);
   }
 
   public addInputVariable(variable: Variable): void {
@@ -45,11 +45,11 @@ export class MamdaniService {
   }
 
   public addOutputVariable(variable: Variable): void {
-    this.outputVariableBS.next([variable]);
+    this.outputVariablesBS.next([variable]);
   }
 
   removeOutputVariable(index: number) {
-    this.outputVariableBS.next([]);
+    this.outputVariablesBS.next([]);
     this.rulesBS.next([]);
   }
 
@@ -65,9 +65,9 @@ export class MamdaniService {
       this.inputVariablesBS.next(variables);
       return;
     }
-    const variables = this.outputVariableBS.value;
+    const variables = this.outputVariablesBS.value;
     variables[varialeIndex].fuzzyAreas[itemIndex] = value;
-    this.outputVariableBS.next(variables);
+    this.outputVariablesBS.next(variables);
   }
 
   public addRule(rule: Rule): void {
@@ -93,7 +93,7 @@ export class MamdaniService {
         selectedRule = rule;
       }
     });
-    const output = this.outputVariableBS.value[0];
+    const output = this.outputVariablesBS.value[0];
     const area = output.fuzzyAreas.find(
       (area) => area.name === selectedRule.fuzzyAreas.output.area
     );
@@ -103,13 +103,13 @@ export class MamdaniService {
   public importConfig(result: string | ArrayBuffer): void {
     const config = JSON.parse(result as string);
     this.inputVariablesBS.next(config.inputs);
-    this.outputVariableBS.next(config.output);
+    this.outputVariablesBS.next(config.output);
     this.rulesBS.next(config.rules);
   }
   public exportConfig(): string {
     const config = {
       inputs: this.inputVariablesBS.value,
-      output: this.outputVariableBS.value,
+      output: this.outputVariablesBS.value,
       rules: this.rulesBS.value,
     };
     return JSON.stringify(config);
