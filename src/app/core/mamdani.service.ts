@@ -60,28 +60,22 @@ export class MamdaniService {
     value: FuzzyArea
   ): void {
     let oldValue = null;
+    let variableName = null;
+    const variables =
+      type === 'inputs'
+        ? this.inputVariablesBS.value
+        : this.outputVariablesBS.value;
+    variableName = variables[varialeIndex].name;
+    oldValue = variables[varialeIndex].fuzzyAreas[itemIndex];
+    variables[varialeIndex].fuzzyAreas[itemIndex] = value;
+
+    this.updateFuzzyAreaInRule(type, variableName, oldValue, value);
+
     if (type === 'inputs') {
-      const variables = this.inputVariablesBS.value;
-      oldValue = variables[varialeIndex].fuzzyAreas[itemIndex];
-      variables[varialeIndex].fuzzyAreas[itemIndex] = value;
       this.inputVariablesBS.next(variables);
     } else {
-      const variables = this.outputVariablesBS.value;
-      oldValue = variables[varialeIndex].fuzzyAreas[itemIndex];
-      variables[varialeIndex].fuzzyAreas[itemIndex] = value;
       this.outputVariablesBS.next(variables);
     }
-
-    this.updateFuzzyAreaInRule(oldValue.name, value.name);
-  }
-  updateFuzzyAreaInRule(oldValue: string, value: string) {
-    const rules = this.rulesBS.value;
-    rules.forEach((rule) => {
-      const area = rule.fuzzyAreas.inputs.find(
-        (input) => (input.area = oldValue)
-      );
-      area.area = value;
-    });
   }
 
   public addRule(rule: Rule): void {
@@ -139,6 +133,28 @@ export class MamdaniService {
 
     rules = rules.filter((rule) => rule.fuzzyAreas.inputs.length > 0);
     this.rulesBS.next(rules);
+  }
+
+  private updateFuzzyAreaInRule(
+    type: string,
+    variableName: string,
+    oldValue: FuzzyArea,
+    value: FuzzyArea
+  ) {
+    const rules = this.rulesBS.value;
+    rules.forEach((rule) => {
+      let area = null;
+      if (type === 'inputs') {
+        area = rule.fuzzyAreas.inputs.find(
+          (input) => input.name === variableName && input.area === oldValue.name
+        );
+      } else {
+        area = rule.fuzzyAreas.output;
+      }
+      if (area) {
+        area.area = value.name;
+      }
+    });
   }
 
   private checkValue(rule: Rule, values: ExampleValue[]): any {
