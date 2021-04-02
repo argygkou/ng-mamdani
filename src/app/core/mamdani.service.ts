@@ -59,15 +59,29 @@ export class MamdaniService {
     itemIndex: number,
     value: FuzzyArea
   ): void {
+    let oldValue = null;
     if (type === 'inputs') {
       const variables = this.inputVariablesBS.value;
+      oldValue = variables[varialeIndex].fuzzyAreas[itemIndex];
       variables[varialeIndex].fuzzyAreas[itemIndex] = value;
       this.inputVariablesBS.next(variables);
-      return;
+    } else {
+      const variables = this.outputVariablesBS.value;
+      oldValue = variables[varialeIndex].fuzzyAreas[itemIndex];
+      variables[varialeIndex].fuzzyAreas[itemIndex] = value;
+      this.outputVariablesBS.next(variables);
     }
-    const variables = this.outputVariablesBS.value;
-    variables[varialeIndex].fuzzyAreas[itemIndex] = value;
-    this.outputVariablesBS.next(variables);
+
+    this.updateFuzzyAreaInRule(oldValue.name, value.name);
+  }
+  updateFuzzyAreaInRule(oldValue: string, value: string) {
+    const rules = this.rulesBS.value;
+    rules.forEach((rule) => {
+      const area = rule.fuzzyAreas.inputs.find(
+        (input) => (input.area = oldValue)
+      );
+      area.area = value;
+    });
   }
 
   public addRule(rule: Rule): void {
