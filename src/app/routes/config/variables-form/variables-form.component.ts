@@ -28,16 +28,16 @@ export class VariablesFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.form
-    //   .get('fuzzyAreasCount')
-    //   .valueChanges.pipe(takeUntil(this.onDestroy$))
-    //   .subscribe((value) => {
-    //     const areas = this.form.get('fuzzyAreas') as FormArray;
-    //     areas.clear();
-    //     for (let index = 0; index < value; index++) {
-    //       areas.push(this.formCreatorService.createFuzzyAreaForm());
-    //     }
-    //   });
+    this.form
+      .get('fuzzyAreasCount')
+      .valueChanges.pipe(takeUntil(this.onDestroy$))
+      .subscribe((value) => {
+        const areas = this.form.get('fuzzyAreas') as FormArray;
+        areas.clear();
+        for (let index = 0; index < value; index++) {
+          areas.push(this.formCreatorService.createFuzzyAreaForm());
+        }
+      });
   }
 
   ngOnDestroy(): void {
