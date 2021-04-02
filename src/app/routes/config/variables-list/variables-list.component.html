@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card *ngIf="variables$ | async as variables">
   <mat-card-title>{{ title }} </mat-card-title>
   <mat-card-content>
-    <mat-list *ngIf="variables$ | async as variables">
+    <mat-list>
       <mat-list-item *ngIf="variables.length === 0">
         <p matLine>No Variables. Add some!</p>
         <button mat-icon-button color="primary" (click)="openDialog()">
@@ -23,9 +23,24 @@
       mat-raised-button
       color="primary"
       (click)="openDialog()"
-      *ngIf="type === 'inputs'"
+      *ngIf="showAddButton(variables)"
     >
       Add variable
     </button>
   </mat-card-actions>
 </mat-card>
+
+<ng-template #deleteDialog>
+  <h1 mat-dialog-title>Delete Ouput Variable</h1>
+  <div mat-dialog-content>
+    By deleting Output variable all rules will be automatically deleted. Are you
+    sure?
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+      Delete
+    </button>
+  </div>
+</ng-template>

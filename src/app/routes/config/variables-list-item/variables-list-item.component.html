@@ -9,12 +9,7 @@
     </button>
   </h3>
   <span class="header-spacer"></span>
-  <button
-    mat-icon-button
-    color="warn"
-    (click)="removeItem.emit(itemIndex)"
-    *ngIf="type === 'inputs'"
-  >
+  <button mat-icon-button color="warn" (click)="removeItem.emit(itemIndex)">
     <mat-icon>delete</mat-icon>
   </button>
 </div>

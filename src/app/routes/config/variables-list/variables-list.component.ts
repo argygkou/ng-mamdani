@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { Variable } from 'src/app/shared';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./variables-list.component.scss'],
 })
 export class VariablesListComponent implements OnInit {
+  @ViewChild('deleteDialog') deleteDialog: any;
   public title: string;
   public type: string;
   public variables$: Observable<Variable[]>;
@@ -39,13 +40,27 @@ export class VariablesListComponent implements OnInit {
     }
   }
 
-  public openDialog() {
+  public openDialog(variable?: Variable) {
     this.dialog.open(VariablesFormComponent, {
+      data: { type: this.type, variable },
       width: '1200px',
     });
   }
 
   public onRemoveItem(index: number): void {
-    this.mamdaniService.removeInputVariable(index);
+    if (this.type === 'inputs') {
+      this.mamdaniService.removeInputVariable(index);
+      return;
+    }
+    const dialogRef = this.dialog.open(this.deleteDialog);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.mamdaniService.removeOutputVariable(index);
+      }
+    });
+  }
+
+  public showAddButton(variables: Variable[]) {
+    return this.type === 'inputs' || !variables.length;
   }
 }

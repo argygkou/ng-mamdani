@@ -48,6 +48,11 @@ export class MamdaniService {
     this.outputVariableBS.next([variable]);
   }
 
+  removeOutputVariable(index: number) {
+    this.outputVariableBS.next([]);
+    this.rulesBS.next([]);
+  }
+
   public addFuzzyArea(
     type: string,
     varialeIndex: number,
