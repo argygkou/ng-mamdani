@@ -88,24 +88,20 @@ export class MamdaniService {
     this.rulesBS.next(rules);
   }
 
-  public getResult(values: ExampleValue[]): number {
+  public getResult(values: ExampleValue[]): string {
     const rules = this.rulesBS.value;
     if (!rules.length) {
-      return 0;
+      return null;
     }
     let selectedRule: Rule = rules[0];
-    const result = this.checkValue(selectedRule, values);
+    selectedRule.value = this.checkValue(selectedRule, values);
     rules.forEach((rule) => {
-      const res = this.checkValue(rule, values);
-      if (res > result) {
+      rule.value = this.checkValue(rule, values);
+      if (selectedRule.value < rule.value) {
         selectedRule = rule;
       }
     });
-    const output = this.outputVariablesBS.value[0];
-    const area = output.fuzzyAreas.find(
-      (area) => area.name === selectedRule.fuzzyAreas.output.area
-    );
-    return area.ranges[1];
+    return `${selectedRule.fuzzyAreas.output.name} is ${selectedRule.fuzzyAreas.output.area}`;
   }
 
   public importConfig(result: string | ArrayBuffer): void {

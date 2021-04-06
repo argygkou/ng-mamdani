@@ -4,6 +4,7 @@ export interface Rule {
     inputs: SelectedFuzzyArea[];
     output: SelectedFuzzyArea;
   };
+  value?: number; // calculated value;
 }
 
 export interface SelectedFuzzyArea {

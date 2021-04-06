@@ -9,7 +9,7 @@ import { ExampleValue } from 'src/app/shared/models/selected-values';
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit {
-  public result: number;
+  public result: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { values: ExampleValue[] },

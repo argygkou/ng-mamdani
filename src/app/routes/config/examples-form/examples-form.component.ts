@@ -43,7 +43,7 @@ export class ExamplesFormComponent implements OnInit, OnDestroy {
     return (input && input.fuzzyAreas) || [];
   }
 
-  public getResult(): number {
+  public getResult(): string {
     const values = this.form.get('variables').value as ExampleValue[];
     return this.mamdaniService.getResult(values);
   }
