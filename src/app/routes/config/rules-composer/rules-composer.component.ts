@@ -1,17 +1,9 @@
-import { TYPED_NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { Rule } from 'src/app/shared';
 
 @Component({
   selector: 'app-rules-composer',

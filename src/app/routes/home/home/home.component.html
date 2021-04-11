@@ -15,34 +15,10 @@
             <ng-template matStepLabel>{{
               variableGroup.get("name").value
             }}</ng-template>
-            <mat-form-field>
-              <mat-label></mat-label>
-              <input
-                matInput
-                type="number"
-                autocomplete="off"
-                placeholder="enter a value"
-                formControlName="example"
-                autocomplete="off"
-              />
-              <mat-error
-                *ngIf="variableGroup.get('example').hasError('required')"
-              >
-                Please enter a value
-              </mat-error>
-              <mat-error *ngIf="variableGroup.get('example').hasError('min')">
-                Minimum value:
-                <strong>{{
-                  variableGroup.get("example").errors.min.min
-                }}</strong>
-              </mat-error>
-              <mat-error *ngIf="variableGroup.get('example').hasError('max')">
-                Maximum value:
-                <strong>{{
-                  variableGroup.get("example").errors.max.max
-                }}</strong>
-              </mat-error>
-            </mat-form-field>
+            <app-star-rating
+              [end]="calculateMaxValue(i)"
+              formControlName="example"
+            ></app-star-rating>
             <div>
               <button *ngIf="i > 0" mat-button matStepperPrevious type="button">
                 Back
