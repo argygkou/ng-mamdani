@@ -6,7 +6,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
-import { Variable } from 'src/app/shared';
+import { FuzzyArea, Variable } from 'src/app/shared';
 import { ExampleValue } from 'src/app/shared/models/selected-values';
 import { ResultComponent } from '../result/result.component';
 
@@ -43,6 +43,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public getFuzzyAreaValue(fuzzyArea: FuzzyArea) {
+    return (
+      fuzzyArea.ranges.reduce((p, c) => p + c, 0) / fuzzyArea.ranges.length
+    );
   }
 
   public getResult(): void {
