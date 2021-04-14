@@ -7,23 +7,23 @@
     "fuzzyAreas": [
       {
         "name": "Poor",
-        "type": "Trapezoid",
-        "ranges": [0, 0, 30, 45]
+        "type": "Triangle",
+        "ranges": [0, 15, 30]
       },
       {
         "name": "Fair",
-        "type": "Trapezoid",
-        "ranges": [33, 50, 50, 68]
+        "type": "Triangle",
+        "ranges": [20, 30, 60]
       },
       {
         "name": "Good",
-        "type": "Trapezoid",
-        "ranges": [53, 70, 70, 88]
+        "type": "Triangle",
+        "ranges": [45, 60, 80]
       },
       {
         "name": "Very Good",
-        "type": "Trapezoid",
-        "ranges": [76, 90, 100, 100]
+        "type": "Triangle",
+        "ranges": [65, 80, 100]
       }
     ]
   },
@@ -36,7 +36,7 @@
       {
         "name": "Easy",
         "type": "Triangle",
-        "ranges": [0, 20, 45]
+        "ranges": [65, 70, 100]
       },
       {
         "name": "Average",
@@ -46,7 +46,7 @@
       {
         "name": "Hard",
         "type": "Triangle",
-        "ranges": [65, 80, 100]
+        "ranges": [0, 20, 50]
       }
     ]
   },
@@ -57,17 +57,17 @@
     "fuzzyAreasCount": 3,
     "fuzzyAreas": [
       {
-        "name": "Few",
+        "name": "Low",
         "type": "Triangle",
         "ranges": [0, 15, 30]
       },
       {
-        "name": "Some",
+        "name": "Average",
         "type": "Triangle",
         "ranges": [25, 50, 75]
       },
       {
-        "name": "Many",
+        "name": "High",
         "type": "Triangle",
         "ranges": [70, 85, 100]
       }
@@ -80,17 +80,17 @@
     "fuzzyAreasCount": 3,
     "fuzzyAreas": [
       {
-        "name": "Low",
+        "name": "Few",
         "type": "Triangle",
         "ranges": [0, 25, 50]
       },
       {
-        "name": "Average",
+        "name": "Some",
         "type": "Triangle",
         "ranges": [40, 55, 70]
       },
       {
-        "name": "High",
+        "name": "Many",
         "type": "Triangle",
         "ranges": [65, 80, 100]
       }
@@ -128,7 +128,7 @@
       {
         "name": "Low",
         "type": "Triangle",
-        "ranges": [0, 20, 40]
+        "ranges": [72, 86, 100]
       },
       {
         "name": "Moderate",
@@ -138,7 +138,7 @@
       {
         "name": "High",
         "type": "Triangle",
-        "ranges": [72, 86, 100]
+        "ranges": [0, 20, 40]
       }
     ]
   }
