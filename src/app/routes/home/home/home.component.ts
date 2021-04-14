@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
+import { FuzzyArea, Variable } from 'src/app/shared';
 import { ExampleValue } from 'src/app/shared/models/selected-values';
 import { ResultComponent } from '../result/result.component';
 
@@ -17,6 +18,7 @@ import { ResultComponent } from '../result/result.component';
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
   public form: FormGroup;
+  public inputVariables: Variable[];
   private destroy$ = new Subject();
 
   constructor(
@@ -26,12 +28,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    combineLatest([
+      this.mamdaniService.inputVariables$,
+      this.mamdaniService.outputVariables$,
+      this.mamdaniService.rules$,
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([inputs, outputs, rules]) => {
+        this.inputVariables = inputs;
+        this.initForm();
+      });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public getFuzzyAreaValue(fuzzyArea: FuzzyArea) {
+    return (
+      fuzzyArea.ranges.reduce((p, c) => p + c, 0) / fuzzyArea.ranges.length
+    );
   }
 
   public getResult(): void {
@@ -48,16 +65,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  public calculateMaxValue(index: number) {
+    return this.formCreatorService.calculateMaxMin(
+      'max',
+      this.inputVariables[index].fuzzyAreas
+    );
+  }
+
   private initForm(): void {
     this.form = this.formCreatorService.initExampleForm();
-    this.mamdaniService.inputVariables$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((inputVariables) => {
-        const variables = this.form.get('variables') as FormArray;
-        variables.clear();
-        inputVariables.forEach((input) => {
-          variables.push(this.formCreatorService.addExample(input));
-        });
-      });
+    const variables = this.form.get('variables') as FormArray;
+    variables.clear();
+    this.inputVariables.forEach((input) => {
+      variables.push(this.formCreatorService.addExample(input));
+    });
   }
 }

@@ -52,19 +52,19 @@ export class FormCreatorService {
         null,
         Validators.compose([
           Validators.required,
-          Validators.min(calculateMaxMin('min', input.fuzzyAreas)),
-          Validators.max(calculateMaxMin('max', input.fuzzyAreas)),
+          Validators.min(this.calculateMaxMin('min', input.fuzzyAreas)),
+          Validators.max(this.calculateMaxMin('max', input.fuzzyAreas)),
         ]),
       ],
     });
   }
-}
 
-function calculateMaxMin(type: 'max' | 'min', fuzzyAreas: FuzzyArea[]): number {
-  const ranges = [];
-  fuzzyAreas.forEach((area) => {
-    ranges.push(...area.ranges);
-  });
+  public calculateMaxMin(type: 'max' | 'min', fuzzyAreas: FuzzyArea[]): number {
+    const ranges = [];
+    fuzzyAreas.forEach((area) => {
+      ranges.push(...area.ranges);
+    });
 
-  return type === 'max' ? Math.max(...ranges) : Math.min(...ranges);
+    return type === 'max' ? Math.max(...ranges) : Math.min(...ranges);
+  }
 }
