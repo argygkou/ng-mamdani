@@ -43,5 +43,55 @@
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     }
+  },
+  {
+    "type": "AND",
+    "fuzzyAreas": {
+      "inputs": [{ "name": "Reputation of learing pathway", "area": "Low" }],
+      "output": { "name": "Recommendation", "area": "Low" }
+    }
+  },
+  {
+    "type": "AND",
+    "fuzzyAreas": {
+      "inputs": [
+        {
+          "name": "Perceived Difficulty of Learning Pathway",
+          "area": "Average"
+        },
+        { "name": "Friends & Peers in Learning Pathway", "area": "Many" }
+      ],
+      "output": { "name": "Recommendation", "area": "Average" }
+    }
+  },
+  {
+    "type": "AND",
+    "fuzzyAreas": {
+      "inputs": [
+        { "name": "Past Performance", "area": "Very Good" },
+        { "name": "Reputation of learing pathway", "area": "Moderate" }
+      ],
+      "output": { "name": "Recommendation", "area": "High" }
+    }
+  },
+  {
+    "type": "AND",
+    "fuzzyAreas": {
+      "inputs": [
+        { "name": "Past Performance", "area": "Very Good" },
+        { "name": "Friends & Peers in Learning Pathway", "area": "Many" }
+      ],
+      "output": { "name": "Recommendation", "area": "Very High" }
+    }
+  },
+  {
+    "type": "AND",
+    "fuzzyAreas": {
+      "inputs": [
+        { "name": "Perceived Career Opportunities", "area": "Low" },
+        { "name": "Cost of learing pathway", "area": "High" }
+      ],
+      "output": { "name": "Recommendation", "area": "Very Low" }
+    }
   }
 ]
