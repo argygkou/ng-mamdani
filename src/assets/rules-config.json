@@ -175,7 +175,6 @@
     "type": "AND",
     "fuzzyAreas": {
       "inputs": [
-        { "name": "Past Performance", "area": "Good" },
         {
           "name": "Perceived Difficulty of Learning Pathway",
           "area": "Average"
