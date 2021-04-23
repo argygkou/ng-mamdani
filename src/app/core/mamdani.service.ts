@@ -95,12 +95,16 @@ export class MamdaniService {
     }
     let selectedRule: Rule = rules[0];
     selectedRule.value = this.checkValue(selectedRule, values);
-    rules.forEach((rule) => {
+    let selectedIndex = null;
+    rules.forEach((rule, index) => {
       rule.value = this.checkValue(rule, values);
-      if (selectedRule.value < rule.value) {
+      console.log(`${index + 1}: ${rule.value}`)
+      if (selectedRule.value <= rule.value) {
         selectedRule = rule;
+        selectedIndex = index + 1;
       }
     });
+    console.log( `${selectedIndex}:${JSON.stringify(selectedRule)}`)
     return `${selectedRule.fuzzyAreas.output.name} is ${selectedRule.fuzzyAreas.output.area}`;
   }
 
