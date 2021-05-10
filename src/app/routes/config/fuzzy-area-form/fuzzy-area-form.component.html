@@ -12,7 +12,7 @@
     </mat-error>
   </mat-form-field>
   <div fxLayout="row wrap " fxLayoutAlign="start center">
-    <mat-form-field class="mr-3">
+    <mat-form-field class="me-3">
       <mat-label>Type</mat-label>
       <mat-select formControlName="type">
         <mat-option
@@ -31,7 +31,7 @@
       fxLayout="row wrap"
       fxLayoutAlign="start center"
     >
-      <label for="fuzzy-area-value" class="mr-3">Value:</label>
+      <label for="fuzzy-area-value" class="me-3">Value:</label>
       <span *ngFor="let range of ranges.controls; let i = index">
         <ng-container>
           <mat-form-field class="fuzzy-area-range-input mx-3">
