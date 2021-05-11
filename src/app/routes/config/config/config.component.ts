@@ -7,6 +7,7 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   styleUrls: ['./config.component.scss'],
 })
 export class ConfigComponent implements OnInit {
+  public links = ['inputs', 'output', 'rules'];
   constructor(public mamdaniService: MamdaniService) {}
 
   ngOnInit(): void {}
