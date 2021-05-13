@@ -22,7 +22,7 @@ export class LayoutComponent {
     this.downloadJsonHref = uri;
   }
 
-  public onFileInput(files: File[]): void {
+  public onFileInput(files: FileList): void {
     if (files.length > 0) {
       const file = files[0];
       const fileReader = new FileReader();

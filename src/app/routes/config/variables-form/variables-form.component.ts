@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -17,6 +17,10 @@ export class VariablesFormComponent implements OnInit, OnDestroy {
 
   get fuzzyAreasArray(): FormArray {
     return this.form.get('fuzzyAreas') as FormArray;
+  }
+
+  get fuzzyAreasControls() {
+    return this.fuzzyAreasArray.controls as FormGroup[];
   }
 
   private onDestroy$ = new Subject();
