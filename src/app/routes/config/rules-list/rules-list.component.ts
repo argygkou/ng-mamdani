@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { RulesComposerComponent } from '../rules-composer/rules-composer.component';
 
@@ -9,13 +8,11 @@ import { RulesComposerComponent } from '../rules-composer/rules-composer.compone
   templateUrl: './rules-list.component.html',
   styleUrls: ['./rules-list.component.scss'],
 })
-export class RulesListComponent implements OnInit {
+export class RulesListComponent {
   constructor(
     public mamdaniService: MamdaniService,
     private dialog: MatDialog
   ) {}
-
-  ngOnInit(): void {}
 
   public openDialog() {
     this.dialog.open(RulesComposerComponent, {

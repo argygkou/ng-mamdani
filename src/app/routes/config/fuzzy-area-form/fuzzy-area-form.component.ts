@@ -3,7 +3,6 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +16,7 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   templateUrl: './fuzzy-area-form.component.html',
   styleUrls: ['./fuzzy-area-form.component.scss'],
 })
-export class FuzzyAreaFormComponent implements OnInit, OnDestroy, OnChanges {
+export class FuzzyAreaFormComponent implements OnDestroy, OnChanges {
   @Input() form: FormGroup;
 
   get ranges(): FormArray {
@@ -27,8 +26,6 @@ export class FuzzyAreaFormComponent implements OnInit, OnDestroy, OnChanges {
   private onDestroy$ = new Subject();
 
   constructor(public mamdaniService: MamdaniService) {}
-
-  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.form && this.form) {

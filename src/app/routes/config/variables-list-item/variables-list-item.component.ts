@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { FuzzyArea, Variable } from 'src/app/shared';
 
@@ -7,7 +7,7 @@ import { FuzzyArea, Variable } from 'src/app/shared';
   templateUrl: './variables-list-item.component.html',
   styleUrls: ['./variables-list-item.component.scss'],
 })
-export class VariablesListItemComponent implements OnInit {
+export class VariablesListItemComponent {
   @Input() variable: Variable;
   @Input() type: string;
   @Input() variableIndex: number;
@@ -18,8 +18,6 @@ export class VariablesListItemComponent implements OnInit {
   public itemIndex: number;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   public changeMode(): void {
     this.edit = !this.edit;

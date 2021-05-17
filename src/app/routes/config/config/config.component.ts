@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 
 @Component({
@@ -6,9 +6,7 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
 })
-export class ConfigComponent implements OnInit {
+export class ConfigComponent {
   public links = ['inputs', 'output', 'rules'];
   constructor(public mamdaniService: MamdaniService) {}
-
-  ngOnInit(): void {}
 }
