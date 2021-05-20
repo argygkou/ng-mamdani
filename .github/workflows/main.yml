@@ -44,4 +44,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install
+          npm run lint
           npm run ng -- deploy --repo=https://github.com/argygkou/ng-mamdani.git --base-href=/ng-mamdani/ --name="Argyris Gkountoulas" --email=argiris_g@outlook.com
