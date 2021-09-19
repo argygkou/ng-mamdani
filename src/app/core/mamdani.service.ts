@@ -157,7 +157,7 @@ export class MamdaniService {
     const compareFunction = rule.type === 'AND' ? Math.min : Math.max;
     const inputs = rule.fuzzyAreas.inputs;
     const data = [];
-    inputs.forEach((element, index) => {
+    inputs.forEach((element) => {
       const selectedValue = values.find((v) => v.name === element.name);
       if (!selectedValue) {
         return;
