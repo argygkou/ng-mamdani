@@ -88,7 +88,7 @@ export class MamdaniService {
     this.rulesBS.next(rules);
   }
 
-  public getResult(values: ExampleValue[]): string {
+  public getResult(values: ExampleValue[]): Rule {
     const rules = this.rulesBS.value;
     if (!rules.length) {
       return null;
@@ -101,7 +101,7 @@ export class MamdaniService {
         selectedRule = rule;
       }
     });
-    return `${selectedRule.fuzzyAreas.output.name} is ${selectedRule.fuzzyAreas.output.area}`;
+    return selectedRule;
   }
 
   public importConfig(result: string | ArrayBuffer): void {
