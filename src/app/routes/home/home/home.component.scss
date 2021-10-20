@@ -1,3 +1,14 @@
 .stepper-buttons {
+  padding: 0 20px;
   margin-top: 10px;
+  .back-button {
+    margin-right: 15px;
+  }
+}
+
+.radio-container {
+  padding: 20px;
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
 }

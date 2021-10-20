@@ -18,7 +18,7 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
     const selectedRule = this.mamdaniService.getResult(this.data.values);
-    this.result = `${selectedRule.fuzzyAreas.output.name} is ${selectedRule.fuzzyAreas.output.area}`;
+    this.result = selectedRule.fuzzyAreas.output.area;
     // expose value to window
     const percentage = Math.round(selectedRule.value * 100);
     (window as any).mamndaniResult = percentage;
