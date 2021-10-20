@@ -46,7 +46,9 @@ export class ExamplesFormComponent implements OnInit, OnDestroy {
   public getResult(): string {
     const values = this.form.get('variables').value as ExampleValue[];
     const selectedRule = this.mamdaniService.getResult(values);
-    return `${selectedRule.fuzzyAreas.output.name} is ${selectedRule.fuzzyAreas.output.area}`;
+    return selectedRule
+      ? `${selectedRule.fuzzyAreas?.output.name} is ${selectedRule.fuzzyAreas?.output.area}`
+      : '';
   }
 
   private initExampleForm(): void {
