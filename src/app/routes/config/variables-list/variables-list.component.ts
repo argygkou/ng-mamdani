@@ -55,7 +55,7 @@ export class VariablesListComponent implements OnInit {
     const dialogRef = this.dialog.open(this.deleteDialog);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.mamdaniService.removeOutputVariable(index);
+        this.mamdaniService.removeOutputVariable();
       }
     });
   }

@@ -48,7 +48,7 @@ export class MamdaniService {
     this.outputVariablesBS.next([variable]);
   }
 
-  removeOutputVariable(index: number) {
+  removeOutputVariable() {
     this.outputVariablesBS.next([]);
     this.rulesBS.next([]);
   }
@@ -117,6 +117,17 @@ export class MamdaniService {
       rules: this.rulesBS.value,
     };
     return JSON.stringify(config);
+  }
+
+  public exposeResultValue(rule: Rule): number {
+    const selectedOuput = rule.fuzzyAreas.output;
+    const output = this.outputVariablesBS.value.find(
+      (output) => output.name === selectedOuput.name
+    );
+    const area = output.fuzzyAreas.find(
+      (area) => area.name === selectedOuput.area
+    );
+    return area.ranges[0];
   }
 
   private updateRuleContainingRemovedVariable(variableToRemove: Variable) {

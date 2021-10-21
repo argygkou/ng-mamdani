@@ -20,7 +20,8 @@ export class ResultComponent implements OnInit {
     const selectedRule = this.mamdaniService.getResult(this.data.values);
     this.result = selectedRule.fuzzyAreas.output.area;
     // expose value to window
-    const percentage = Math.round(selectedRule.value * 100);
+    const percentage = this.mamdaniService.exposeResultValue(selectedRule);
+    // const percentage = Math.round(selectedRule.value * 100);
     (window as any).mamndaniResult = percentage;
     console.log((window as any).mamndaniResult);
   }
