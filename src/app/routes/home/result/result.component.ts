@@ -22,7 +22,7 @@ export class ResultComponent implements OnInit {
     // expose value to window
     const percentage = this.mamdaniService.exposeResultValue(selectedRule);
     // const percentage = Math.round(selectedRule.value * 100);
-    (window as any).mamndaniResult = percentage;
-    console.log((window as any).mamndaniResult);
+    parent.postMessage({ mamdaniResult: percentage }, '*');
+    console.log(percentage);
   }
 }
