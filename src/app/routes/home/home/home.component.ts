@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(message);
     //expose result to custom function
     try {
-      (parent as any).sinester(message);
+      (parent as any).sinterest(message);
     } catch (err) {
       console.log(err);
     }
