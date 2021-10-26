@@ -55,12 +55,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     const values = this.form.get('variables').value as ExampleValue[];
     const selectedRule = this.mamdaniService.getResult(values);
     const result = selectedRule.fuzzyAreas.output.area;
-    const message = `Recomendation is ${result}`;
+    console.log(result);
 
-    console.log(message);
     //expose result to custom function
     try {
-      (parent as any).sinterest(message);
+      (parent as any).sinterest(result);
     } catch (err) {
       console.log(err);
     }
