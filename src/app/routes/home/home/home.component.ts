@@ -53,23 +53,28 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public getResult(): void {
     const values = this.form.get('variables').value as ExampleValue[];
-    const dialogRef = this.dialog.open(ResultComponent, {
-      data: { values },
-    });
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((result) => {
-        this.initForm();
-        this.stepper.reset();
-      });
-  }
+    const selectedRule = this.mamdaniService.getResult(values);
+    const result = selectedRule.fuzzyAreas.output.area;
+    const message = `Recomendation is ${result}`;
 
-  public calculateMaxValue(index: number) {
-    return this.formCreatorService.calculateMaxMin(
-      'max',
-      this.inputVariables[index].fuzzyAreas
-    );
+    console.log(message);
+    //expose result to custom function
+    try {
+      (parent as any).sinester(message);
+    } catch (err) {
+      console.log(err);
+    }
+
+    // const dialogRef = this.dialog.open(ResultComponent, {
+    //   data: { values },
+    // });
+    // dialogRef
+    //   .afterClosed()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((result) => {
+    //     this.initForm();
+    //     this.stepper.reset();
+    //   });
   }
 
   private initForm(): void {
