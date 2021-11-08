@@ -12,7 +12,7 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
 })
 export class RulesComposerComponent implements OnInit, OnDestroy {
   public form: FormGroup;
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
   get typeControl(): FormControl {
     return this.form.get('type') as FormControl;
   }

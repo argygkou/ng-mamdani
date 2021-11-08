@@ -20,7 +20,8 @@ import { FuzzyArea, Variable } from 'src/app/shared';
   styleUrls: ['./variables-list-item-form.component.scss'],
 })
 export class VariablesListItemFormComponent
-  implements OnInit, OnDestroy, OnChanges {
+  implements OnInit, OnDestroy, OnChanges
+{
   @Input() variable: Variable;
   @Input() fuzzyArea: FuzzyArea;
   @Input() variableIndex: number;
@@ -33,14 +34,14 @@ export class VariablesListItemFormComponent
     return this.form.get('ranges') as FormArray;
   }
 
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<void>();
 
   constructor(
     public mamdaniService: MamdaniService,
     private formCreatorService: FormCreatorService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.fuzzyArea) {
+    if (changes['fuzzyArea']) {
       this.initForm();
     }
   }

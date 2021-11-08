@@ -23,12 +23,12 @@ export class FuzzyAreaFormComponent implements OnDestroy, OnChanges {
     return this.form.get('ranges') as FormArray;
   }
   public fuzzyAreaTypes = Object.keys(FUZZYAREATYPES);
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<void>();
 
   constructor(public mamdaniService: MamdaniService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.form && this.form) {
+    if (changes['form'] && this.form) {
       this.formTypeChangeSubsciption();
     }
   }

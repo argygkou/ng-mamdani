@@ -15,7 +15,7 @@ import { ExampleValue } from 'src/app/shared/models/selected-values';
 export class ExamplesFormComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public inputVariables: Variable[];
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     public mamdaniService: MamdaniService,

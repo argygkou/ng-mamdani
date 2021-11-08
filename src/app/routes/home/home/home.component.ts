@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
   public form: FormGroup;
   public inputVariables: Variable[];
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     public mamdaniService: MamdaniService,

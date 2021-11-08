@@ -23,7 +23,7 @@ export class VariablesFormComponent implements OnInit, OnDestroy {
     return this.fuzzyAreasArray.controls as FormGroup[];
   }
 
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<void>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { type: string; variable: Variable },
