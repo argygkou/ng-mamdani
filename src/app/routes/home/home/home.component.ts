@@ -54,11 +54,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     const values = this.form.get('variables').value as ExampleValue[];
     const selectedRule = this.mamdaniService.getResult(values);
     const result = selectedRule.fuzzyAreas.output.area;
-    console.log(result);
+
+    //calculate percentage
+    let sum = 0;
+    values.forEach((value) => {
+      sum += value.example;
+    });
+    const percentage = sum / values.length;
+    // console.log(percentage);
+    // console.log(result);
 
     //expose result to custom function
     try {
-      (parent as any).sinterest(result);
+      (parent as any).sinterest(result, percentage.toFixed(2));
     } catch (err) {
       console.log(err);
     }
