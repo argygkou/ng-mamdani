@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { FuzzyArea, Variable } from '../shared';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormCreatorService {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
-  public createVariableForm(): FormGroup {
+  public createVariableForm(): UntypedFormGroup {
     return this.fb.group({
       name: [null, Validators.required],
       start: [0, Validators.required],
@@ -21,7 +21,7 @@ export class FormCreatorService {
     });
   }
 
-  public createFuzzyAreaForm(): FormGroup {
+  public createFuzzyAreaForm(): UntypedFormGroup {
     return this.fb.group({
       name: [null, Validators.required],
       type: [null, Validators.required],
@@ -29,7 +29,7 @@ export class FormCreatorService {
     });
   }
 
-  public createRuleForm(): FormGroup {
+  public createRuleForm(): UntypedFormGroup {
     return this.fb.group({
       type: ['AND'],
       fuzzyAreas: this.fb.group({
@@ -39,13 +39,13 @@ export class FormCreatorService {
     });
   }
 
-  public initExampleForm(): FormGroup {
+  public initExampleForm(): UntypedFormGroup {
     return this.fb.group({
       variables: this.fb.array([]),
     });
   }
 
-  public addExample(input: Variable): FormGroup {
+  public addExample(input: Variable): UntypedFormGroup {
     return this.fb.group({
       name: [input.name],
       example: [

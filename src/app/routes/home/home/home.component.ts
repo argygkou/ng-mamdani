@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { combineLatest, Subject } from 'rxjs';
@@ -17,7 +17,7 @@ import { ResultComponent } from '../result/result.component';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public inputVariables: Variable[];
   private destroy$ = new Subject<void>();
 
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = this.formCreatorService.initExampleForm();
-    const variables = this.form.get('variables') as FormArray;
+    const variables = this.form.get('variables') as UntypedFormArray;
     variables.clear();
     this.inputVariables.forEach((input) => {
       variables.push(this.formCreatorService.addExample(input));

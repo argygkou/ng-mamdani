@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { FUZZYAREATYPES } from 'src/app/core/config';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
@@ -13,7 +13,7 @@ import { ExampleValue } from 'src/app/shared/models/selected-values';
   styleUrls: ['./examples-form.component.scss'],
 })
 export class ExamplesFormComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public inputVariables: Variable[];
   private destroy$ = new Subject<void>();
 
@@ -55,7 +55,7 @@ export class ExamplesFormComponent implements OnInit, OnDestroy {
     this.form = this.formCreatorService.initExampleForm();
     this.mamdaniService.inputVariables$.pipe().subscribe((inputVariables) => {
       this.inputVariables = inputVariables;
-      const variables = this.form.get('variables') as FormArray;
+      const variables = this.form.get('variables') as UntypedFormArray;
       variables.clear();
       this.inputVariables.forEach((input) => {
         variables.push(this.formCreatorService.addExample(input));

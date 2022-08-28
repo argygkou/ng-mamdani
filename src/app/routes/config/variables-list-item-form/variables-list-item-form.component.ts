@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormArray, FormControl, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FUZZYAREATYPES } from 'src/app/core/config';
@@ -30,8 +30,8 @@ export class VariablesListItemFormComponent
 
   public form = this.formCreatorService.createVariableForm();
 
-  get ranges(): FormArray {
-    return this.form.get('ranges') as FormArray;
+  get ranges(): UntypedFormArray {
+    return this.form.get('ranges') as UntypedFormArray;
   }
 
   private onDestroy$ = new Subject<void>();
@@ -70,7 +70,7 @@ export class VariablesListItemFormComponent
     this.form = this.formCreatorService.createFuzzyAreaForm();
     this.form.patchValue(this.fuzzyArea);
     this.fuzzyArea.ranges.forEach((range) => {
-      this.ranges.push(new FormControl(range, Validators.required));
+      this.ranges.push(new UntypedFormControl(range, Validators.required));
     });
   }
 }

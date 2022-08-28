@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: ConfigComponent,
     children: [
-      { path: '', redirectTo: 'inputs' },
+      { path: '', redirectTo: 'inputs', pathMatch: 'full' },
       { path: 'inputs', component: VariablesListComponent },
       { path: 'output', component: VariablesListComponent },
       { path: 'rules', component: RulesListComponent },

@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, FormControl, UntypedFormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,12 +15,12 @@ import { Variable } from 'src/app/shared';
 export class VariablesFormComponent implements OnInit, OnDestroy {
   public form = this.formCreatorService.createVariableForm();
 
-  get fuzzyAreasArray(): FormArray {
-    return this.form.get('fuzzyAreas') as FormArray;
+  get fuzzyAreasArray(): UntypedFormArray {
+    return this.form.get('fuzzyAreas') as UntypedFormArray;
   }
 
   get fuzzyAreasControls() {
-    return this.fuzzyAreasArray.controls as FormGroup[];
+    return this.fuzzyAreasArray.controls as UntypedFormGroup[];
   }
 
   private onDestroy$ = new Subject<void>();
@@ -36,7 +36,7 @@ export class VariablesFormComponent implements OnInit, OnDestroy {
       .get('fuzzyAreasCount')
       .valueChanges.pipe(takeUntil(this.onDestroy$))
       .subscribe((value) => {
-        const areas = this.form.get('fuzzyAreas') as FormArray;
+        const areas = this.form.get('fuzzyAreas') as UntypedFormArray;
         areas.clear();
         for (let index = 0; index < value; index++) {
           areas.push(this.formCreatorService.createFuzzyAreaForm());

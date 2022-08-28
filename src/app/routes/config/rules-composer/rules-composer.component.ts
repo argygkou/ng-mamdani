@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormCreatorService } from 'src/app/core/form-creator.service';
@@ -11,22 +11,22 @@ import { MamdaniService } from 'src/app/core/mamdani.service';
   styleUrls: ['./rules-composer.component.scss'],
 })
 export class RulesComposerComponent implements OnInit, OnDestroy {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   private destroy$ = new Subject<void>();
-  get typeControl(): FormControl {
-    return this.form.get('type') as FormControl;
+  get typeControl(): UntypedFormControl {
+    return this.form.get('type') as UntypedFormControl;
   }
 
-  get fuzzyAreas(): FormArray {
-    return this.form.get('fuzzyAreas') as FormArray;
+  get fuzzyAreas(): UntypedFormArray {
+    return this.form.get('fuzzyAreas') as UntypedFormArray;
   }
 
-  get inputs(): FormArray {
-    return this.fuzzyAreas.get('inputs') as FormArray;
+  get inputs(): UntypedFormArray {
+    return this.fuzzyAreas.get('inputs') as UntypedFormArray;
   }
 
-  get output(): FormGroup {
-    return this.fuzzyAreas.get('output') as FormGroup;
+  get output(): UntypedFormGroup {
+    return this.fuzzyAreas.get('output') as UntypedFormGroup;
   }
 
   constructor(
@@ -71,9 +71,9 @@ export class RulesComposerComponent implements OnInit, OnDestroy {
       .subscribe((variables) => {
         variables.forEach((input) => {
           this.inputs.push(
-            new FormGroup({
-              name: new FormControl(input.name),
-              area: new FormControl(null),
+            new UntypedFormGroup({
+              name: new UntypedFormControl(input.name),
+              area: new UntypedFormControl(null),
             })
           );
         });
