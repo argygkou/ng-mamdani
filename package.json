@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "deploy": "ng deploy ng-mamdani --base-href=/ng-mamdani/",
     "generate-lock": "npm i --package-lock-only --force",
-    "generate-cs": "ng build --prod --base-href='(unknown)'"
+    "generate-cs": "ng build --configuration production --base-href='(unknown)'"
   },
   "private": true,
   "dependencies": {
