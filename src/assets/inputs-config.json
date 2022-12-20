@@ -97,7 +97,7 @@
     ]
   },
   {
-    "name": "Reputation of learing pathway",
+    "name": "Reputation of learning pathway",
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,
@@ -120,7 +120,7 @@
     ]
   },
   {
-    "name": "Cost of learing pathway",
+    "name": "Cost of learning pathway",
     "start": 0,
     "end": 100,
     "fuzzyAreasCount": 3,

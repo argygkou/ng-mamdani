@@ -7,8 +7,8 @@
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Easy" },
         { "name": "Perceived Career Opportunities", "area": "High" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Reputation of learing pathway", "area": "High" },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Reputation of learning pathway", "area": "High" },
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Very High" }
     },
@@ -20,7 +20,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Very Good" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Reputation of learing pathway", "area": "High" }
+        { "name": "Reputation of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Very High" }
     },
@@ -43,8 +43,8 @@
       "inputs": [
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Easy" },
         { "name": "Perceived Career Opportunities", "area": "High" },
-        { "name": "Reputation of learing pathway", "area": "High" },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Reputation of learning pathway", "area": "High" },
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Very High" }
     },
@@ -66,7 +66,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Perceived Career Opportunities", "area": "High" },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Very High" }
     },
@@ -90,7 +90,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Fair" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Cost of learing pathway", "area": "Moderate" }
+        { "name": "Cost of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "High" }
     },
@@ -101,7 +101,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Past Performance", "area": "Very Good" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "High" }
     },
@@ -125,7 +125,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Very Good" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "High" }
     },
@@ -140,7 +140,7 @@
           "area": "Average"
         },
         { "name": "Perceived Career Opportunities", "area": "High" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "High" }
     },
@@ -165,7 +165,7 @@
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
         { "name": "Perceived Career Opportunities", "area": "High" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Cost of learing pathway", "area": "Moderate" }
+        { "name": "Cost of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "High" }
     },
@@ -181,8 +181,8 @@
         },
         { "name": "Perceived Career Opportunities", "area": "Average" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Some" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" },
-        { "name": "Cost of learing pathway", "area": "Moderate" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" },
+        { "name": "Cost of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -207,7 +207,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Past Performance", "area": "Fair" },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -219,7 +219,7 @@
       "inputs": [
         { "name": "Perceived Career Opportunities", "area": "Low" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Reputation of learing pathway", "area": "High" }
+        { "name": "Reputation of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -234,7 +234,7 @@
           "name": "Perceived Difficulty of Learning Pathway",
           "area": "Average"
         },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -246,7 +246,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Poor" },
         { "name": "Perceived Career Opportunities", "area": "High" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -262,7 +262,7 @@
         },
         { "name": "Perceived Career Opportunities", "area": "Low" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
-        { "name": "Cost of learing pathway", "area": "Moderate" }
+        { "name": "Cost of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "Average" }
     },
@@ -271,7 +271,7 @@
   {
     "type": "AND",
     "fuzzyAreas": {
-      "inputs": [{ "name": "Reputation of learing pathway", "area": "Low" }],
+      "inputs": [{ "name": "Reputation of learning pathway", "area": "Low" }],
       "output": { "name": "Recommendation", "area": "Low" }
     },
     "value": 0
@@ -283,7 +283,7 @@
         { "name": "Past Performance", "area": "Fair" },
         { "name": "Perceived Career Opportunities", "area": "Average" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Some" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Low" }
     },
@@ -294,7 +294,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "Low" }
     },
@@ -305,7 +305,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Perceived Career Opportunities", "area": "Low" },
-        { "name": "Cost of learing pathway", "area": "Low" }
+        { "name": "Cost of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Low" }
     },
@@ -334,8 +334,8 @@
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
         { "name": "Perceived Career Opportunities", "area": "Low" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Some" },
-        { "name": "Reputation of learing pathway", "area": "Moderate" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Reputation of learning pathway", "area": "Moderate" },
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Low" }
     },
@@ -351,7 +351,7 @@
           "area": "Average"
         },
         { "name": "Perceived Career Opportunities", "area": "Low" },
-        { "name": "Cost of learing pathway", "area": "Moderate" }
+        { "name": "Cost of learning pathway", "area": "Moderate" }
       ],
       "output": { "name": "Recommendation", "area": "Low" }
     },
@@ -365,8 +365,8 @@
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
         { "name": "Perceived Career Opportunities", "area": "Low" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Few" },
-        { "name": "Reputation of learing pathway", "area": "Low" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Reputation of learning pathway", "area": "Low" },
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
@@ -377,7 +377,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Perceived Career Opportunities", "area": "Low" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
@@ -399,7 +399,7 @@
     "fuzzyAreas": {
       "inputs": [
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
-        { "name": "Reputation of learing pathway", "area": "Low" }
+        { "name": "Reputation of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
@@ -411,7 +411,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Poor" },
         { "name": "Perceived Career Opportunities", "area": "Low" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
@@ -423,7 +423,7 @@
       "inputs": [
         { "name": "Past Performance", "area": "Poor" },
         { "name": "Perceived Career Opportunities", "area": "Low" },
-        { "name": "Reputation of learing pathway", "area": "Low" }
+        { "name": "Reputation of learning pathway", "area": "Low" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
@@ -435,7 +435,7 @@
       "inputs": [
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
         { "name": "Friends & Peers in Learning Pathway", "area": "Few" },
-        { "name": "Cost of learing pathway", "area": "High" }
+        { "name": "Cost of learning pathway", "area": "High" }
       ],
       "output": { "name": "Recommendation", "area": "Very Low" }
     },
