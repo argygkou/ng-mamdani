@@ -21,9 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { LayoutModule } from '@angular/cdk/layout';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MATERIAL_MODULES = [
   MatToolbarModule,
@@ -46,12 +44,7 @@ const MATERIAL_MODULES = [
   MatTooltipModule,
 ];
 
-const MODULES = [
-  CommonModule,
-  FormsModule,
-  ReactiveFormsModule,
-  FlexLayoutModule,
-];
+const MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const COMPONENTS = [CustomModalComponent];
 

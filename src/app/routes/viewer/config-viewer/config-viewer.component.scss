@@ -5,3 +5,15 @@
 .viewer {
   margin: 20px 10px;
 }
+
+.card-title {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.viewer-spacer {
+  display: flex;
+  flex: 1 1 0%;
+  box-sizing: border-box;
+}

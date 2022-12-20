@@ -10,3 +10,11 @@
     width: 100px;
   }
 }
+
+.form-container {
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+}

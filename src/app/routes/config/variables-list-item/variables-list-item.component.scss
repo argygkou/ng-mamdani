@@ -9,3 +9,9 @@
 .fuzzy-area-toogle-group {
   flex-wrap: wrap;
 }
+
+.item-title {
+  display: flex !important;
+  flex-direction: row !important;
+  box-sizing: border-box;
+}
