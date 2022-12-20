@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ResultComponent } from './result/result.component';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [HomeComponent, ResultComponent],
-  imports: [HomeRoutingModule, SharedModule],
+  imports: [
+    HomeRoutingModule,
+    CommonModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatCardModule,
+    MatRadioModule,
+    MatButtonModule,
+  ],
 })
 export class HomeModule {}

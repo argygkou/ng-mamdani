@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { ViewerRoutingModule } from './viewer-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ConfigViewerComponent } from './config-viewer/config-viewer.component';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [ConfigViewerComponent],
-  imports: [SharedModule, ViewerRoutingModule, NgxJsonViewerModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    ViewerRoutingModule,
+    NgxJsonViewerModule,
+  ],
 })
 export class ViewerModule {}

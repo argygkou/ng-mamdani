@@ -8,7 +8,6 @@ import { FormCreatorService } from 'src/app/core/form-creator.service';
 import { MamdaniService } from 'src/app/core/mamdani.service';
 import { FuzzyArea, Variable } from 'src/app/shared';
 import { ExampleValue } from 'src/app/shared/models/selected-values';
-import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-home',
