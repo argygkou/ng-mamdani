@@ -1,5 +1,7 @@
 <mat-card *ngIf="variables$ | async as variables" class="mat-elevation-z0">
-  <mat-card-title>{{ title }} </mat-card-title>
+  <mat-card-header>
+    <mat-card-title>{{ title }} </mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngIf="variables.length === 0">

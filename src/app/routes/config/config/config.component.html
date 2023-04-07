@@ -5,7 +5,7 @@
   <div class="tabs-container">
     <mat-card class="mat-elevation-z4">
       <mat-card-content>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a
             *ngFor="let link of links"
             mat-tab-link
@@ -17,7 +17,9 @@
             {{ link | titlecase }}
           </a>
         </nav>
-        <router-outlet></router-outlet>
+        <mat-tab-nav-panel #tabPanel>
+          <router-outlet></router-outlet>
+        </mat-tab-nav-panel>
       </mat-card-content>
     </mat-card>
   </div>

@@ -1,5 +1,7 @@
 <mat-card class="mat-elevation-z0">
-  <mat-card-title>Rules</mat-card-title>
+  <mat-card-header>
+    <mat-card-title>Rules</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <mat-list *ngIf="mamdaniService.rules$ | async as rules">
       <mat-list-item *ngIf="rules.length === 0">
