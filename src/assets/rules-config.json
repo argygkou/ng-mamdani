@@ -4,7 +4,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Easy" },
@@ -22,7 +22,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
@@ -37,7 +37,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" }
@@ -86,7 +86,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Perceived Career Opportunities", "area": "High" },
@@ -101,7 +101,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Fair"
         },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
@@ -116,7 +116,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Reputation of learning pathway", "area": "Moderate" }
@@ -142,7 +142,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Very Good"
         },
         { "name": "Friends & Peers in Learning Pathway", "area": "Many" },
@@ -172,7 +172,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Good"
         },
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Easy" },
@@ -231,7 +231,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Fair"
         },
         { "name": "Cost of learning pathway", "area": "Low" }
@@ -257,7 +257,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Fair"
         },
         {
@@ -275,7 +275,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Perceived Career Opportunities", "area": "High" },
@@ -314,7 +314,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Fair"
         },
         { "name": "Perceived Career Opportunities", "area": "Average" },
@@ -352,7 +352,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         {
@@ -370,7 +370,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
@@ -388,7 +388,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Fair"
         },
         {
@@ -407,7 +407,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Perceived Difficulty of Learning Pathway", "area": "Hard" },
@@ -436,7 +436,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Friends & Peers in Learning Pathway", "area": "Few" }
@@ -461,7 +461,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Perceived Career Opportunities", "area": "Low" },
@@ -476,7 +476,7 @@
     "fuzzyAreas": {
       "inputs": [
         {
-          "name": "Past performance (GPA or academic grades especially in relevant learning objects)",
+          "name": "Past performance (grades especially in relevant learning objects)",
           "area": "Poor"
         },
         { "name": "Perceived Career Opportunities", "area": "Low" },

@@ -5,7 +5,6 @@ import { ResultComponent } from './result/result.component';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 @NgModule({
@@ -14,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
     HomeRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    MatStepperModule,
     MatCardModule,
     MatRadioModule,
     MatButtonModule,

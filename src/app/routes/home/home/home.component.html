@@ -1,25 +1,20 @@
-<div class="container">
-  <mat-card class="mat-elevation-z4">
-    <mat-card-content>
-      <form [formGroup]="form">
-        <mat-stepper
-          orientation="vertical"
-          formArrayName="variables"
-          linear
-          #stepper
-        >
-          <mat-step
-            *ngFor="
-              let variableGroup of form.get('variables')['controls'];
-              let i = index;
-              let last = last
-            "
-            [formGroupName]="i"
-            [stepControl]="variableGroup"
-          >
-            <ng-template matStepLabel>{{
+<div class="container card-container">
+  <form [formGroup]="form">
+    <ng-container formArrayName="variables">
+      <ng-container
+        *ngFor="
+          let variableGroup of form.get('variables')['controls'];
+          let i = index;
+          let last = last
+        "
+      >
+        <mat-card [formGroupName]="i" *ngIf="selectedIndex === i">
+          <mat-card-header>
+            <mat-card-title>{{
               variableGroup.get("name").value
-            }}</ng-template>
+            }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
             <div class="radio-container">
               <mat-radio-group
                 aria-label="Select an option"
@@ -27,7 +22,7 @@
               >
                 <mat-radio-button
                   *ngFor="
-                    let fuzzyArea of inputVariables[i].fuzzyAreas;
+                    let fuzzyArea of inputVariables[selectedIndex].fuzzyAreas;
                     let areaIndex = index
                   "
                   [value]="getFuzzyAreaValue(fuzzyArea)"
@@ -35,38 +30,40 @@
                 >
               </mat-radio-group>
             </div>
-            <div class="stepper-buttons">
-              <button
-                class="back-button"
-                *ngIf="i > 0"
-                mat-stroked-button
-                matStepperPrevious
-                type="button"
-              >
-                Back
-              </button>
-              <button
-                *ngIf="!last"
-                mat-stroked-button
-                matStepperNext
-                color="primary"
-                type="button"
-              >
-                Next
-              </button>
-              <button
-                *ngIf="last"
-                mat-flat-button
-                matStepperNext
-                color="primary"
-                (click)="getResult()"
-              >
-                Finish
-              </button>
-            </div>
-          </mat-step>
-        </mat-stepper>
-      </form>
-    </mat-card-content>
-  </mat-card>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <button
+              *ngIf="i > 0"
+              mat-stroked-button
+              (click)="previousStep()"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              class="stepper-button"
+              *ngIf="!last"
+              mat-stroked-button
+              color="primary"
+              type="button"
+              [disabled]="variableGroup.invalid"
+              (click)="nextStep()"
+            >
+              Next
+            </button>
+            <button
+              class="stepper-button"
+              *ngIf="last"
+              mat-flat-button
+              color="primary"
+              [disabled]="variableGroup.invalid"
+              (click)="getResult()"
+            >
+              Finish
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+  </form>
 </div>

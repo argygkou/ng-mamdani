@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('stepper') stepper: MatStepper;
   public form: UntypedFormGroup;
   public inputVariables: Variable[];
+  public selectedIndex = 0;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -42,6 +44,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public previousStep() {
+    this.selectedIndex--;
+  }
+  public nextStep() {
+    this.selectedIndex++;
   }
 
   public getFuzzyAreaValue(fuzzyArea: FuzzyArea) {
