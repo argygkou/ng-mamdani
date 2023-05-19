@@ -92,6 +92,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   });
   }
 
+  getCustomTitle(index: number): string | null {
+    // document.getElementById(`Q${index + 1}`).innerHTML =
+    return parent.document.getElementById(`newQuest${index + 1}`)?.innerHTML;
+  }
+
   private initForm(): void {
     this.form = this.formCreatorService.initExampleForm();
     const variables = this.form.get('variables') as UntypedFormArray;

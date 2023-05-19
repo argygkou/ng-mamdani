@@ -10,9 +10,15 @@
       >
         <mat-card [formGroupName]="i" *ngIf="selectedIndex === i">
           <mat-card-header>
-            <mat-card-title>{{
-              variableGroup.get("name").value
-            }}</mat-card-title>
+            <mat-card-title>
+              <span
+                *ngIf="getCustomTitle(i); else titleTemplate"
+                [innerHTML]="getCustomTitle(i)"
+              ></span>
+              <ng-template #titleTemplate>
+                {{ variableGroup.get("name").value }}
+              </ng-template>
+            </mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <div class="radio-container">
@@ -31,7 +37,7 @@
               </mat-radio-group>
             </div>
           </mat-card-content>
-          <mat-card-actions align="end">
+          <mat-card-actions>
             <button
               *ngIf="i > 0"
               mat-stroked-button
